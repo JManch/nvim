@@ -378,6 +378,14 @@ local plugins = {
             })
         end,
     },
+
+    {
+        "zbirenbaum/copilot.lua",
+        event = "InsertEnter",
+        config = function()
+            require("plugins.configs.copilot")
+        end,
+    },
 }
 
 require("plugins.packer").load_plugins(plugins)

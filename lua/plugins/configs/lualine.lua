@@ -20,6 +20,13 @@ local sun_status = function()
     end
 end
 
+local copilot_status = function()
+    if vim.b.copilot_suggestion_auto_trigger or vim.b.copilot_suggestion_auto_trigger == nil then
+        return ""
+    end
+    return ""
+end
+
 local options = {
     options = {
         theme = "auto",
@@ -37,6 +44,7 @@ local options = {
         lualine_x = {
             sun_status,
             "encoding",
+            copilot_status,
             "fileformat",
             "filetype",
         },

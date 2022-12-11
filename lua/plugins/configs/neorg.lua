@@ -5,6 +5,7 @@ if not ok then
 end
 
 local options = {
+    lazy_loading = true,
     load = {
         ["core.defaults"] = {},
         ["core.norg.completion"] = {

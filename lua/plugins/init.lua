@@ -250,7 +250,6 @@ local plugins = {
     {
         "nvim-neorg/neorg",
         after = "nvim-treesitter",
-        run = ":Neorg sync-parsers",
         config = function()
             require("plugins.configs.neorg")
         end,

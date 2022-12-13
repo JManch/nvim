@@ -48,7 +48,6 @@ map("n", "<LEADER>O", "O<ESC>", "Create new line above")
 map("n", "<LEADER>c", "<CMD>nohl<CR>", "Clear search highlighting")
 
 map("n", "<LEADER>l", "<CMD>SunsetToggle<CR>", "Toggle sunset theme")
-map("n", "<leader>h", "<CMD>ToggleCMD<CR>", "Toggle CMD height")
 map("n", "<leader>w", "<CMD>ToggleWinbar<CR>", "Toggle winbar")
 
 map("v", "<leader>y", '"+y', "Yank to system register")

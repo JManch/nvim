@@ -47,7 +47,7 @@ api.nvim_create_user_command("ToggleColorcolumn", function()
     utils.toggle_wo("colorcolumn", "80", "")
 end, {})
 
-api.nvim_create_user_command("ToggleCMD", function()
+api.nvim_create_user_command("ToggleCMDHeight", function()
     utils.toggle_o("cmdheight", 1, 0)
 end, {})
 

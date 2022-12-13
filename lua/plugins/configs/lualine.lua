@@ -21,10 +21,10 @@ local sun_status = function()
 end
 
 local copilot_status = function()
-    if vim.b.copilot_suggestion_auto_trigger == nil or not vim.b.copilot_suggestion_auto_trigger then
-        return ""
+    if vim.b.copilot_suggestion_auto_trigger == nil or vim.b.copilot_suggestion_auto_trigger then
+        return ""
     end
-    return ""
+    return ""
 end
 
 local options = {

@@ -16,7 +16,7 @@ local options = {
         },
     },
     suggestion = {
-        auto_trigger = false,
+        auto_trigger = true,
         keymap = {
             accept = "<C-x>",
             next = false,

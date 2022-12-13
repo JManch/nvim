@@ -255,12 +255,9 @@ masonconfig.setup_handlers({
     ["omnisharp"] = function()
         lspconfig.omnisharp.setup({
             on_attach = function(client, bufnr)
-                -- local tokens = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
-                -- for i, v in ipairs(tokens) do
-                --     tokens[i] = v:gsub("%W", "")
-                -- end
-                -- P(client.server_capabilities.semanticTokensProvider)
-                -- client.server_capabilities.semanticTokensProvider = nil
+                if client.server_capabilities.semanticTokensProvider then
+                    client.server_capabilities.semanticTokensProvider = nil
+                end
                 on_attach(client, bufnr)
             end,
             capabilities = capabilities,

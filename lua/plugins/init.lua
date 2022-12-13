@@ -164,15 +164,6 @@ local plugins = {
     },
 
     {
-        "andweeb/presence.nvim",
-        config = function()
-            if vim.fn.has("win32") == 1 then
-                require("plugins.configs.presence")
-            end
-        end,
-    },
-
-    {
         "numToStr/Comment.nvim",
         config = function()
             require("plugins.configs.comment")

@@ -44,7 +44,7 @@ end, {})
 
 o.winblend = 0
 o.pumblend = 0
-o.guifont = string.format("%s:h%s", "FiraCode NFM", 17)
+o.guifont = string.format("%s:h%s", "FiraCode NFM", 16)
 if vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1 then
     g.neovide_refresh_rate = 165
 end

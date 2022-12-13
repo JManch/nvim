@@ -212,7 +212,7 @@ local plugins = {
     },
 
     {
-        "JManch/sessions.nvim",
+        "natecraddock/sessions.nvim",
         config = function()
             require("sessions").setup({
                 session_filepath = vim.fn.resolve(vim.fn.stdpath("data") .. "/sessions"),

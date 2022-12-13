@@ -204,8 +204,19 @@ local plugins = {
                             vim.log.levels.INFO,
                             { title = "Workspaces", timeout = "1000" }
                         )
+                        require("sessions").load(nil, { silent = true })
                     end,
                 },
+            })
+        end,
+    },
+
+    {
+        "JManch/sessions.nvim",
+        config = function()
+            require("sessions").setup({
+                session_filepath = vim.fn.resolve(vim.fn.stdpath("data") .. "/sessions"),
+                absolute = true,
             })
         end,
     },

@@ -49,6 +49,9 @@ local options = {
         end, "Gitsigns view file diff against last commit")
         map("n", "<LEADER>td", gitsigns.toggle_deleted, "Gitsigns toggle deleted")
     end,
+    preview_config = {
+        border = "rounded",
+    },
 }
 
 gitsigns.setup(options)

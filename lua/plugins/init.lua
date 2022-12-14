@@ -312,7 +312,7 @@ local plugins = {
             -- mode
             local luasnip = require("luasnip")
 
-            local unlinkgrp = vim.api.nvim_create_augroup("UnlinkSnippetOnModeChange", { clear = true })
+            local unlinkgrp = vim.api.nvim_create_augroup("UnlinkSnippetOnModeChange", {})
 
             vim.api.nvim_create_autocmd("ModeChanged", {
                 group = unlinkgrp,

@@ -83,7 +83,7 @@ local plugins = {
     {
         "lervag/vimtex",
         config = function()
-            -- :h vimtex-faq-treesitter in regards to treesitter vs vimtex
+            -- :h vimtex-faq-nreesitter in regards to treesitter vs vimtex
             -- syntax highlighting. (I'm using treesitter despite downsides)
             vim.cmd([[
                 filetype plugin on
@@ -96,7 +96,6 @@ local plugins = {
                 " Disable syntax highlighting, use treesitter instead
                 let g:vimtex_syntax_enabled = 0
                 let g:vimtex_syntax_conceal_disable = 1
-
             ]])
         end,
     },
@@ -106,6 +105,7 @@ local plugins = {
         run = function()
             require("nvim-treesitter.install").update()
         end,
+        requires = "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()
             require("plugins.configs.treesitter")
         end,

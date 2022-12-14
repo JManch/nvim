@@ -6,6 +6,7 @@ M.set_highlights = function()
     api.nvim_set_hl(0, "MatchParen", {})
     api.nvim_set_hl(0, "WinBar", {})
     api.nvim_set_hl(0, "WinBarNC", {})
+    api.nvim_set_hl(0, "NoCursor", { blend = 100, strikethrough = true })
 end
 
 local jump_chars = {
@@ -43,6 +44,22 @@ M.bracket_jump = function()
     if not jumped then
         api.nvim_win_set_cursor(0, { row, #line })
     end
+end
+
+M.delete_hidden_buffers = function()
+    local buffers = api.nvim_list_bufs()
+    local ok
+    for _, buf in ipairs(buffers) do
+        local buf_info = vim.fn.getbufinfo(buf)[1]
+        if buf_info.loaded == 0 or (buf_info.hidden == 1 and buf_info.listed == 1) then
+            ok, _ = pcall(api.nvim_buf_delete, buf, { force = false })
+            if not ok then
+                vim.cmd.b(buf)
+                return
+            end
+        end
+    end
+    vim.notify("Closed all background buffers", "info", { title = "Buffers" })
 end
 
 local toggle_table_key = function(table, key, on, off)

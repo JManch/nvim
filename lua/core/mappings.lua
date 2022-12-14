@@ -9,11 +9,12 @@ M.map = function(mode, lhs, rhs, desc, opts)
 end
 
 local map = M.map
+local utils = require("core.utils")
 
 map("i", "jk", "<ESC>", "Exit insert mode")
 map("i", "<C-b>", "<ESC>^i", "Jump to beginning of line")
 map("i", "<C-e>", "<END>", "Jump to end of line")
-map("i", "<S-Tab>", require("core.utils").bracket_jump, "Jump out of things")
+map("i", "<S-Tab>", utils.bracket_jump, "Jump out of things")
 
 map("n", "<C-h>", "<C-w>h", "Go to the left window")
 map("n", "<C-l>", "<C-w>l", "Go to the right window")
@@ -34,7 +35,8 @@ map("n", "<C-i>", "<C-i>zz", "Go to next marker and centre cursor")
 map("n", "G", "Gzz", "Jump to bottom and center cursor")
 
 map("n", "<LEADER>v", "<CMD>vsplit<CR><C-l>", "Vertical split current buffer")
-map("n", "<S-x>", "<CMD>Bdelete<CR>", "Close current buffer")
+map("n", "<S-x>", "<CMD>Bwipeout<CR>", "Close current buffer")
+map("n", "<S-z>", utils.delete_hidden_buffers, "Close all hidden buffers")
 map("n", "ZZ", "<CMD>wa<CR><CMD>qa<CR>", "Write all buffers and quit all")
 
 map("n", "<LEADER>y", '"+y', "Yank to system register")

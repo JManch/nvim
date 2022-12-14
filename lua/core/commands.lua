@@ -54,3 +54,7 @@ end, {})
 api.nvim_create_user_command("ToggleVirtualText", function()
     vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
 end, {})
+
+api.nvim_create_user_command("PutMessages", function()
+    vim.cmd("put =execute('messages')")
+end, {})

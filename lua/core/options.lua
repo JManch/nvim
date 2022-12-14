@@ -80,3 +80,8 @@ local unused_plugins = {
 for _, plugin in pairs(unused_plugins) do
     g["loaded_" .. plugin] = 1
 end
+
+-- Disable providers
+g["loaded_python3_provider"] = 0
+g["loaded_node_provider"] = 0
+g["loaded_perl_provider"] = 0

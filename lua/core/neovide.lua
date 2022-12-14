@@ -4,16 +4,13 @@ end
 
 local g = vim.g
 local o = vim.o
+local api = vim.api
 local map = require("core.mappings").map
 local utils = require("core.utils")
 
 map("n", "<M-CR>", function()
     utils.toggle_g("neovide_fullscreen", true, false)
 end, "Neovide toggle fullscreen")
-
-map("n", "<LEADER>np", function()
-    utils.toggle_g("neovide_profiler", true, false)
-end, "Neovide toggle profiler")
 
 map("n", "<A-=>", function()
     g.neovide_scale_factor = g.neovide_scale_factor + 0.1
@@ -36,7 +33,24 @@ map("n", "<M-t>", function()
     vim.notify(os.date("%X"), vim.log.levels.INFO, { title = "Time", timeout = 2000 })
 end, "Neovide view current time")
 
-vim.api.nvim_create_user_command("ToggleAnimations", function()
+api.nvim_create_user_command("NeovideToggleFullscreen", function()
+    utils.toggle_g("neovide_fullscreen", true, false)
+end, {})
+
+api.nvim_create_user_command("NeovideToggleProfiler", function()
+    utils.toggle_g("neovide_profiler", true, false)
+end, {})
+
+api.nvim_create_user_command("NeovideToggleRefreshRate", function()
+    utils.toggle_g("neovide_refresh_rate", 165, 60)
+    vim.notify(
+        "Set refresh rate to " .. g.neovide_refresh_rate,
+        vim.log.levels.INFO,
+        { title = "Neovide", timeout = 2000 }
+    )
+end, {})
+
+api.nvim_create_user_command("NeovideToggleAnimations", function()
     utils.toggle_g("neovide_cursor_animation_length", 0.06, 0)
     utils.toggle_g("neovide_cursor_trail_size", 0.4, 0)
     utils.toggle_g("neovide_cursor_vfx_mode", "railgun", "")

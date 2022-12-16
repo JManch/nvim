@@ -11,17 +11,6 @@ local plugins = {
     { "godlygeek/tabular" },
 
     {
-        "mbbill/undotree",
-        config = function()
-            require("core.mappings").map("n", "<LEADER>u", "<CMD>UndotreeToggle<CR>", "Toggle undo tree")
-            vim.g.undotree_WindowLayout = 2
-            vim.g.undotree_ShortIndicators = 0
-            vim.g.undotree_SplitWidth = 40
-            vim.g.undotree_SetFocusWhenToggle = 1
-        end,
-    },
-
-    {
         "ggandor/leap.nvim",
         config = function()
             require("leap").add_default_mappings()
@@ -105,7 +94,10 @@ local plugins = {
         run = function()
             require("nvim-treesitter.install").update()
         end,
-        requires = "nvim-treesitter/nvim-treesitter-textobjects",
+        requires = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/nvim-treesitter-context",
+        },
         config = function()
             require("plugins.configs.treesitter")
         end,

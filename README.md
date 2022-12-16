@@ -1,5 +1,4 @@
-![image](https://user-images.githubusercontent.com/61563764/206861957-36e5bfc6-51bc-4214-a748-c828e3264dfd.png)
-
+![image](https://user-images.githubusercontent.com/61563764/208174663-fd7529e8-efe2-4650-a46b-7d1cf10cb1da.png)
 My (somewhat) minimal Neovim config that I use with [Neovide](https://github.com/neovide/neovide).
 
 # Config structure

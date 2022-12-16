@@ -65,8 +65,8 @@ end
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = true
 g.neovide_floating_opacity = 0.6
-g.neovide_floating_blur_amount_x = 3
-g.neovide_floating_blur_amount_y = 3
+g.neovide_floating_blur_amount_x = 0.1
+g.neovide_floating_blur_amount_y = 0.1
 g.neovide_cursor_animation_length = 0
 g.neovide_cursor_trail_size = 0
 g.neovide_cursor_vfx_mode = ""

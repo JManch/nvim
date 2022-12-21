@@ -30,7 +30,7 @@ o.list = true -- Show tab, space and new line chars
 o.listchars:append("eol:↴") -- Custom new line char
 o.listchars:append("trail:·") -- Custom space char
 o.listchars:append("tab:  ") -- Custom tab char
-o.cmdheight = 0 -- Hide command bar
+o.cmdheight = 1 -- Hide command bar
 g.custom_winbar = "%=%m %t" -- Custom winbar
 
 -- Tabs, indent and folding

@@ -10,24 +10,20 @@ local plugins = {
 
     { "godlygeek/tabular" },
 
+    { "folke/twilight.nvim" },
+
     {
         "ggandor/leap.nvim",
+        requires = "ggandor/leap-spooky.nvim",
         config = function()
-            require("leap").add_default_mappings()
+            require("plugins.configs.leap")
         end,
     },
 
     {
-        "ggandor/leap-spooky.nvim",
+        "shortcuts/no-neck-pain.nvim",
         config = function()
-            require("leap-spooky").setup()
-        end,
-    },
-
-    {
-        "folke/zen-mode.nvim",
-        config = function()
-            require("plugins.configs.zen")
+            require("plugins.configs.neck")
         end,
     },
 
@@ -118,7 +114,7 @@ local plugins = {
     },
 
     {
-        "goolord/alpha-nvim",
+        "JManch/alpha-nvim",
         config = function()
             require("plugins.configs.alpha")
         end,
@@ -272,6 +268,7 @@ local plugins = {
             "nvim-lspconfig",
             "cmp-nvim-lsp",
             "null-ls.nvim",
+            "neodev.nvim",
         },
         requires = {
             "HallerPatrick/py_lsp.nvim",
@@ -290,6 +287,17 @@ local plugins = {
             require("mason").setup({
                 ui = {
                     border = "rounded",
+                },
+            })
+        end,
+    },
+
+    {
+        "folke/neodev.nvim",
+        config = function()
+            require("neodev").setup({
+                library = {
+                    plugins = false,
                 },
             })
         end,

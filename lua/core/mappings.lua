@@ -28,6 +28,9 @@ map("n", "vv", "v$", "Visual select to end of line")
 
 map("n", "<S-e>", "ge", "Go to end of previous word")
 
+map({ "n", "v" }, "<S-h>", "^", "Go to start of line")
+map({ "n", "v" }, "<S-l>", "$", "Go to end of line")
+
 map("n", "<C-d>", "<C-d>zz", "Scroll down half a page and centre cursor")
 map("n", "<C-u>", "<C-u>zz", "Scroll up half a page and centre cursor")
 map("n", "<C-o>", "<C-o>zz", "Go to prev marker and centre cursor")

@@ -40,10 +40,16 @@ local cmp_options = {
     },
     mapping = {
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+
         ["<Up>"] = cmp.mapping.select_prev_item(),
         ["<Down>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+
         ["<S-Up>"] = cmp.mapping.scroll_docs(-5),
         ["<S-Down>"] = cmp.mapping.scroll_docs(5),
+
         ["<C-e>"] = cmp.mapping.abort(),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -78,6 +84,9 @@ local cmp_options = {
             ellipsis_char = "...",
         }),
     },
+    -- view = { waiting for https://github.com/hrsh7th/nvim-cmp/issues/1142
+    --     entries = "native",
+    -- },
 }
 
 cmp.setup(cmp_options)

@@ -148,7 +148,7 @@ local lsp_maps = function(bufnr)
     local opts = { buffer = bufnr, silent = true }
 
     local buf = vim.lsp.buf
-    map("n", "H", buf.hover, "Display hover information about symbol", opts)
+    map("n", "gH", buf.hover, "Display hover information about symbol", opts)
     map("n", "gd", "<CMD>Telescope lsp_definitions initial_mode=normal<CR>", "Go to symbol definition", opts)
     map("n", "gD", buf.declaration, "Go to symbol declaration", opts)
     map("n", "go", buf.type_definition, "Go to symbol type definition", opts)

@@ -13,6 +13,13 @@ local plugins = {
     { "folke/twilight.nvim" },
 
     {
+        "rareitems/anki.nvim",
+        config = function()
+            require("plugins.configs.anki")
+        end,
+    },
+
+    {
         "ggandor/leap.nvim",
         requires = "ggandor/leap-spooky.nvim",
         config = function()

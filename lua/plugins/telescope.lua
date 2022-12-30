@@ -100,7 +100,7 @@ M.keys = {
     { "<LEADER>fd", "<CMD>Telescope file_browser<CR>", desc = "File browser" },
     { "<LEADER>fD", "<CMD>Telescope file_browser respect_gitignore=false<CR>", desc = "File browser with git ignore" },
     { "<LEADER>b", "<CMD>Telescope buffers<CR>", desc = "Buffers" },
-    { "<LEADER>fg", "<CMD>Telescope live_grep_args<CR>", desc = "Live grep cwd" },
+    { "<LEADER>fg", "<CMD>Telescope live_grep<CR>", desc = "Live grep cwd" },
     { "<LEADER>fG", "<CMD>Telescope grep_string<CR>", desc = "Grep word under cursor in cwd" },
     { "<LEADER>f/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Find in current buffer" },
     { "<leader>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", desc = "Neoclip" },

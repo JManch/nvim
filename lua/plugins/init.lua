@@ -3,7 +3,12 @@ return {
     "nvim-lua/plenary.nvim",
     "godlygeek/tabular",
     "folke/twilight.nvim",
-    "windwp/nvim-autopairs",
+
+    {
+        "windwp/nvim-autopairs",
+        event = "BufReadPre",
+        config = true,
+    },
 
     { "nvim-tree/nvim-web-devicons", config = true },
 

@@ -1,6 +1,6 @@
 local M = {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = "BufReadPost",
 }
 
 M.dependencies = {

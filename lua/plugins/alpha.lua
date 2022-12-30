@@ -1,6 +1,6 @@
 local M = {
     "JManch/alpha-nvim",
-	lazy = false,
+    lazy = false,
 }
 
 local function button(sc, txt, keybind)
@@ -48,7 +48,7 @@ local header = {
     },
 }
 
-local total_plugins = 0
+local total_plugins = vim.fn.len(vim.fn.globpath(vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy"), "*", 0, 1))
 
 local plugin_count = {
     type = "text",

@@ -1,8 +1,7 @@
 local M = {
     "williamboman/mason-lspconfig.nvim",
+    event = "BufReadPre",
 }
-
-M.event = "BufReadPre"
 
 M.dependencies = {
     "JManch/nvim-lspconfig",
@@ -24,30 +23,7 @@ M.dependencies = {
             },
         },
     },
-    {
-        "HallerPatrick/py_lsp.nvim",
-        config = {
-            auto_source = false,
-            language_server = "pyright",
-            on_attach = M.on_attach,
-            capabilities = M.capabilities,
-        },
-    },
 }
-
-M.on_attach = function(client, bufnr)
-    require("plugins.lsp.formatting").on_attach(client, bufnr)
-    require("plugins.lsp.mappings").load(bufnr)
-    require("lsp_signature").on_attach({
-        max_height = 100,
-        max_width = 120,
-        doc_lines = 100,
-        floating_window = false,
-        hint_enable = false,
-        hint_prefix = " ",
-        toggle_key = "<C-s>",
-    }, bufnr)
-end
 
 M.config = function()
     -- Configure LspInfo window border
@@ -68,16 +44,30 @@ M.config = function()
         ensure_installed = { "sumneko_lua" },
     })
 
-    M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local on_attach = function(client, bufnr)
+        require("plugins.lsp.formatting").on_attach(client, bufnr)
+        require("plugins.lsp.mappings").load(bufnr)
+        require("lsp_signature").on_attach({
+            max_height = 100,
+            max_width = 120,
+            doc_lines = 100,
+            floating_window = false,
+            hint_enable = false,
+            hint_prefix = " ",
+            toggle_key = "<C-s>",
+        }, bufnr)
+    end
+
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     local servers = vim.tbl_deep_extend("error", {
         function(server_name)
             require("lspconfig")[server_name].setup({
-                on_attach = M.on_attach,
-                capabilities = M.capabilities,
+                on_attach = on_attach,
+                capabilities = capabilities,
             })
         end,
-    }, require("plugins.lsp.servers"))
+    }, require("plugins.lsp.servers").servers(on_attach, capabilities))
 
     mason_config.setup_handlers(servers)
 end

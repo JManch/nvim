@@ -61,3 +61,5 @@ local options = {
 }
 
 require("lazy").setup("plugins", options)
+
+vim.keymap.set("n", "<LEADER>L", "<CMD>Lazy<CR>", { desc = "Open Lazy" })

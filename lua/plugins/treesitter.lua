@@ -5,6 +5,7 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "nvim-treesitter/nvim-treesitter-context",
+        "p00f/nvim-ts-rainbow",
     },
     config = function()
         require("nvim-treesitter.configs").setup({
@@ -52,6 +53,10 @@ return {
             },
             context = {
                 enable = true,
+            },
+            rainbow = {
+                enable = true,
+                max_file_lines = 2000,
             },
         })
     end,

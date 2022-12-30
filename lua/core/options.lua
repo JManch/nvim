@@ -31,7 +31,6 @@ o.listchars:append("eol:↴") -- Custom new line char
 o.listchars:append("trail:·") -- Custom space char
 o.listchars:append("tab:  ") -- Custom tab char
 o.cmdheight = 1 -- Hide command bar
-g.custom_winbar = "%=%m %t" -- Custom winbar
 
 -- Tabs, indent and folding
 o.expandtab = true -- Use spaces instead of tabs

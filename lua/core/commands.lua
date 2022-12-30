@@ -39,10 +39,6 @@ api.nvim_create_user_command("ToggleParagraphAutoFormat", function()
     utils.toggle_local_opt("formatoptions", "a")
 end, {})
 
-api.nvim_create_user_command("ToggleWinbar", function()
-    utils.toggle_o("winbar", g.custom_winbar, "")
-end, {})
-
 api.nvim_create_user_command("ToggleColorcolumn", function()
     utils.toggle_wo("colorcolumn", "80", "")
 end, {})

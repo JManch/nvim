@@ -1,8 +1,8 @@
-local ok, alpha = pcall(require, "alpha")
+local M = {
+    "JManch/alpha.nvim",
+}
 
-if not ok then
-    return
-end
+M.lazy = false
 
 local function button(sc, txt, keybind)
     local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
@@ -95,64 +95,47 @@ local options = {
     },
 }
 
-alpha.setup(options)
-
-local utils = require("core.utils")
-
-local group = vim.api.nvim_create_augroup("Alpha", {})
-vim.api.nvim_create_autocmd("FileType", {
-    group = group,
-    pattern = "alpha",
-    callback = function()
-        if vim.o.winbar ~= "" then
-            utils.toggle_o("winbar", vim.g.custom_winbar, "")
-            vim.api.nvim_create_autocmd("BufUnload", {
-                pattern = "<buffer>",
-                callback = function()
-                    if vim.o.winbar == "" then
-                        utils.toggle_o("winbar", vim.g.custom_winbar, "")
+M.config = function()
+    local group = vim.api.nvim_create_augroup("Alpha", {})
+    -- Hide cursor when Alpha is opened
+    vim.api.nvim_create_autocmd({ "User" }, {
+        group = group,
+        pattern = "AlphaReady",
+        callback = function()
+            if not vim.tbl_contains(vim.opt.guicursor:get(), "a:NoCursor") then
+                vim.opt.guicursor:append("a:NoCursor")
+                vim.api.nvim_create_autocmd("BufLeave", {
+                    pattern = "<buffer>",
+                    callback = function()
+                        vim.opt.guicursor:remove("a:NoCursor")
                         return true
-                    end
-                end,
-            })
-        end
-    end,
-})
+                    end,
+                })
+            end
+        end,
+    })
 
--- Hide cursor when Alpha is opened
-vim.api.nvim_create_autocmd({ "User" }, {
-    group = group,
-    pattern = "AlphaReady",
-    callback = function()
-        if not vim.tbl_contains(vim.opt.guicursor:get(), "a:NoCursor") then
-            vim.opt.guicursor:append("a:NoCursor")
-            vim.api.nvim_create_autocmd("BufLeave", {
-                pattern = "<buffer>",
-                callback = function()
-                    vim.opt.guicursor:remove("a:NoCursor")
-                    return true
-                end,
-            })
-        end
-    end,
-})
+    -- Hide cursor when toggling between Alpha and other buffers
+    vim.api.nvim_create_autocmd("BufEnter", {
+        group = group,
+        callback = function()
+            if vim.bo.filetype ~= "alpha" then
+                return
+            end
+            if not vim.tbl_contains(vim.opt.guicursor:get(), "a:NoCursor") then
+                vim.opt.guicursor:append("a:NoCursor")
+                vim.api.nvim_create_autocmd("BufLeave", {
+                    pattern = "<buffer>",
+                    callback = function()
+                        vim.opt.guicursor:remove("a:NoCursor")
+                        return true
+                    end,
+                })
+            end
+        end,
+    })
 
--- Hide cursor when toggling between Alpha and other buffers
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = group,
-    callback = function()
-        if vim.bo.filetype ~= "alpha" then
-            return
-        end
-        if not vim.tbl_contains(vim.opt.guicursor:get(), "a:NoCursor") then
-            vim.opt.guicursor:append("a:NoCursor")
-            vim.api.nvim_create_autocmd("BufLeave", {
-                pattern = "<buffer>",
-                callback = function()
-                    vim.opt.guicursor:remove("a:NoCursor")
-                    return true
-                end,
-            })
-        end
-    end,
-})
+    require("alpha").setup(options)
+end
+
+return M

@@ -1,10 +1,8 @@
-local ok, lualine = pcall(require, "lualine")
+local M = {
+    "nvim-lualine/lualine.nvim",
+}
 
-if not ok then
-    return
-end
-
-local api = vim.api
+M.event = "VeryLazy"
 
 local statusline_tab = function()
     local tab_count = vim.fn.tabpagenr("$")
@@ -37,30 +35,6 @@ local show_macro_recording = function()
         return "Recording @" .. recording_register
     end
 end
-
-api.nvim_create_autocmd("RecordingEnter", {
-    callback = function()
-        lualine.refresh({
-            place = { "statusline" },
-        })
-    end,
-})
-
-api.nvim_create_autocmd("RecordingLeave", {
-    callback = function()
-        local timer = vim.loop.new_timer()
-        -- Wait 50ms for recording to fully stopm
-        timer:start(
-            50,
-            0,
-            vim.schedule_wrap(function()
-                lualine.refresh({
-                    place = { "statusline" },
-                })
-            end)
-        )
-    end,
-})
 
 local options = {
     options = {
@@ -100,4 +74,32 @@ local options = {
     },
 }
 
-lualine.setup(options)
+M.config = function()
+    require("lualine").setup(options)
+
+    vim.api.nvim_create_autocmd("RecordingEnter", {
+        callback = function()
+            require("lualine").refresh({
+                place = { "statusline" },
+            })
+        end,
+    })
+
+    vim.api.nvim_create_autocmd("RecordingLeave", {
+        callback = function()
+            local timer = vim.loop.new_timer()
+            -- Wait 50ms for recording to fully stopm
+            timer:start(
+                50,
+                0,
+                vim.schedule_wrap(function()
+                    require("lualine").refresh({
+                        place = { "statusline" },
+                    })
+                end)
+            )
+        end,
+    })
+end
+
+return M

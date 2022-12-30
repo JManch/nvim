@@ -1,8 +1,15 @@
-local ok, telescope = pcall(require, "telescope")
+local M = {
+    "nvim-telescope/telescope.nvim",
+}
 
-if not ok then
-    return
-end
+M.cmd = "Telescope"
+
+M.dependencies = {
+    { "AckslD/nvim-neoclip.lua" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-file-browser.nvim" },
+}
 
 local options = {
     defaults = {
@@ -65,27 +72,32 @@ local options = {
     },
 }
 
-telescope.setup(options)
+M.config = function()
+    local telescope = require("telescope")
+    telescope.setup(options)
 
-telescope.load_extension("fzf")
-telescope.load_extension("neoclip")
-telescope.load_extension("ui-select")
-telescope.load_extension("workspaces")
-telescope.load_extension("file_browser")
-telescope.load_extension("live_grep_args")
+    telescope.load_extension("fzf")
+    telescope.load_extension("neoclip")
+    telescope.load_extension("ui-select")
+    telescope.load_extension("workspaces")
+    telescope.load_extension("file_browser")
+end
 
-local map = require("core.mappings").map
-map("n", "<LEADER>ff", "<CMD>Telescope find_files<CR>", "Find files")
-map("n", "<LEADER>fa", "<CMD>Telescope find_files no_ignore=true hidden=true<CR>", "Find all files")
-map("n", "<LEADER>fd", "<CMD>Telescope file_browser<CR>", "File browser")
-map("n", "<LEADER>fD", "<CMD>Telescope file_browser respect_gitignore=false<CR>", "File browser with git ignore")
-map("n", "<LEADER>b", "<CMD>Telescope buffers<CR>", "Buffers")
-map("n", "<LEADER>fg", "<CMD>Telescope live_grep_args<CR>", "Live grep cwd")
-map("n", "<LEADER>fG", "<CMD>Telescope grep_string<CR>", "Grep word under cursor in cwd")
-map("n", "<LEADER>f/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer")
-map("n", "<leader>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", "Neoclip")
-map("n", "<leader>fR", "<CMD>Telescope registers initial_mode=normal<CR>", "Registers")
-map("n", "<leader>fh", "<CMD>Telescope help_tags<CR>", "Help tags")
-map("n", "<leader>fk", "<CMD>Telescope keymaps<CR>", "Keymaps")
-map("n", "<leader>fs", "<CMD>Telescope spell_suggest<CR>", "Spell suggestions")
-map("n", "<leader>fw", "<CMD>Telescope workspaces theme=dropdown previewer=false <CR>", "Workspaces")
+M.keys = {
+    { "<LEADER>ff", "<CMD>Telescope find_files<CR>", desc = "Find files" },
+    { "<LEADER>fa", "<CMD>Telescope find_files no_ignore=true hidden=true<CR>", desc = "Find all files" },
+    { "<LEADER>fd", "<CMD>Telescope file_browser<CR>", desc = "File browser" },
+    { "<LEADER>fD", "<CMD>Telescope file_browser respect_gitignore=false<CR>", desc = "File browser with git ignore" },
+    { "<LEADER>b", "<CMD>Telescope buffers<CR>", desc = "Buffers" },
+    { "<LEADER>fg", "<CMD>Telescope live_grep_args<CR>", desc = "Live grep cwd" },
+    { "<LEADER>fG", "<CMD>Telescope grep_string<CR>", desc = "Grep word under cursor in cwd" },
+    { "<LEADER>f/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Find in current buffer" },
+    { "<leader>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", desc = "Neoclip" },
+    { "<leader>fR", "<CMD>Telescope registers initial_mode=normal<CR>", desc = "Registers" },
+    { "<leader>fh", "<CMD>Telescope help_tags<CR>", desc = "Help tags" },
+    { "<leader>fk", "<CMD>Telescope keymaps<CR>", desc = "Keymaps" },
+    { "<leader>fs", "<CMD>Telescope spell_suggest<CR>", desc = "Spell suggestions" },
+    { "<leader>fw", "<CMD>Telescope workspaces theme=dropdown previewer=false <CR>", desc = "Workspaces" },
+}
+
+return M

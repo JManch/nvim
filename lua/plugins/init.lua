@@ -1,170 +1,26 @@
-local plugins = {
+return {
+    "lewis6991/impatient.nvim",
+    "moll/vim-bbye",
+    "nvim-lua/plenary.nvim",
+    "godlygeek/tabular",
+    "folke/twilight.nvim",
+    "windwp/nvim-autopairs",
 
-    { "wbthomason/packer.nvim" },
-
-    { "lewis6991/impatient.nvim" },
-
-    { "moll/vim-bbye" },
-
-    { "nvim-lua/plenary.nvim" },
-
-    { "godlygeek/tabular" },
-
-    { "folke/twilight.nvim" },
-
-    {
-        "rareitems/anki.nvim",
-        config = function()
-            require("plugins.configs.anki")
-        end,
-    },
-
-    {
-        "phaazon/mind.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-            require("plugins.configs.mind")
-        end,
-    },
-
-    {
-        "ggandor/leap.nvim",
-        requires = "ggandor/leap-spooky.nvim",
-        config = function()
-            require("plugins.configs.leap")
-        end,
-    },
-
-    {
-        "shortcuts/no-neck-pain.nvim",
-        config = function()
-            require("plugins.configs.neck")
-        end,
-    },
-
-    {
-        "mfussenegger/nvim-dap",
-        config = function()
-            require("plugins.configs.dap")
-        end,
-        disabled = true,
-    },
+    { "nvim-tree/nvim-web-devicons", config = true },
 
     {
         "JManch/sunset.nvim",
-        config = function()
-            require("sunset").setup({
-                update_interval = 10000,
-                latitude = 50.8229,
-                longitude = -0.1363,
-                sunset_offset = -3600,
-                sunrise_offset = 3600,
-            })
-        end,
-        after = "neovim-ayu",
-    },
-
-    {
-        "Shatur/neovim-ayu",
-        config = function()
-            local colors = require("ayu.colors")
-            colors.generate(true)
-            require("ayu").setup({
-                mirage = true,
-                overrides = function()
-                    return { Comment = { fg = colors.comment } }
-                end,
-            })
-            require("core.utils").set_highlights()
-            vim.cmd("colorscheme ayu-mirage")
-        end,
-    },
-
-    {
-        "lervag/vimtex",
-        config = function()
-            -- :h vimtex-faq-nreesitter in regards to treesitter vs vimtex
-            -- syntax highlighting. (I'm using treesitter despite downsides)
-            vim.cmd([[
-                filetype plugin on
-                let g:vimtex_view_general_viewer = 'SumatraPDF'
-                let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-                let g:vimtex_matchparen_enabled = 0
-                let g:vimtex_format_enabled = 1
-                let g:vimtex_compiler_silent = 0
-                let g:vimtex_complete_enabled = 0 " use texlab for completion instead
-                " Disable syntax highlighting, use treesitter instead
-                let g:vimtex_syntax_enabled = 0
-                let g:vimtex_syntax_conceal_disable = 1
-            ]])
-        end,
-    },
-
-    {
-        "nvim-treesitter/nvim-treesitter",
-        run = function()
-            require("nvim-treesitter.install").update()
-        end,
-        requires = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            "nvim-treesitter/nvim-treesitter-context",
+        lazy = false,
+        config = {
+            update_interval = 10000,
+            latitude = 50.8229,
+            longitude = -0.1363,
+            sunset_offset = -3600,
+            sunrise_offset = 3600,
         },
-        config = function()
-            require("plugins.configs.treesitter")
-        end,
     },
 
-    {
-        "kyazdani42/nvim-web-devicons",
-        config = function()
-            require("nvim-web-devicons").setup()
-        end,
-    },
-
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        config = function()
-            require("plugins.configs.blankline")
-        end,
-    },
-
-    {
-        "JManch/alpha-nvim",
-        config = function()
-            require("plugins.configs.alpha")
-        end,
-    },
-
-    {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup()
-        end,
-    },
-
-    {
-        "nvim-lualine/lualine.nvim",
-        config = function()
-            require("plugins.configs.lualine")
-        end,
-    },
-
-    {
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            "nvim-telescope/telescope-ui-select.nvim",
-            "nvim-telescope/telescope-packer.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-            "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-live-grep-args.nvim",
-        },
-        after = {
-            "nvim-neoclip.lua",
-        },
-        config = function()
-            require("plugins.configs.telescope")
-        end,
-    },
+    -- NOTE:I got to here in the lazy.nvim port
 
     {
         "numToStr/Comment.nvim",
@@ -403,5 +259,3 @@ local plugins = {
         end,
     },
 }
-
-require("plugins.packer").load_plugins(plugins)

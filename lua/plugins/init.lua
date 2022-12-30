@@ -20,6 +20,14 @@ local plugins = {
     },
 
     {
+        "phaazon/mind.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("plugins.configs.mind")
+        end,
+    },
+
+    {
         "ggandor/leap.nvim",
         requires = "ggandor/leap-spooky.nvim",
         config = function()

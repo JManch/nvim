@@ -1,79 +1,90 @@
 local M = {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
 }
 
-M.cmd = "Telescope"
-
 M.dependencies = {
-    { "AckslD/nvim-neoclip.lua" },
+    {
+        "AckslD/nvim-neoclip.lua",
+        config = {
+            keys = {
+                telescope = {
+                    i = {
+                        paste_behind = "<C-P>",
+                    },
+                },
+            },
+        },
+    },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-file-browser.nvim" },
 }
 
-local options = {
-    defaults = {
-        layout_config = {
-            prompt_position = "top",
-        },
-        sorting_strategy = "ascending",
-        dynamic_preview_title = true,
-        mappings = {
-            i = {
-                ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
-                ["<C-n>"] = "preview_scrolling_down",
-                ["<C-p>"] = "preview_scrolling_up",
-                ["<C-j>"] = "move_selection_next",
-                ["<C-k>"] = "move_selection_previous",
-                ["<C-Down>"] = require("telescope.actions").cycle_history_next,
-                ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
+M.config = function()
+    local telescope = require("telescope")
+
+    local options = {
+        defaults = {
+            layout_config = {
+                prompt_position = "top",
             },
-            n = {
-                ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
-                ["<C-n>"] = "preview_scrolling_down",
-                ["<C-p>"] = "preview_scrolling_up",
-                ["<C-Down>"] = require("telescope.actions").cycle_history_next,
-                ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
-            },
-        },
-    },
-    pickers = {
-        ["find_files"] = {
-            follow = true,
-        },
-        ["buffers"] = {
-            previewer = false,
-            path_display = { "tail" },
-            theme = "dropdown",
+            sorting_strategy = "ascending",
+            dynamic_preview_title = true,
             mappings = {
+                i = {
+                    ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
+                    ["<C-n>"] = "preview_scrolling_down",
+                    ["<C-p>"] = "preview_scrolling_up",
+                    ["<C-j>"] = "move_selection_next",
+                    ["<C-k>"] = "move_selection_previous",
+                    ["<C-Down>"] = require("telescope.actions").cycle_history_next,
+                    ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
+                },
                 n = {
-                    ["x"] = require("telescope.actions").delete_buffer,
+                    ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
+                    ["<C-n>"] = "preview_scrolling_down",
+                    ["<C-p>"] = "preview_scrolling_up",
+                    ["<C-Down>"] = require("telescope.actions").cycle_history_next,
+                    ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
                 },
             },
         },
-        ["registers"] = {
-            initial_mode = "insert",
+        pickers = {
+            ["find_files"] = {
+                follow = true,
+            },
+            ["buffers"] = {
+                previewer = false,
+                path_display = { "tail" },
+                theme = "dropdown",
+                mappings = {
+                    n = {
+                        ["x"] = require("telescope.actions").delete_buffer,
+                    },
+                },
+            },
+            ["registers"] = {
+                initial_mode = "insert",
+            },
+            ["spell_suggest"] = {
+                theme = "cursor",
+                intitial_mode = "normal",
+            },
         },
-        ["spell_suggest"] = {
-            theme = "cursor",
-            intitial_mode = "normal",
+        extensions = {
+            -- Not sure why but some extensions seem to ignore the settings here
+            -- whilst for others it works fine. For extensions like workspaces I
+            -- have configured the picker in the mapping below.
+            ["ui-select"] = require("telescope.themes").get_dropdown(),
+            ["file_browser"] = {
+                initial_mode = "normal",
+                path = "%:p:h",
+                grouped = true,
+            },
         },
-    },
-    extensions = {
-        -- Not sure why but some extensions seem to ignore the settings here
-        -- whilst for others it works fine. For extensions like workspaces I
-        -- have configured the picker in the mapping below.
-        ["ui-select"] = require("telescope.themes").get_dropdown(),
-        ["file_browser"] = {
-            initial_mode = "normal",
-            path = "%:p:h",
-            grouped = true,
-        },
-    },
-}
+    }
 
-M.config = function()
-    local telescope = require("telescope")
     telescope.setup(options)
 
     telescope.load_extension("fzf")

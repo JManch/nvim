@@ -13,6 +13,51 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local options = {}
+local options = {
+    defaults = {
+        lazy = true,
+    },
+    install = {
+        colorscheme = { "ayu-mirage", "habamax" },
+    },
+    checker = {
+        enabled = true,
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "2html_plugin",
+                "getscript",
+                "man",
+                "matchit",
+                "matchparen",
+                "shada_plugin",
+                "getscriptPlugin",
+                "gzip",
+                "logipat",
+                "netrw",
+                "netrwPlugin",
+                "netrwSettings",
+                "netrwFileHandlers",
+                "tar",
+                "tarPlugin",
+                "rrhelper",
+                "spellfile_plugin",
+                "vimball",
+                "vimballPlugin",
+                "zip",
+                "zipPlugin",
+                "tutor",
+                "rplugin",
+                "syntax",
+                "synmenu",
+                "optwin",
+                "compiler",
+                "bugreport",
+                "ftplugin",
+            },
+        },
+    },
+}
 
 require("lazy").setup("plugins", options)

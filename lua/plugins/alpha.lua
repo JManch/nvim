@@ -1,8 +1,7 @@
 local M = {
-    "JManch/alpha.nvim",
+    "JManch/alpha-nvim",
+	lazy = false,
 }
-
-M.lazy = false
 
 local function button(sc, txt, keybind)
     local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
@@ -49,7 +48,7 @@ local header = {
     },
 }
 
-local total_plugins = #vim.tbl_keys(packer_plugins)
+local total_plugins = 0
 
 local plugin_count = {
     type = "text",

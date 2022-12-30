@@ -1,6 +1,6 @@
 return {
     "ggandor/leap.nvim",
-    event = "VeryLazy",
+    event = "BufReadPost",
     dependencies = {
         {
             "ggandor/leap-spooky.nvim",

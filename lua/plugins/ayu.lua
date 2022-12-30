@@ -12,6 +12,6 @@ return {
             end,
         })
         require("core.utils").set_highlights()
-        vim.cmd([[colorscheme ayu-mirage]])
+		vim.cmd("colorscheme ayu-mirage")
     end,
 }

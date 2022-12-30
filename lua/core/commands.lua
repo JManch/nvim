@@ -1,5 +1,4 @@
 local api = vim.api
-local g = vim.g
 local utils = require("core.utils")
 
 local set_format_options = api.nvim_create_augroup("SetFormatOptions", {})
@@ -24,6 +23,15 @@ api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function()
         vim.highlight.on_yank({ higroup = "IncSearch", timeout = 40 })
+    end,
+})
+
+local terminal_mappings = api.nvim_create_augroup("TerminalMappings", {})
+api.nvim_create_autocmd("TermOpen", {
+    group = terminal_mappings,
+    pattern = "term://*",
+    callback = function()
+        utils.terminal_maps()
     end,
 })
 

@@ -1,16 +1,16 @@
-local ok, gitsigns = pcall(require, "gitsigns")
+local M = {
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
+}
 
-if not ok then
-    return
-end
-
-local map = require("core.mappings").map
-
-local options = {
+M.config = {
     signcolumn = true,
-    numhl = true,
+    numhl = false,
     attach_to_untracked = false,
     on_attach = function(_)
+        local map = require("core.mappings").map
+        local gitsigns = package.loaded.gitsigns
+
         -- Navigation
         map("n", "]c", function()
             if vim.wo.diff then
@@ -54,4 +54,4 @@ local options = {
     },
 }
 
-gitsigns.setup(options)
+return M

@@ -43,6 +43,9 @@ M.config = function()
             section_separators = "",
             disabled_filetypes = {
                 "alpha",
+                "mason",
+                "lazy",
+                "TelescopePrompt",
             },
             globalstatus = true,
         },

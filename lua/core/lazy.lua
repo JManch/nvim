@@ -20,6 +20,9 @@ local options = {
     install = {
         colorscheme = { "ayu-mirage", "habamax" },
     },
+    ui = {
+        border = "rounded",
+    },
     checker = {
         enabled = true,
     },

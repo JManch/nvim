@@ -11,7 +11,7 @@ return {
                 return { Comment = { fg = colors.comment } }
             end,
         })
+        vim.cmd("colorscheme ayu-mirage")
         require("core.utils").set_highlights()
-		vim.cmd("colorscheme ayu-mirage")
     end,
 }

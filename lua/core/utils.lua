@@ -4,8 +4,6 @@ local api = vim.api
 
 M.set_highlights = function()
     api.nvim_set_hl(0, "MatchParen", {})
-    api.nvim_set_hl(0, "WinBar", {})
-    api.nvim_set_hl(0, "WinBarNC", {})
     api.nvim_set_hl(0, "NoCursor", { blend = 100, strikethrough = true })
 end
 
@@ -88,6 +86,31 @@ M.toggle_local_opt = function(key, value)
     else
         vim.opt_local[key]:remove(value)
     end
+end
+
+M.terminal_maps = function()
+    local map = require("core.mappings").map
+    local opts = { buffer = true }
+    local excluded_terminals = {
+        "lazygit",
+    }
+
+    local buffer_name = vim.api.nvim_buf_get_name(0)
+    for _, buffer in ipairs(excluded_terminals) do
+        if string.find(buffer_name, buffer, 1, true) then
+            if buffer == "lazygit" then
+                map("t", "<C-v>", [[<C-\><C-n>"+pA]], "Put from system register", opts)
+            end
+            return
+        end
+    end
+
+    map("t", "jk", [[<C-\><C-n>]], "Exit insert mode", opts)
+    map("t", "<C-h>", "<CMD>wincmd h<CR>", "Go to the left window", opts)
+    map("t", "<C-l>", "<CMD>wincmd l<CR>", "Go to the right window", opts)
+    map("t", "<C-j>", "<CMD>wincmd j<CR>", "Go to the down window", opts)
+    map("t", "<C-k>", "<CMD>wincmd k<CR>", "Go to the up window", opts)
+    map("t", "<C-v>", [[<C-\><C-n>"+pA]], "Put from system register", opts)
 end
 
 P = function(v)

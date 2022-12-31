@@ -1,5 +1,4 @@
 local api = vim.api
-local g = vim.g
 local utils = require("core.utils")
 
 local set_format_options = api.nvim_create_augroup("SetFormatOptions", {})
@@ -27,6 +26,15 @@ api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+local terminal_mappings = api.nvim_create_augroup("TerminalMappings", {})
+api.nvim_create_autocmd("TermOpen", {
+    group = terminal_mappings,
+    pattern = "term://*",
+    callback = function()
+        utils.terminal_maps()
+    end,
+})
+
 api.nvim_create_user_command("ToggleAutoWrap", function()
     utils.toggle_local_opt("formatoptions", "t")
 end, {})
@@ -37,10 +45,6 @@ end, {})
 
 api.nvim_create_user_command("ToggleParagraphAutoFormat", function()
     utils.toggle_local_opt("formatoptions", "a")
-end, {})
-
-api.nvim_create_user_command("ToggleWinbar", function()
-    utils.toggle_o("winbar", g.custom_winbar, "")
 end, {})
 
 api.nvim_create_user_command("ToggleColorcolumn", function()

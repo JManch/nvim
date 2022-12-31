@@ -9,6 +9,7 @@ M.dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     {
         "williamboman/mason.nvim",
+        cmd = "Mason",
         config = {
             ui = {
                 border = "rounded",
@@ -81,7 +82,7 @@ end
 -- clang_format (c++)
 -- clangd (c++)
 -- csharpier (c#)
--- c-sharp-language-server (c#)
+-- omnisharp (c#)
 -- ltex-ls (spell check for latex + md)
 -- texlab (latex)
 -- rustfmt (rust)

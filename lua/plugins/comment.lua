@@ -37,6 +37,27 @@ return {
             desc = "Comment toggle blockwise visual mode",
             mode = "x",
         },
+        {
+            "gco",
+            function()
+                require("Comment.api").insert.linewise.below()
+            end,
+            desc = "Comment insert below",
+        },
+        {
+            "gcO",
+            function()
+                require("Comment.api").insert.linewise.above()
+            end,
+            desc = "Comment insert above",
+        },
+        {
+            "gcA",
+            function()
+                require("Comment.api").locked("insert.linewise.eol")
+            end,
+            desc = "Comment insert end of line",
+        },
 
         -- Custom mappings
         { "gcp", "yygccp", desc = "Comment and put below", remap = true, mode = "n" },

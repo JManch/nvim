@@ -95,6 +95,8 @@ local options = {
 }
 
 M.config = function()
+    require("alpha").setup(options)
+
     local group = vim.api.nvim_create_augroup("Alpha", {})
     -- Hide cursor when Alpha is opened
     vim.api.nvim_create_autocmd({ "User" }, {
@@ -133,8 +135,6 @@ M.config = function()
             end
         end,
     })
-
-    require("alpha").setup(options)
 end
 
 return M

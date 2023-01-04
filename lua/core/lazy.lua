@@ -33,7 +33,6 @@ local options = {
                 "getscript",
                 "man",
                 "matchit",
-                "matchparen",
                 "shada_plugin",
                 "getscriptPlugin",
                 "gzip",

@@ -3,7 +3,7 @@ local M = {}
 local api = vim.api
 
 M.set_highlights = function()
-    api.nvim_set_hl(0, "MatchParen", {})
+    api.nvim_set_hl(0, "MatchParen", { link = "Constant" })
     api.nvim_set_hl(0, "NoCursor", { blend = 100, strikethrough = true })
 end
 

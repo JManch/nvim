@@ -1,6 +1,7 @@
 return {
     "nvim-neorg/neorg",
     ft = "norg",
+    cmd = "Neorg sync-parsers",
     config = {
         load = {
             ["core.defaults"] = {},

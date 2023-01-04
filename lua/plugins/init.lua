@@ -1,8 +1,9 @@
 return {
-    "moll/vim-bbye",
     "nvim-lua/plenary.nvim",
     "godlygeek/tabular",
     "folke/twilight.nvim",
+
+    { "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } },
 
     {
         "windwp/nvim-autopairs",
@@ -46,11 +47,13 @@ return {
     },
 
     {
+        -- TODO: Figure out mappings that don't clash with leap
         "kylechui/nvim-surround",
         event = "VeryLazy",
         config = {
-            visual = "<leader>S",
+            visual = "<LEADER>S",
         },
+        enabled = false,
     },
 
     {

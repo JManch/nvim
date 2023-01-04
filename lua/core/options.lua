@@ -43,7 +43,7 @@ vim.opt.textwidth = 79 -- 79 is default anyway
 -- Performance
 vim.opt.hidden = true -- Enable background buffers
 vim.opt.updatetime = 250 -- Trigger event wait time (ms)
-vim.opt.timeoutlen = 400 -- Time to wait for mapped sequence (ms)
+vim.opt.timeoutlen = 600 -- Time to wait for mapped sequence (ms)
 
 -- Disable providers
 g["loaded_python3_provider"] = 0

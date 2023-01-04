@@ -4,7 +4,7 @@ local M = {
 }
 
 M.dependencies = {
-    "JManch/nvim-lspconfig",
+    "neovim/nvim-lspconfig",
     "ray-x/lsp_signature.nvim",
     "hrsh7th/cmp-nvim-lsp",
     {

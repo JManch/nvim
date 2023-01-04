@@ -13,7 +13,7 @@ end
 
 local sun_status = function()
     if vim.g.is_day then
-        return "  " .. vim.g.sunset
+        return " " .. vim.g.sunset
     else
         return " " .. vim.g.sunrise
     end

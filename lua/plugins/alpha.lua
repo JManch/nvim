@@ -33,69 +33,80 @@ local function button(sc, txt, keybind)
     }
 end
 
-local header = {
-    type = "text",
-    val = {
-        "       __           __               ",
-        "      / /___  _____/ /_  __  ______ _",
-        " __  / / __ \\/ ___/ __ \\/ / / / __ `/",
-        "/ /_/ / /_/ (__  ) / / / /_/ / /_/ / ",
-        "\\____/\\____/____/_/ /_/\\__,_/\\__,_/  ",
-    },
-    opts = {
-        position = "center",
-        hl = "GitSignsChange",
-    },
-}
+M.opts = function()
+    local header = {
+        type = "text",
+        val = {
+            "       __           __               ",
+            "      / /___  _____/ /_  __  ______ _",
+            " __  / / __ \\/ ___/ __ \\/ / / / __ `/",
+            "/ /_/ / /_/ (__  ) / / / /_/ / /_/ / ",
+            "\\____/\\____/____/_/ /_/\\__,_/\\__,_/  ",
+        },
+        opts = {
+            position = "center",
+            hl = "GitSignsChange",
+        },
+    }
 
-local total_plugins = vim.fn.len(vim.fn.globpath(vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy"), "*", 0, 1))
+    local plugin_count = {
+        type = "text",
+        val = "",
+        opts = {
+            position = "center",
+            hl = "CmpItemMenu",
+        },
+    }
 
-local plugin_count = {
-    type = "text",
-    val = "  " .. total_plugins .. " plugins installed",
-    opts = {
-        position = "center",
-        hl = "CmpItemMenu",
-    },
-}
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        callback = function()
+            local stats = require("lazy").stats()
+            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+            plugin_count.val = "  " .. stats.count .. " plugins (" .. ms .. "ms)"
+        end
+    })
 
-local buttons = {
-    type = "group",
-    val = {
-        button("e", "   New file", ":ene <BAR> startinsert<CR>"),
-        button("f", "   Find file", ":Telescope find_files<CR>"),
-        button("d", "   Browse files", ":Telescope file_browser<CR>"),
-        button("w", "   Load workspace", ":Telescope workspaces theme=dropdown previewer=false<CR>"),
-        button("l", "   Toggle theme", ":SunsetToggle<CR>"),
-        button("q", "   Quit", ":qa<CR>"),
-    },
-    opts = {
-        position = "center",
-        spacing = 1,
-    },
-}
+    local buttons = {
+        type = "group",
+        val = {
+            button("e", "   New file", "<CMD>ene <BAR> startinsert<CR>"),
+            button("f", "   Find file", "<CMD>Telescope find_files<CR>"),
+            button("d", "   Browse files", "<CMD>Telescope file_browser<CR>"),
+            button("w", "   Load workspace", "<CMD>Telescope workspaces theme=dropdown previewer=false<CR>"),
+            button("l", "   Toggle theme", "<CMD>SunsetToggle<CR>"),
+            button("q", "   Quit", "<CMD>qa<CR>"),
+        },
+        opts = {
+            position = "center",
+            spacing = 1,
+        },
+    }
 
-local marginTopPercent = 0.25
-local winheight = vim.fn.winheight(0)
-local headerPadding = vim.fn.max({ 2, vim.fn.floor(winheight * marginTopPercent) })
+    local marginTopPercent = 0.25
+    local winheight = vim.fn.winheight(0)
+    local headerPadding = vim.fn.max({ 2, vim.fn.floor(winheight * marginTopPercent) })
 
-local options = {
-    layout = {
-        { type = "padding", val = 8 },
-        header,
-        { type = "padding", val = 2 },
-        buttons,
-        { type = "padding", val = 1 },
-        plugin_count,
-        { type = "padding", val = winheight - headerPadding - 3 },
-    },
-    opts = {
-        margin = 0,
-    },
-}
+    local opts = {
+        layout = {
+            { type = "padding", val = headerPadding },
+            header,
+            { type = "padding", val = 2 },
+            buttons,
+            { type = "padding", val = 1 },
+            plugin_count,
+            { type = "padding", val = winheight - headerPadding - 4 },
+        },
+        opts = {
+            margin = 0,
+        },
+    }
 
-M.config = function()
-    require("alpha").setup(options)
+    return opts
+end
+
+M.config = function(_, opts)
+    require("alpha").setup(opts)
 
     local group = vim.api.nvim_create_augroup("Alpha", {})
     -- Hide cursor when Alpha is opened

@@ -2,39 +2,43 @@ local M = {}
 
 -- Stores the format_on_save option for each filetype. If a filetype is not
 -- listed here, format on save will be false although formatting can still be
--- manually invoked. Filetype is the value returned from vim.bo.filetype
+-- manually invoked. Filetype is the value returned from vim.bo.filetype. If
+-- the null_ls key is false, formatting will attempt to use the language server
+-- rather than null-ls.
 M.format_on_save_filetypes = {
-    ["lua"] = true,
-    ["cs"] = false,
+    ["lua"] = { enabled = true, formatter = "sumneko_lua" },
+    ["cs"] = { enabled = false, formatter = "null-ls" },
+    ["javascript"] = { enabled = true, formatter = "null-ls" },
+    ["html"] = { enabled = true, formatter = "null-ls" },
 }
 
 M.setup = function()
     -- Format on save commands
     vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
         local filetype = vim.bo.filetype
-        local enabled = M.format_on_save_filetypes[filetype]
+        local enabled = M.format_on_save_filetypes[filetype].enabled
         if enabled == nil then
             vim.notify(
                 "Format on save has not be configured for filetype " .. filetype,
                 vim.log.levels.INFO,
-                { title = "null-ls" }
+                { title = "Formatting" }
             )
         end
-        M.format_on_save_filetypes[filetype] = not enabled
+        M.format_on_save_filetypes[filetype].enabled = not enabled
         vim.notify(
             "Format on save for filetype " .. filetype .. " set to " .. tostring(not enabled),
             vim.log.levels.INFO,
-            { title = "null-ls" }
+            { title = "Formatting" }
         )
     end, {})
 
     vim.api.nvim_create_user_command("W", function()
         vim.lsp.buf.format({
             filter = function(active_client)
-                return active_client.name == "null-ls"
-            end,
+                return active_client.name == M.format_on_save_filetypes[vim.bo.filetype].formatter
+            end
         })
-        vim.cmd(":w")
+        vim.cmd(":noautocmd w")
     end, {})
 end
 
@@ -53,8 +57,8 @@ M.on_attach = function(client, bufnr)
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = function(active_client)
-                        return active_client.name == "null-ls"
-                    end,
+                        return active_client.name == M.format_on_save_filetypes[filetype].formatter
+                    end
                 })
             end,
         })

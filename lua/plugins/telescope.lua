@@ -49,6 +49,9 @@ M.config = function()
                     ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
                 },
             },
+            preview = {
+                timeout = 10,
+            }
         },
         pickers = {
             ["find_files"] = {

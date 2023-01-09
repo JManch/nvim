@@ -1,6 +1,6 @@
 return {
     "rmagatti/goto-preview",
-    config = {
+    opts = {
         width = 120,
         height = 15,
         default_mappings = false,

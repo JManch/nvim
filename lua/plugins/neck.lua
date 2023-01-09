@@ -4,7 +4,7 @@
 
 return {
     "shortcuts/no-neck-pain.nvim",
-    config = {
+    opts = {
         width = 120,
         disableOnLastBuffer = true,
         killAllBuffersOnDisable = false,

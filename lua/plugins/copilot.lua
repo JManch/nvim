@@ -2,7 +2,7 @@ return {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
     enabled = false,
-    config = {
+    opts = {
         panel = {
             enabled = false,
             keymap = {

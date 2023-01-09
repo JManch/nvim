@@ -1,7 +1,7 @@
 return {
     "chrisgrieser/nvim-various-textobjs",
     event = "BufReadPost",
-    config = {
+    opts = {
         lookForwardLines = 10,
         useDefaultKeymaps = false,
     },

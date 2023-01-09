@@ -1,6 +1,6 @@
 return {
     "numToStr/Comment.nvim",
-    config = {
+    opts = {
         mappings = false,
     },
     keys = {

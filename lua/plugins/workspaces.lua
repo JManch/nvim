@@ -2,13 +2,13 @@ return {
     "natecraddock/workspaces.nvim",
     dependencies = {
         "natecraddock/sessions.nvim",
-        config = {
+        opts = {
             session_filepath = vim.fn.resolve(vim.fn.stdpath("data") .. "/sessions"),
             absolute = true,
         },
     },
     event = "VeryLazy",
-    config = {
+    opts = {
         hooks = {
             open = function()
                 vim.notify("Loaded workspace " .. require("workspaces").name(), vim.log.levels.INFO, {

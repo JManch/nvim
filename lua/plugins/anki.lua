@@ -1,7 +1,7 @@
 return {
     "rareitems/anki.nvim",
     ft = "anki",
-    config = {
+    opts = {
         text_support = false,
     },
     init = function()

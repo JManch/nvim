@@ -16,7 +16,7 @@ return {
     {
         "JManch/sunset.nvim",
         lazy = false,
-        config = {
+        opts = {
             update_interval = 10000,
             latitude = 50.8229,
             longitude = -0.1363,
@@ -41,7 +41,7 @@ return {
     {
         "danymat/neogen",
         cmd = "Neogen",
-        config = {
+        opts = {
             snippet_engine = "luasnip",
         },
     },
@@ -50,7 +50,7 @@ return {
         -- TODO: Figure out mappings that don't clash with leap
         "kylechui/nvim-surround",
         event = "VeryLazy",
-        config = {
+        opts = {
             visual = "<LEADER>S",
         },
         enabled = false,
@@ -59,7 +59,7 @@ return {
     {
         "j-hui/fidget.nvim",
         event = "BufReadPost",
-        config = {
+        opts = {
             text = {
                 done = "",
             },
@@ -74,7 +74,7 @@ return {
     {
         "smjonas/inc-rename.nvim",
         cmd = "LspRename",
-        config = {
+        opts = {
             cmd_name = "LspRename",
         },
     },

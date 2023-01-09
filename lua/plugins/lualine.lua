@@ -35,49 +35,55 @@ local show_macro_recording = function()
     end
 end
 
-M.config = function()
-    local options = {
-        options = {
-            theme = "auto",
-            component_separators = "|",
-            section_separators = "",
-            disabled_filetypes = {
-                "alpha",
-                "mason",
-                "lazy",
-                "TelescopePrompt",
-            },
-            globalstatus = true,
-        },
-        sections = {
-            lualine_a = { "mode" },
-            lualine_b = { show_macro_recording, "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
-            lualine_c = { statusline_tab, { "filename", path = 1 }, "searchcount" },
-            lualine_x = {
-                sun_status,
-                "encoding",
-                copilot_status,
-                "fileformat",
-                "filetype",
-            },
-            lualine_y = { "progress" },
-            lualine_z = { "location" },
-        },
-        -- inactions sections are shown when focus is on another window
-        inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = { { "filename", path = 1 } },
-            lualine_x = { "location" },
-            lualine_y = {},
-            lualine_z = {},
-        },
-        extensions = {
-            "nvim-tree",
-        },
-    }
+local lazy_status = {
+    require("lazy.status").updates,
+    cond = require("lazy.status").has_updates,
+}
 
-    require("lualine").setup(options)
+M.opts = {
+    options = {
+        theme = "auto",
+        component_separators = "|",
+        section_separators = "",
+        disabled_filetypes = {
+            "alpha",
+            "mason",
+            "lazy",
+            "TelescopePrompt",
+        },
+        globalstatus = true,
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { show_macro_recording, "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
+        lualine_c = { statusline_tab, { "filename", path = 1 }, "searchcount" },
+        lualine_x = {
+            lazy_status,
+            sun_status,
+            "encoding",
+            copilot_status,
+            "fileformat",
+            "filetype",
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+    },
+    -- inactions sections are shown when focus is on another window
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { { "filename", path = 1 } },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+    },
+    extensions = {
+        "nvim-tree",
+    },
+}
+
+M.config = function(_, opts)
+    require("lualine").setup(opts)
 
     vim.api.nvim_create_autocmd("RecordingEnter", {
         callback = function()

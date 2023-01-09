@@ -25,6 +25,7 @@ local options = {
     },
     checker = {
         enabled = true,
+        notify = false,
     },
     performance = {
         rtp = {

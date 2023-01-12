@@ -78,4 +78,20 @@ return {
             cmd_name = "LspRename",
         },
     },
+
+    {
+        "folke/zen-mode.nvim",
+        cmd = "ZenMode",
+        opts = {
+            window = {
+                backdrop = "1",
+            },
+            plugins = {
+                twilight = { enabled = false }
+            }
+        },
+        keys = {
+            { "<LEADER>z", "<CMD>ZenMode<CR>", desc = "Toggle zen mode" }
+        }
+    }
 }

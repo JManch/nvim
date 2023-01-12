@@ -3,7 +3,7 @@ local M = {
     event = "BufReadPre",
 }
 
-M.config = {
+M.opts = {
     signcolumn = true,
     numhl = false,
     attach_to_untracked = false,

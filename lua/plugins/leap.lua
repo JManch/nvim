@@ -4,13 +4,13 @@ return {
     dependencies = {
         {
             "ggandor/leap-spooky.nvim",
-            config = {
+            opts = {
                 paste_on_remote_yank = true,
             },
         },
         {
             "ggandor/flit.nvim",
-            config = {
+            opts = {
                 labeled_modes = "nv",
             },
         },

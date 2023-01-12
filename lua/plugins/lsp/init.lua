@@ -10,7 +10,7 @@ M.dependencies = {
     {
         "williamboman/mason.nvim",
         cmd = "Mason",
-        config = {
+        opts = {
             ui = {
                 border = "rounded",
             },
@@ -18,7 +18,7 @@ M.dependencies = {
     },
     {
         "folke/neodev.nvim",
-        config = {
+        opts = {
             library = {
                 plugins = false,
             },

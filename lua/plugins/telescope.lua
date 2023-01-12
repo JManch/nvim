@@ -6,7 +6,7 @@ local M = {
 M.dependencies = {
     {
         "AckslD/nvim-neoclip.lua",
-        config = {
+        opts = {
             keys = {
                 telescope = {
                     i = {
@@ -38,15 +38,16 @@ M.config = function()
                     ["<C-p>"] = "preview_scrolling_up",
                     ["<C-j>"] = "move_selection_next",
                     ["<C-k>"] = "move_selection_previous",
-                    ["<C-Down>"] = require("telescope.actions").cycle_history_next,
-                    ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
+                    ["<C-Down>"] = "cycle_history_next",
+                    ["<C-Up>"] = "cycle_history_prev",
                 },
                 n = {
                     ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
                     ["<C-n>"] = "preview_scrolling_down",
                     ["<C-p>"] = "preview_scrolling_up",
-                    ["<C-Down>"] = require("telescope.actions").cycle_history_next,
-                    ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
+                    ["<C-Down>"] = "cycle_history_next",
+                    ["<C-Up>"] = "cycle_history_prev",
+                    ["q"] = "close",
                 },
             },
             preview = {

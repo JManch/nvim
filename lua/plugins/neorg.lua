@@ -11,6 +11,11 @@ return {
                 },
             },
             ["core.norg.concealer"] = {},
+            ["core.presenter"] = {
+                config = {
+                    zen_mode = "zen-mode"
+                }
+            },
         },
     },
 }

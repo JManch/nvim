@@ -1,19 +1,17 @@
 return {
     "echasnovski/mini.surround",
-    keys = { "gz" },
+    keys = { "<LEADER>a", mode = { "n", "v" } },
     opts = {
         mappings = {
-            add = "gza", -- Add surrounding in Normal and Visual modes
-            delete = "gzd", -- Delete surrounding
-            find = "gzf", -- Find surrounding (to the right)
-            find_left = "gzF", -- Find surrounding (to the left)
-            highlight = "gzh", -- Highlight surrounding
-            replace = "gzr", -- Replace surrounding
-            update_n_lines = "gzn", -- Update `n_lines`
+            add = "<LEADER>aa",
+            delete = "<LEADER>ad",
+            highlight = "<LEADER>ah",
+            replace = "<LEADER>ar",
+            update_n_lines = "<LEADER>an", -- temporarily set n_lines value
         },
+        n_lines = 20, -- lines searched for surround
     },
     config = function(_, opts)
-        -- use gz mappings instead of s to prevent conflict with leap
         require("mini.surround").setup(opts)
     end,
 }

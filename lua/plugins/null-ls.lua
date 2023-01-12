@@ -19,8 +19,8 @@ return {
                     filetypes = { "html", "javascript" },
                     extra_args = { "--tab-width", 4 }
                 }),
-                require("null-ls").builtins.code_actions.eslint_d,
-                require("null-ls").builtins.diagnostics.eslint_d,
+                -- require("null-ls").builtins.code_actions.eslint_d,
+                -- require("null-ls").builtins.diagnostics.eslint_d,
             },
             on_attach = require("plugins.lsp.formatting").on_attach
         })

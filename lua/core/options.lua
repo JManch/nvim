@@ -30,6 +30,7 @@ vim.opt.listchars:append("eol:↴") -- Custom new line char
 vim.opt.listchars:append("trail:·") -- Custom space char
 vim.opt.listchars:append("tab:  ") -- Custom tab char
 vim.opt.cmdheight = 1 -- Hide command bar
+vim.opt.fillchars = { eob = " " }
 g.custom_winbar = "%=%m %t" -- Custom winbar
 
 -- Tabs, indent and folding

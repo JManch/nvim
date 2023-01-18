@@ -8,6 +8,7 @@ vim.opt.ignorecase = true -- Case-insensitive search
 vim.opt.smartcase = true -- Smart case-sensitive search
 vim.opt.swapfile = true -- Enable swap files
 vim.opt.undofile = true -- Store undo history
+vim.opt.diffopt:append("linematch:60")
 g.mapleader = " " -- Custom leader
 g.maplocalleader = "," -- Local leader used for neorg
 api.nvim_del_keymap("n", "<C-L>") -- Delete clashing keymap

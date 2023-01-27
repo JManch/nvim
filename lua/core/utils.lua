@@ -118,4 +118,9 @@ P = function(v)
     return v
 end
 
+R = function(module)
+    require("plenary.reload").reload_module(module)
+    return require(module)
+end
+
 return M

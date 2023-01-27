@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.surround",
-    keys = { "<LEADER>a", mode = { "n", "v" } },
+    keys = { { "<LEADER>a", mode = { "n", "v" } } },
     opts = {
         mappings = {
             add = "<LEADER>aa",

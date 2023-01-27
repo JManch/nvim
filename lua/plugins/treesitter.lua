@@ -42,7 +42,7 @@ return {
                 swap = {
                     enable = true,
                     swap_next = {
-                        ["<C-f>"] = { query = "@parameter.inner", desc = "Swap parameter formward" },
+                        ["<C-f>"] = { query = "@parameter.inner", desc = "Swap parameter forward" },
                         ["<C-y>"] = { query = "@function.outer", desc = "Swap function forward" },
                     },
                     swap_previous = {

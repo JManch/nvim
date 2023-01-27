@@ -1,5 +1,11 @@
 local M = {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+        {
+            "jcdickinson/wpm.nvim",
+            config = true
+        },
+    },
     lazy = false,
 }
 
@@ -19,13 +25,6 @@ local sun_status = function()
     end
 end
 
-local copilot_status = function()
-    if vim.b.copilot_suggestion_auto_trigger == nil or not vim.b.copilot_suggestion_auto_trigger then
-        return ""
-    end
-    return ""
-end
-
 local show_macro_recording = function()
     local recording_register = vim.fn.reg_recording()
     if recording_register == "" then
@@ -35,10 +34,15 @@ local show_macro_recording = function()
     end
 end
 
-local lazy_status = {
-    require("lazy.status").updates,
-    cond = require("lazy.status").has_updates,
-}
+-- Don't show utf-8 encoding
+local encoding = function()
+    local encoding, _ = (vim.bo.fenc or vim.go.enc):gsub("^utf%-8$", "")
+    return encoding
+end
+
+local wpm = function()
+    return require("wpm").wpm() .. " wpm " .. require("wpm").historic_graph()
+end
 
 M.opts = {
     options = {
@@ -56,12 +60,14 @@ M.opts = {
     sections = {
         lualine_a = { "mode" },
         lualine_b = { show_macro_recording, "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
-        lualine_c = { statusline_tab, { "filename", path = 1 }, "searchcount" },
+        lualine_c = { statusline_tab, { "filename", path = 1 }, "searchcount", wpm },
         lualine_x = {
-            lazy_status,
+            {
+                require("lazy.status").updates,
+                cond = require("lazy.status").has_updates,
+            },
             sun_status,
-            "encoding",
-            copilot_status,
+            encoding,
             "fileformat",
             "filetype",
         },

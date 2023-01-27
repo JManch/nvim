@@ -33,7 +33,7 @@ M.config = function()
             dynamic_preview_title = true,
             mappings = {
                 i = {
-                    ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
+                    ["<C-S-p>"] = require("telescope.actions.layout").toggle_preview,
                     ["<C-n>"] = "preview_scrolling_down",
                     ["<C-p>"] = "preview_scrolling_up",
                     ["<C-j>"] = "move_selection_next",
@@ -42,7 +42,7 @@ M.config = function()
                     ["<C-Up>"] = "cycle_history_prev",
                 },
                 n = {
-                    ["<A-p>"] = require("telescope.actions.layout").toggle_preview,
+                    ["<C-S-p>"] = require("telescope.actions.layout").toggle_preview,
                     ["<C-n>"] = "preview_scrolling_down",
                     ["<C-p>"] = "preview_scrolling_up",
                     ["<C-Down>"] = "cycle_history_next",
@@ -50,9 +50,6 @@ M.config = function()
                     ["q"] = "close",
                 },
             },
-            preview = {
-                timeout = 10,
-            }
         },
         pickers = {
             ["find_files"] = {
@@ -106,7 +103,7 @@ M.keys = {
     { "<LEADER>b", "<CMD>Telescope buffers<CR>", desc = "Buffers" },
     { "<LEADER>fg", "<CMD>Telescope live_grep<CR>", desc = "Live grep cwd" },
     { "<LEADER>fG", "<CMD>Telescope grep_string<CR>", desc = "Grep word under cursor in cwd" },
-    { "<LEADER>f/", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Find in current buffer" },
+    { "<LEADER>fb", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Find in current buffer" },
     { "<leader>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", desc = "Neoclip" },
     { "<leader>fR", "<CMD>Telescope registers initial_mode=normal<CR>", desc = "Registers" },
     { "<leader>fh", "<CMD>Telescope help_tags<CR>", desc = "Help tags" },

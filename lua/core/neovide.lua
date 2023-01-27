@@ -63,7 +63,7 @@ if vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1 then
     g.neovide_refresh_rate = 165
 end
 g.neovide_hide_mouse_when_typing = true
-g.neovide_remember_window_size = true
+g.neovide_remember_window_size = false
 g.neovide_floating_opacity = 0.6
 g.neovide_floating_blur_amount_x = 0.1
 g.neovide_floating_blur_amount_y = 0.1

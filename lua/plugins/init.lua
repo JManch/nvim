@@ -1,7 +1,11 @@
 return {
     "nvim-lua/plenary.nvim",
-    "godlygeek/tabular",
-    "folke/twilight.nvim",
+
+    -- { dir = "~/repos/pomodoro.nvim", lazy = false },
+
+    { "godlygeek/tabular", cmd = "Tabularize" },
+
+    { "folke/twilight.nvim", cmd = { "Twilight" } },
 
     { "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } },
 
@@ -31,7 +35,6 @@ return {
         config = function()
             local notify = require("notify")
             notify.setup({
-                fps = 30,
                 top_down = true,
             })
             vim.notify = notify
@@ -44,16 +47,6 @@ return {
         opts = {
             snippet_engine = "luasnip",
         },
-    },
-
-    {
-        -- TODO: Figure out mappings that don't clash with leap
-        "kylechui/nvim-surround",
-        event = "VeryLazy",
-        opts = {
-            visual = "<LEADER>S",
-        },
-        enabled = false,
     },
 
     {
@@ -88,10 +81,17 @@ return {
             },
             plugins = {
                 twilight = { enabled = false }
-            }
+            },
+            on_open = function()
+                require("lualine").hide()
+                vim.o.statusline = " "
+            end,
+            on_close = function()
+                require("lualine").hide({ unhide = true })
+            end
         },
         keys = {
             { "<LEADER>z", "<CMD>ZenMode<CR>", desc = "Toggle zen mode" }
         }
-    }
+    },
 }

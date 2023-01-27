@@ -51,13 +51,14 @@ M.on_attach = function(client, bufnr)
             buffer = bufnr,
             callback = function()
                 local filetype = vim.bo.filetype
-                if not M.format_on_save_filetypes[filetype] then
+                if M.format_on_save_filetypes[filetype] == nil then
                     return
                 end
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = function(active_client)
-                        return active_client.name == M.format_on_save_filetypes[filetype].formatter
+                        return M.format_on_save_filetypes[filetype].enabled and
+                            (active_client.name == M.format_on_save_filetypes[filetype].formatter)
                     end
                 })
             end,

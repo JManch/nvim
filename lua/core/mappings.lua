@@ -52,9 +52,10 @@ map("n", "<LEADER>O", "O<ESC>", "Create new line above")
 map("n", "<LEADER>c", "<CMD>nohl<CR>", "Clear search highlighting")
 
 map("n", "<LEADER>l", "<CMD>SunsetToggle<CR>", "Toggle sunset theme")
+map("n", "<LEADER>n", "<CMD>ToggleCMDHeight<CR>", "Toggle cmdheight")
 
-map("v", "<leader>y", '"+y', "Yank to system register")
-map("v", "<leader>p", '"+p', "Put from system register")
-map("v", "<leader>P", '"+P', "Put before from system register")
+map("v", "<LEADER>y", '"+y', "Yank to system register")
+map("v", "<LEADER>p", '"+p', "Put from system register")
+map("v", "<LEADER>P", '"+P', "Put before from system register")
 
 return M

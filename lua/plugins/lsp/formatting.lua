@@ -16,28 +16,35 @@ M.setup = function()
     -- Format on save commands
     vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
         local filetype = vim.bo.filetype
-        local enabled = M.format_on_save_filetypes[filetype].enabled
-        if enabled == nil then
+        local formatData = M.format_on_save_filetypes[filetype]
+        if formatData == nil then
             vim.notify(
                 "Format on save has not be configured for filetype " .. filetype,
                 vim.log.levels.INFO,
                 { title = "Formatting" }
             )
+            return;
         end
-        M.format_on_save_filetypes[filetype].enabled = not enabled
+        formatData.enabled = not formatData.enabled
         vim.notify(
-            "Format on save for filetype " .. filetype .. " set to " .. tostring(not enabled),
+            "Format on save for filetype " .. filetype .. " set to " .. tostring(formatData.enabled),
             vim.log.levels.INFO,
             { title = "Formatting" }
         )
     end, {})
 
     vim.api.nvim_create_user_command("W", function()
-        vim.lsp.buf.format({
-            filter = function(active_client)
-                return active_client.name == M.format_on_save_filetypes[vim.bo.filetype].formatter
-            end
-        })
+        -- Only filter formatter for know file types
+        if M.format_on_save_filetypes[vim.bo.filetype] == nil then
+            vim.lsp.buf.format();
+        else
+            vim.lsp.buf.format({
+                filter = function(active_client)
+                    return active_client.name == M.format_on_save_filetypes[vim.bo.filetype].formatter
+                end
+            })
+        end
+
         vim.cmd(":noautocmd w")
     end, {})
 end
@@ -50,15 +57,16 @@ M.on_attach = function(client, bufnr)
             group = group,
             buffer = bufnr,
             callback = function()
-                local filetype = vim.bo.filetype
-                if M.format_on_save_filetypes[filetype] == nil then
+                local formatData = M.format_on_save_filetypes[vim.bo.filetype]
+
+                if formatData == nil or not formatData.enabled then
                     return
                 end
+
                 vim.lsp.buf.format({
                     bufnr = bufnr,
                     filter = function(active_client)
-                        return M.format_on_save_filetypes[filetype].enabled and
-                            (active_client.name == M.format_on_save_filetypes[filetype].formatter)
+                        return active_client.name == formatData.formatter
                     end
                 })
             end,

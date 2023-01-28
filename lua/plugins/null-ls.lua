@@ -16,7 +16,7 @@ return {
             -- require("null-ls").builtins.diagnostics.eslint_d,
         }
 
-        if vim.fn.executable('clang-format') then
+        if vim.fn.executable('clang-format') == 1 then
             table.insert(sources, require("null-ls").builtins.formatting.clang_format.with({
                 extra_args = { "-style={IndentWidth: 4}" },
             }))

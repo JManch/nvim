@@ -94,4 +94,11 @@ return {
             { "<LEADER>z", "<CMD>ZenMode<CR>", desc = "Toggle zen mode" }
         }
     },
+
+    {
+        "Eandrju/cellular-automaton.nvim",
+        keys = {
+            { "<LEADER>rr", "<CMD>CellularAutomaton make_it_rain<CR>", desc = "Make it rain" }
+        }
+    }
 }

@@ -17,8 +17,8 @@ M.load = function(bufnr)
 
     -- Diagnostics
     map("n", "gl", vim.diagnostic.open_float, "Open diagnostic float", opts)
-    map("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic", opts)
-    map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic", opts)
+    map("n", "[d", function() vim.diagnostic.goto_prev() vim.cmd.normal("zz") end, "Go to previous diagnostic", opts)
+    map("n", "]d", function() vim.diagnostic.goto_next() vim.cmd.normal("zz") end, "Go to next diagnostic", opts)
 
     -- goto-preview mappings
     map("n", "gpd", function()

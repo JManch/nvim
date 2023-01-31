@@ -17,6 +17,10 @@ local options = {
     defaults = {
         lazy = true,
     },
+    dev = {
+        path = "~/neovim-plugins",
+        fallback = true,
+    },
     install = {
         colorscheme = { "ayu-mirage", "habamax" },
     },

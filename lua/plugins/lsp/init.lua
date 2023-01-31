@@ -22,6 +22,12 @@ M.dependencies = {
             library = {
                 plugins = false,
             },
+            override = function(root_dir, library)
+                if string.find(root_dir, "neovim-plugins") then
+                    library.enabled = true
+                    library.plugins = { "sqlite.lua" }
+                end
+            end
         },
     },
 }

@@ -58,6 +58,15 @@ M.opts = function()
         },
     }
 
+    local version = {
+        type = "text",
+        val = string.match(vim.api.nvim_exec("version", true), "NVIM (.-)\n"),
+        opts = {
+            position = "center",
+            hl = "CmpItemMenu",
+        },
+    }
+
     vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
         callback = function()
@@ -95,7 +104,8 @@ M.opts = function()
             buttons,
             { type = "padding", val = 1 },
             plugin_count,
-            { type = "padding", val = winheight - headerPadding - 4 },
+            { type = "padding", val = 2 },
+            version,
         },
         opts = {
             margin = 0,

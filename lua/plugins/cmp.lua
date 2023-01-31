@@ -72,9 +72,6 @@ M.config = function()
                 ellipsis_char = "...",
             }),
         },
-        -- view = { waiting for https://github.com/hrsh7th/nvim-cmp/issues/1142
-        --     entries = "native",
-        -- },
     }
 
     cmp.setup(options)

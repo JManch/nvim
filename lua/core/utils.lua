@@ -5,6 +5,13 @@ local api = vim.api
 M.set_highlights = function()
     api.nvim_set_hl(0, "MatchParen", { link = "Constant" })
     api.nvim_set_hl(0, "NoCursor", { blend = 100, strikethrough = true })
+
+    -- Missing highlight groups from ayu
+    api.nvim_set_hl(0, "Bold", { bold = true })
+    api.nvim_set_hl(0, "Italic", { italic = true })
+    api.nvim_set_hl(0, "@text.strong", { link = "Bold" })
+    api.nvim_set_hl(0, "@text.emphasis", { link = "Italic" })
+    -- TODO: Ayu is missing a bunch more highlight groups which I should PR someday
 end
 
 local jump_chars = {
@@ -57,7 +64,7 @@ M.delete_hidden_buffers = function()
             end
         end
     end
-    vim.notify("Closed all background buffers", "info", { title = "Buffers" })
+    vim.notify("Closed all background buffers", vim.log.levels.INFO, { title = "Buffers" })
 end
 
 local toggle_table_key = function(table, key, on, off)

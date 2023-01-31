@@ -1,21 +1,28 @@
 return {
     "nvim-neorg/neorg",
     ft = "norg",
-    cmd = "Neorg",
+    cmd = { "Neorg", "Notes" },
     opts = {
         load = {
             ["core.defaults"] = {},
+            ["core.norg.concealer"] = {},
+            ["core.norg.dirman"] = {
+                config = {
+                    workspaces = {
+                        notes = "~/notes"
+                    },
+                    index = "index.norg"
+                }
+            },
             ["core.norg.completion"] = {
                 config = {
                     engine = "nvim-cmp",
                 },
             },
-            ["core.norg.concealer"] = {},
-            ["core.presenter"] = {
-                config = {
-                    zen_mode = "zen-mode"
-                }
-            },
         },
     },
+    config = function(_, opts)
+        vim.api.nvim_create_user_command("Notes", "Neorg workspace notes", {})
+        require("neorg").setup(opts)
+    end
 }

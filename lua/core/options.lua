@@ -8,7 +8,9 @@ vim.opt.ignorecase = true -- Case-insensitive search
 vim.opt.smartcase = true -- Smart case-sensitive search
 vim.opt.swapfile = true -- Enable swap files
 vim.opt.undofile = true -- Store undo history
-vim.opt.diffopt:append("linematch:60")
+if vim.version().minor > 8 then
+    vim.opt.diffopt:append("linematch:60")
+end
 g.mapleader = " " -- Custom leader
 g.maplocalleader = "," -- Local leader used for neorg
 api.nvim_del_keymap("n", "<C-L>") -- Delete clashing keymap
@@ -32,6 +34,7 @@ vim.opt.listchars:append("trail:·") -- Custom space char
 vim.opt.listchars:append("tab:  ") -- Custom tab char
 vim.opt.cmdheight = 1 -- Hide command bar
 vim.opt.fillchars = { eob = " " }
+vim.opt.conceallevel = 2 -- Hide neorg formatting characters
 g.custom_winbar = "%=%m %t" -- Custom winbar
 
 -- Tabs, indent and folding

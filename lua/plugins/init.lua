@@ -1,8 +1,6 @@
 return {
     "nvim-lua/plenary.nvim",
 
-    -- { dir = "~/repos/pomodoro.nvim", lazy = false },
-
     { "godlygeek/tabular", cmd = "Tabularize" },
 
     { "folke/twilight.nvim", cmd = { "Twilight" } },
@@ -18,18 +16,6 @@ return {
     { "nvim-tree/nvim-web-devicons", config = true },
 
     {
-        "JManch/sunset.nvim",
-        lazy = false,
-        opts = {
-            update_interval = 10000,
-            latitude = 50.8229,
-            longitude = -0.1363,
-            sunset_offset = -3600,
-            sunrise_offset = 3600,
-        },
-    },
-
-    {
         "rcarriga/nvim-notify",
         event = "VeryLazy",
         config = function()
@@ -39,6 +25,15 @@ return {
             })
             vim.notify = notify
         end,
+    },
+
+    {
+        "kkharji/sqlite.lua",
+        config = function()
+            if vim.fn.has("win32") == 1 then
+                vim.g.sqlite_clib_path = vim.fn.stdpath("data") .. "/sqlite3.dll"
+            end
+        end
     },
 
     {
@@ -99,6 +94,35 @@ return {
         "Eandrju/cellular-automaton.nvim",
         keys = {
             { "<LEADER>rr", "<CMD>CellularAutomaton make_it_rain<CR>", desc = "Make it rain" }
+        }
+    },
+
+    {
+        "jcdickinson/wpm.nvim",
+        cmd = "ToggleWPM",
+        config = function()
+            vim.api.nvim_create_user_command("ToggleWPM", function()
+                require("core.utils").toggle_g("wpm", true, false)
+            end, {})
+            require("wpm").setup({})
+        end,
+        init = function()
+            vim.g.wpm = false
+        end
+    },
+
+    {
+        "kwakzalver/duckytype.nvim",
+        cmd = "DuckyType",
+        opts = {
+            window_config = {
+                border = "rounded"
+            },
+            highlight = {
+                good = "String",
+                bad = "DiagnosticError",
+                remaining = "Comment",
+            }
         }
     }
 }

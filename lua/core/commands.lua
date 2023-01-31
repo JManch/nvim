@@ -1,4 +1,5 @@
 local api = vim.api
+
 local utils = require("core.utils")
 
 local set_format_options = api.nvim_create_augroup("SetFormatOptions", {})
@@ -61,4 +62,8 @@ end, {})
 
 api.nvim_create_user_command("PutMessages", function()
     vim.cmd("put =execute('messages')")
+end, {})
+
+api.nvim_create_user_command("HighlightGroups", function()
+    vim.cmd.so("$VIMRUNTIME/syntax/hitest.vim")
 end, {})

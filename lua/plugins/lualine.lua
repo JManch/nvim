@@ -1,11 +1,5 @@
 local M = {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-        {
-            "jcdickinson/wpm.nvim",
-            config = true
-        },
-    },
     lazy = false,
 }
 
@@ -41,7 +35,7 @@ local encoding = function()
 end
 
 local wpm = function()
-    return require("wpm").wpm() .. " wpm " .. require("wpm").historic_graph()
+    return vim.g.wpm and require("wpm").wpm() .. " wpm " .. require("wpm").historic_graph() or ""
 end
 
 M.opts = {

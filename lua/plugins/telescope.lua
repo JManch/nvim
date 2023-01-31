@@ -19,6 +19,7 @@ M.dependencies = {
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-file-browser.nvim" },
+    { "tsakirist/telescope-lazy.nvim" },
 }
 
 M.config = function()
@@ -52,10 +53,10 @@ M.config = function()
             },
         },
         pickers = {
-            ["find_files"] = {
+            find_files = {
                 follow = true,
             },
-            ["buffers"] = {
+            buffers = {
                 previewer = false,
                 path_display = { "tail" },
                 theme = "dropdown",
@@ -65,24 +66,34 @@ M.config = function()
                     },
                 },
             },
-            ["registers"] = {
+            registers = {
                 initial_mode = "insert",
             },
-            ["spell_suggest"] = {
+            spell_suggest = {
                 theme = "cursor",
                 intitial_mode = "normal",
             },
+            colorscheme = {
+                initial_mode = "normal",
+                enable_preview = true
+            }
         },
         extensions = {
             -- Not sure why but some extensions seem to ignore the settings here
             -- whilst for others it works fine. For extensions like workspaces I
             -- have configured the picker in the mapping below.
             ["ui-select"] = require("telescope.themes").get_dropdown(),
-            ["file_browser"] = {
+            file_browser = {
                 initial_mode = "normal",
                 path = "%:p:h",
                 grouped = true,
             },
+            lazy = {
+                show_icon = true,
+                mappings = {
+                    open_in_file_browser = "<C-d>"
+                }
+            }
         },
     }
 
@@ -93,6 +104,7 @@ M.config = function()
     telescope.load_extension("ui-select")
     telescope.load_extension("workspaces")
     telescope.load_extension("file_browser")
+    telescope.load_extension("lazy")
 end
 
 M.keys = {
@@ -104,12 +116,15 @@ M.keys = {
     { "<LEADER>fg", "<CMD>Telescope live_grep<CR>", desc = "Live grep cwd" },
     { "<LEADER>fG", "<CMD>Telescope grep_string<CR>", desc = "Grep word under cursor in cwd" },
     { "<LEADER>fb", "<CMD>Telescope current_buffer_fuzzy_find<CR>", desc = "Find in current buffer" },
-    { "<leader>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", desc = "Neoclip" },
-    { "<leader>fR", "<CMD>Telescope registers initial_mode=normal<CR>", desc = "Registers" },
-    { "<leader>fh", "<CMD>Telescope help_tags<CR>", desc = "Help tags" },
-    { "<leader>fk", "<CMD>Telescope keymaps<CR>", desc = "Keymaps" },
-    { "<leader>fs", "<CMD>Telescope spell_suggest<CR>", desc = "Spell suggestions" },
-    { "<leader>fw", "<CMD>Telescope workspaces theme=dropdown previewer=false <CR>", desc = "Workspaces" },
+    { "<LEADER>fr", "<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>", desc = "Neoclip" },
+    { "<LEADER>fR", "<CMD>Telescope registers initial_mode=normal<CR>", desc = "Registers" },
+    { "<LEADER>fh", "<CMD>Telescope help_tags<CR>", desc = "Help tags" },
+    { "<LEADER>fk", "<CMD>Telescope keymaps<CR>", desc = "Keymaps" },
+    { "<LEADER>fs", "<CMD>Telescope spell_suggest<CR>", desc = "Spell suggestions" },
+    { "<LEADER>fw", "<CMD>Telescope workspaces theme=dropdown previewer=false <CR>", desc = "Workspaces" },
+    { "<LEADER>fc", "<CMD>LoadExtraColorschemes<CR><CMD>Telescope colorscheme<CR>", desc = "Switch colorscheme" },
+    { "<LEADER>fp", "<CMD>Telescope lazy<CR>", desc = "Browse installed plugins" },
+    { "<LEADER>f<SPACE>", "<CMD>Telescope resume<CR>", desc = "Resume last telescope search" },
 }
 
 return M

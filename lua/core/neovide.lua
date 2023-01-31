@@ -8,9 +8,7 @@ local api = vim.api
 local map = require("core.mappings").map
 local utils = require("core.utils")
 
-map("n", "<M-CR>", function()
-    utils.toggle_g("neovide_fullscreen", true, false)
-end, "Neovide toggle fullscreen")
+map("n", "<M-CR>", "<CMD>NeovideToggleFullscreen<CR>", "Neovide toggle fullscreen")
 
 map("n", "<A-=>", function()
     g.neovide_scale_factor = g.neovide_scale_factor + 0.1
@@ -20,14 +18,7 @@ map("n", "<A-->", function()
     g.neovide_scale_factor = g.neovide_scale_factor - 0.1
 end, "Neovide decrease scale")
 
-map("n", "<M-r>", function()
-    utils.toggle_g("neovide_refresh_rate", 165, 60)
-    vim.notify(
-        "Set refresh rate to " .. g.neovide_refresh_rate,
-        vim.log.levels.INFO,
-        { title = "Neovide", timeout = 2000 }
-    )
-end, "Neovide toggle refresh rate")
+map("n", "<M-r>", "<CMD>NeovideToggleRefreshRate<CR>", "Neovide toggle refresh rate")
 
 map("n", "<M-t>", function()
     vim.notify(os.date("%X"), vim.log.levels.INFO, { title = "Time", timeout = 2000 })

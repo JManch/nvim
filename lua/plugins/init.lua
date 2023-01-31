@@ -68,29 +68,6 @@ return {
     },
 
     {
-        "folke/zen-mode.nvim",
-        cmd = "ZenMode",
-        opts = {
-            window = {
-                backdrop = "1",
-            },
-            plugins = {
-                twilight = { enabled = false }
-            },
-            on_open = function()
-                require("lualine").hide()
-                vim.o.statusline = " "
-            end,
-            on_close = function()
-                require("lualine").hide({ unhide = true })
-            end
-        },
-        keys = {
-            { "<LEADER>z", "<CMD>ZenMode<CR>", desc = "Toggle zen mode" }
-        }
-    },
-
-    {
         "Eandrju/cellular-automaton.nvim",
         keys = {
             { "<LEADER>rr", "<CMD>CellularAutomaton make_it_rain<CR>", desc = "Make it rain" }
@@ -124,5 +101,64 @@ return {
                 remaining = "Comment",
             }
         }
+    },
+
+    {
+        "rmagatti/goto-preview",
+        opts = {
+            width = 120,
+            height = 15,
+            default_mappings = false,
+            resizing_mappings = true,
+            opacity = nil,
+            focus_on_open = true,
+            dismiss_on_move = false,
+        },
+    },
+
+    {
+        "ggandor/leap.nvim",
+        event = "BufReadPost",
+        dependencies = {
+            {
+                "ggandor/leap-spooky.nvim",
+                opts = {
+                    paste_on_remote_yank = true,
+                },
+            },
+        },
+        config = function()
+            require("leap").add_default_mappings()
+        end,
+    },
+
+    {
+        "andweeb/presence.nvim",
+        cmd = "EnablePresence",
+        opts = {
+            neovim_image_text = "Neovim",
+        },
+        config = function(_, opts)
+            vim.api.nvim_create_user_command("EnablePresence", function() end, {})
+            require("presence").setup(opts)
+        end
+    },
+
+    {
+        "echasnovski/mini.surround",
+        keys = { { "<LEADER>a", mode = { "n", "v" } } },
+        opts = {
+            mappings = {
+                add = "<LEADER>aa",
+                delete = "<LEADER>ad",
+                highlight = "<LEADER>ah",
+                replace = "<LEADER>ar",
+                update_n_lines = "<LEADER>an", -- temporarily set n_lines value
+            },
+            n_lines = 20, -- lines searched for surround
+        },
+        config = function(_, opts)
+            require("mini.surround").setup(opts)
+        end,
     }
 }

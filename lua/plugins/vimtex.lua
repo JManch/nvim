@@ -1,10 +1,10 @@
 return {
-    "lervag/vimtex",
-    lazy = false,
-    config = function()
-        -- :h vimtex-faq-nreesitter in regards to treesitter vs vimtex
-        -- syntax highlighting. (I'm using treesitter despite downsides)
-        vim.cmd([[
+  'lervag/vimtex',
+  lazy = false,
+  config = function()
+    -- :h vimtex-faq-nreesitter in regards to treesitter vs vimtex
+    -- syntax highlighting. (I'm using treesitter despite downsides)
+    vim.cmd([[
             filetype plugin on
             let g:vimtex_view_general_viewer = 'SumatraPDF'
             let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
@@ -16,5 +16,5 @@ return {
             let g:vimtex_syntax_enabled = 0
             let g:vimtex_syntax_conceal_disable = 1
         ]])
-    end,
+  end,
 }

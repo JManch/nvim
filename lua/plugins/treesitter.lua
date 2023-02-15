@@ -6,7 +6,11 @@ return {
     cmd = { 'TSUninstall', 'TSInstall' },
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context',
+      {
+        -- BUG: Broken on nightly
+        'nvim-treesitter/nvim-treesitter-context',
+        enabled = false,
+      },
     },
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -14,6 +18,8 @@ return {
         ensure_installed = { 'lua', 'norg', 'markdown', 'markdown_inline' },
         indent = {
           enable = true,
+          -- Treesitter indent does not work well in python yet
+          disable = { 'python' },
         },
         highlight = {
           enable = true,
@@ -53,7 +59,7 @@ return {
           },
         },
         context = {
-          enable = true,
+          enable = false,
         },
       })
     end,

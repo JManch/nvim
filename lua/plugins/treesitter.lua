@@ -19,7 +19,8 @@ return {
         indent = {
           enable = true,
           -- Treesitter indent does not work well in python yet
-          disable = { 'python' },
+          -- Indentation is c_sharp is broken
+          disable = { 'python', 'c_sharp' },
         },
         highlight = {
           enable = true,

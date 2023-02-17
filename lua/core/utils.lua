@@ -1,6 +1,7 @@
 local M = {}
 
 local api = vim.api
+local fn = vim.fn
 
 M.set_highlights = function()
   api.nvim_set_hl(0, 'MatchParen', { link = 'Constant' })
@@ -118,6 +119,21 @@ M.terminal_maps = function()
   map('t', '<C-j>', '<CMD>wincmd j<CR>', 'Go to the down window', opts)
   map('t', '<C-k>', '<CMD>wincmd k<CR>', 'Go to the up window', opts)
   map('t', '<C-v>', [[<C-\><C-n>"+pA]], 'Put from system register', opts)
+end
+
+M.set_alacritty_theme = function(is_day)
+  if vim.fn.has('win32') ~= 1 or os.getenv('ALACRITTY') ~= 'true' then
+    return
+  end
+  if is_day then
+    vim.fn.jobstart(
+      [[sed -i "s/colors: \*dark/colors: *light/" ]] .. os.getenv('APPDATA') .. '\\alacritty\\alacritty.yml'
+    )
+  else
+    vim.fn.jobstart(
+      [[sed -i "s/colors: \*light/colors: *dark/" ]] .. os.getenv('APPDATA') .. '\\alacritty\\alacritty.yml'
+    )
+  end
 end
 
 P = function(v)

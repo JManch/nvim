@@ -103,7 +103,7 @@ return {
   },
   {
     'AckslD/nvim-neoclip.lua',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'TextYankPost' },
     keys = {
       { '<LEADER>fr', '<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>', desc = 'Neoclip' },
     },
@@ -119,24 +119,6 @@ return {
     config = function(_, opts)
       require('neoclip').setup(opts)
       require('telescope').load_extension('neoclip')
-    end,
-  },
-  {
-    'nvim-telescope/telescope-file-browser.nvim',
-    cmd = 'TelescopeFileBrowser',
-    keys = {
-      { '<LEADER>fd', '<CMD>Telescope file_browser<CR>', desc = 'File browser' },
-      {
-        '<LEADER>fD',
-        '<CMD>Telescope file_browser respect_gitignore=false<CR>',
-        desc = 'File browser with git ignore',
-      },
-    },
-    config = function()
-      vim.api.nvim_create_user_command('TelescopeFileBrowser', function()
-        vim.cmd('Telescope file_browser')
-      end, {})
-      require('telescope').load_extension('file_browser')
     end,
   },
   {

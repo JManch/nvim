@@ -50,6 +50,9 @@ M.dependencies = {
       lightbulb = {
         enable = false,
       },
+      diagnostic = {
+        on_insert = false,
+      },
       outline = {
         auto_preview = false,
         keys = {

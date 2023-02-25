@@ -5,11 +5,13 @@ if vim.fn.has('win32') == 1 then
       dir = '~/neovim-plugins/tracker.nvim',
       lazy = false,
       config = true,
+      enabled = false,
     },
     {
       dir = '~/neovim-plugins/pomodoro.nvim',
       lazy = false,
       config = true,
+      enabled = false,
     },
   }
 else

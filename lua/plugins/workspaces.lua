@@ -1,5 +1,7 @@
 return {
   'natecraddock/workspaces.nvim',
+  -- Commit before the plugin got unnecessarily bloated
+  commit = 'f55ad0a3688840ace255d327a5e5bb16b9ff5a17',
   dependencies = {
     'natecraddock/sessions.nvim',
     opts = {

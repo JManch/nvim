@@ -57,10 +57,6 @@ M.opts = {
     lualine_b = { show_macro_recording, 'branch', 'diff', { 'diagnostics', sources = { 'nvim_diagnostic' } } },
     lualine_c = { statusline_tab, { 'filename', path = 1 }, 'searchcount', wpm },
     lualine_x = {
-      {
-        require('lazy.status').updates,
-        cond = require('lazy.status').has_updates,
-      },
       sun_status,
       encoding,
       'fileformat',
@@ -97,7 +93,10 @@ M.config = function(_, opts)
   vim.api.nvim_create_autocmd('RecordingLeave', {
     callback = function()
       local timer = vim.loop.new_timer()
-      -- Wait 50ms for recording to fully stopm
+      if not timer then
+        return
+      end
+      -- Wait 50ms for recording to fully stop
       timer:start(
         50,
         0,

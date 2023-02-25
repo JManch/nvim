@@ -12,6 +12,7 @@ return {
       'Mason',
       'checkhealth',
       'man',
+      'norg',
       '',
     },
     show_trailing_blankline_indent = false,

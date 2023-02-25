@@ -2,7 +2,20 @@ return {
   {
     'JManch/sunset.nvim',
     dependencies = {
-      'Shatur/neovim-ayu',
+      {
+        'Shatur/neovim-ayu',
+        config = function()
+          if os.getenv('ALACRITTY') ~= 'true' then
+            local colors = require('ayu.colors')
+            colors.generate(true)
+            require('ayu').setup({
+              overrides = function()
+                return { Comment = { fg = colors.comment } }
+              end,
+            })
+          end
+        end,
+      },
     },
     dev = true,
     lazy = false,

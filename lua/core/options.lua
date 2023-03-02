@@ -10,6 +10,7 @@ o.ignorecase = true -- Case-insensitive search
 o.smartcase = true -- Smart case-sensitive search
 o.swapfile = true -- Enable swap files
 o.undofile = true -- Store undo history
+o.spelllang = 'en_gb'
 opt.jumpoptions = { 'stack' } -- Test this
 if vim.version().minor > 8 then
   opt.diffopt:append('linematch:60')
@@ -19,7 +20,7 @@ g.maplocalleader = ',' -- Local leader used for neorg
 api.nvim_del_keymap('n', '<C-L>') -- Delete clashing keymap
 
 -- UI
-o.relativenumber = true -- Show relative line numbers ok this is some super loing tex asd asd asd asd asd asd kjasd asdkjas dkasj aksdj aksdj askd askd asdka sdaksdjaks asd kjasd aksd aksd jaskdja skdas asdasdasd
+o.relativenumber = true -- Show relative line numbers
 o.number = true -- Show absolute line number
 o.wrap = false -- Disable text wrapping
 o.linebreak = true -- Wrap at words rather than characters

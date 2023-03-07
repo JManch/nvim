@@ -91,9 +91,6 @@ M.config = function()
       { name = 'buffer' },
     },
   })
-
-  -- Insert '(' after selecting a function
-  cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 end
 
 return M

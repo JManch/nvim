@@ -2,7 +2,7 @@ return {
   'stevearc/oil.nvim',
   cmd = 'OilFloat',
   keys = {
-    { '<LEADER>fd', '<CMD>OilFloat<CR>' },
+    { '<LEADER>fo', '<CMD>OilFloat<CR>', desc = 'Oil file browser' },
   },
   opts = {
     columns = {

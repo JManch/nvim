@@ -61,4 +61,6 @@ map('v', '<LEADER>y', '"+y', 'Yank to system register')
 map('v', '<LEADER>p', '"+p', 'Put from system register')
 map('v', '<LEADER>P', '"+P', 'Put before from system register')
 
+map('v', 'gy', 'ygv<ESC>', 'Yank and maintain cursor position')
+
 return M

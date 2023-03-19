@@ -21,8 +21,8 @@ map('n', '<C-l>', '<C-w>l', 'Go to the right window')
 map('n', '<C-j>', '<C-w>j', 'Go to the down window')
 map('n', '<C-k>', '<C-w>k', 'Go to the up window')
 
-map('n', '<S-j>', '<CMD>bprevious<CR>', 'Go to previous buffer')
-map('n', '<S-k>', '<CMD>bnext<CR>', 'Go to next buffer')
+map('n', '<S-j>', '<C-o>', 'Go to old cursor position')
+map('n', '<S-k>', '<C-i>', 'Go to newer cursor position')
 
 map('n', ']q', '<CMD>cn<CR>', 'Go to next item in quickfix list')
 map('n', '[q', '<CMD>cp<CR>', 'Go to previous item in quickfix list')

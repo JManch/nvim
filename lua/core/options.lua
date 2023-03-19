@@ -11,7 +11,7 @@ o.smartcase = true -- Smart case-sensitive search
 o.swapfile = true -- Enable swap files
 o.undofile = true -- Store undo history
 o.spelllang = 'en_gb'
-opt.jumpoptions = { 'stack' } -- Test this
+opt.jumpoptions = { 'stack' }
 if vim.version().minor > 8 then
   opt.diffopt:append('linematch:60')
 end

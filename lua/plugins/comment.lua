@@ -54,7 +54,7 @@ return {
     {
       'gcA',
       function()
-        require('Comment.api').locked('insert.linewise.eol')
+        require('Comment.api').insert.linewise.eol()
       end,
       desc = 'Comment insert end of line',
     },

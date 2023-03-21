@@ -51,21 +51,6 @@ return {
   },
 
   {
-    'j-hui/fidget.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      text = {
-        done = '',
-      },
-      sources = {
-        ltex = {
-          ignore = true,
-        },
-      },
-    },
-  },
-
-  {
     'Eandrju/cellular-automaton.nvim',
     keys = {
       { '<LEADER>rr', '<CMD>CellularAutomaton make_it_rain<CR>', desc = 'Make it rain' },
@@ -84,21 +69,6 @@ return {
     init = function()
       vim.g.wpm = false
     end,
-  },
-
-  {
-    'kwakzalver/duckytype.nvim',
-    cmd = 'DuckyType',
-    opts = {
-      window_config = {
-        border = 'rounded',
-      },
-      highlight = {
-        good = 'String',
-        bad = 'DiagnosticError',
-        remaining = 'Comment',
-      },
-    },
   },
 
   {

@@ -63,4 +63,29 @@ map('v', '<LEADER>P', '"+P', 'Put before from system register')
 
 map('v', 'gy', 'ygv<ESC>', 'Yank and maintain cursor position')
 
+M.terminal_maps = function()
+  local opts = { buffer = true }
+  local excluded_terminals = {
+    'lazygit',
+    'typioca',
+  }
+
+  local buffer_name = vim.api.nvim_buf_get_name(0)
+  for _, buffer in ipairs(excluded_terminals) do
+    if string.find(buffer_name, buffer, 1, true) then
+      if buffer == 'lazygit' then
+        map('t', '<C-v>', [[<C-\><C-n>"+pA]], 'Put from system register', opts)
+      end
+      return
+    end
+  end
+
+  map('t', 'jk', [[<C-\><C-n>]], 'Exit insert mode', opts)
+  map('t', '<C-h>', '<CMD>wincmd h<CR>', 'Go to the left window', opts)
+  map('t', '<C-l>', '<CMD>wincmd l<CR>', 'Go to the right window', opts)
+  map('t', '<C-j>', '<CMD>wincmd j<CR>', 'Go to the down window', opts)
+  map('t', '<C-k>', '<CMD>wincmd k<CR>', 'Go to the up window', opts)
+  map('t', '<C-v>', [[<C-\><C-n>"+pA]], 'Put from system register', opts)
+end
+
 return M

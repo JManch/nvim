@@ -1,6 +1,6 @@
 local M = {
   'akinsho/toggleterm.nvim',
-  cmd = { 'ToggleTerm', 'HorizontalTerminal', 'VerticalTerminal', 'TerminalFloat' },
+  cmd = { 'ToggleTerm', 'TerminalHorizontal', 'TerminalHorizontal', 'TerminalFloat', 'Typioca' },
 }
 
 local toggle_terminal = function(direction, count)
@@ -16,11 +16,11 @@ local toggle_terminal = function(direction, count)
 end
 
 M.config = function()
-  vim.api.nvim_create_user_command('HorizontalTerminal', function(table)
+  vim.api.nvim_create_user_command('TerminalHorizontal', function(table)
     toggle_terminal('horizontal', table.args)
   end, { nargs = '?' })
 
-  vim.api.nvim_create_user_command('VerticalTerminal', function(table)
+  vim.api.nvim_create_user_command('TerminalVertical', function(table)
     toggle_terminal('vertical', table.args)
   end, { nargs = '?' })
 
@@ -47,9 +47,16 @@ M.config = function()
     },
   }
 
-  -- Use powershell on windows
   if vim.fn.has('win32') == 1 then
     options.shell = 'pwsh -nologo -noexit -command winfetch'
+
+    vim.api.nvim_create_user_command('Typioca', function()
+      local Terminal = require('toggleterm.terminal').Terminal
+      if M.typioca == nil then
+        M.typioca = Terminal:new({ cmd = 'typioca', hidden = true, close_on_exit = true })
+      end
+      M.typioca:toggle(80, 'float')
+    end, {})
   end
 
   require('toggleterm').setup(options)
@@ -66,7 +73,7 @@ M.keys = {
     function()
       local Terminal = require('toggleterm.terminal').Terminal
       if M.lazygit == nil then
-        M.lazygit = Terminal:new({ cmd = 'lazygit', hidden = true })
+        M.lazygit = Terminal:new({ cmd = 'lazygit', hidden = true, close_on_exit = true })
       end
       M.lazygit:toggle()
     end,
@@ -77,8 +84,11 @@ M.keys = {
     function()
       local Terminal = require('toggleterm.terminal').Terminal
       if M.lazygit_dotfiles == nil then
-        M.lazygit_dotfiles =
-          Terminal:new({ cmd = 'lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME', hidden = true })
+        M.lazygit_dotfiles = Terminal:new({
+          cmd = 'lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME',
+          hidden = true,
+          close_on_exit = true,
+        })
       end
       M.lazygit_dotfiles:toggle()
     end,

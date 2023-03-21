@@ -32,7 +32,7 @@ api.nvim_create_autocmd('TermOpen', {
   group = terminal_mappings,
   pattern = 'term://*',
   callback = function()
-    utils.terminal_maps()
+    require('core.mappings').terminal_maps()
   end,
 })
 

@@ -28,6 +28,15 @@ return {
         context = {
           enable = false,
         },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ['in'] = { query = '@number.inner', desc = 'Select inner number text object' },
+            },
+          },
+        },
       })
     end,
   },

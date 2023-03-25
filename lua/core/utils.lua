@@ -1,7 +1,6 @@
 local M = {}
 
 local api = vim.api
-local fn = vim.fn
 
 M.set_highlights = function()
   api.nvim_set_hl(0, 'MatchParen', { link = 'Constant' })

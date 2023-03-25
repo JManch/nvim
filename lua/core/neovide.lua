@@ -21,6 +21,7 @@ end, 'Neovide decrease scale')
 map('n', '<M-r>', '<CMD>NeovideToggleRefreshRate<CR>', 'Neovide toggle refresh rate')
 
 map('n', '<M-t>', function()
+  ---@diagnostic disable-next-line: param-type-mismatch
   vim.notify(os.date('%X'), vim.log.levels.INFO, { title = 'Time', timeout = 2000 })
 end, 'Neovide view current time')
 

@@ -55,6 +55,7 @@
   "toggleterm.nvim": { "branch": "main", "commit": "9a595ba699837c4333c4296634feed320f084df2" },
   "twilight.nvim": { "branch": "main", "commit": "2e13bd1886562b737f38c418ed542677b41ef5cb" },
   "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },
+  "vim-pasta": { "branch": "master", "commit": "cb4501a123d74fc7d66ac9f10b80c9d393746c66" },
   "vimtex": { "branch": "master", "commit": "93fca124de2610899477ffe97a819ab4a0aa03c2" },
   "workspaces.nvim": { "branch": "master", "commit": "f55ad0a3688840ace255d327a5e5bb16b9ff5a17" },
   "wpm.nvim": { "branch": "main", "commit": "968c213143311cd07acb299ebe5445f68ae57a67" }

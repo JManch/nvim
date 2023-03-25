@@ -2,34 +2,30 @@ local api = vim.api
 
 local utils = require('core.utils')
 
-local set_format_options = api.nvim_create_augroup('SetFormatOptions', {})
 api.nvim_create_autocmd('FileType', {
-  group = set_format_options,
+  group = api.nvim_create_augroup('SetFormatOptions', {}),
   pattern = '*',
   callback = function()
     vim.opt_local.formatoptions:remove('o')
   end,
 })
 
-local set_highlights = api.nvim_create_augroup('SetHighlights', {})
 api.nvim_create_autocmd('ColorScheme', {
-  group = set_highlights,
+  group = api.nvim_create_augroup('SetHighlights', {}),
   pattern = '*',
   callback = utils.set_highlights,
 })
 
-local yank_highlight = api.nvim_create_augroup('YankHighlight', {})
 api.nvim_create_autocmd('TextYankPost', {
-  group = yank_highlight,
+  group = api.nvim_create_augroup('YankHighlight', {}),
   pattern = '*',
   callback = function()
     vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 40 })
   end,
 })
 
-local terminal_mappings = api.nvim_create_augroup('TerminalMappings', {})
 api.nvim_create_autocmd('TermOpen', {
-  group = terminal_mappings,
+  group = api.nvim_create_augroup('TerminalMappings', {}),
   pattern = 'term://*',
   callback = function()
     require('core.mappings').terminal_maps()

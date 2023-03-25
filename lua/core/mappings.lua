@@ -63,6 +63,9 @@ map('v', '<LEADER>P', '"+P', 'Put before from system register')
 
 map('v', 'gy', 'ygv<ESC>', 'Yank and maintain cursor position')
 
+map('v', '>', '>gv', 'Indent right and maintain highlight')
+map('v', '<', '<gv', 'Indent left and maintain highlight')
+
 M.terminal_maps = function()
   local opts = { buffer = true }
   local excluded_terminals = {

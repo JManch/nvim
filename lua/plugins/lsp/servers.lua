@@ -20,6 +20,9 @@ M.servers = function(on_attach, capabilities)
             diagnostics = {
               globals = { 'vim' },
             },
+            workspace = {
+              checkThirdParty = false,
+            },
           },
         },
       })
@@ -45,7 +48,12 @@ M.servers = function(on_attach, capabilities)
     end,
     ['ltex'] = function()
       require('lspconfig').ltex.setup({
-        on_attach = on_attach,
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
+          require('ltex_extra').setup({
+            load_langs = { 'en-GB' },
+          })
+        end,
         capabilities = capabilities,
         settings = {
           ltex = {

@@ -6,6 +6,7 @@ local M = {
 M.dependencies = {
   'neovim/nvim-lspconfig',
   'ray-x/lsp_signature.nvim',
+  'barreiroleo/ltex_extra.nvim',
   'hrsh7th/cmp-nvim-lsp',
   {
     'williamboman/mason.nvim',

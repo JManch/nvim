@@ -24,6 +24,7 @@ o.relativenumber = true -- Show relative line numbers
 o.number = true -- Show absolute line number
 o.wrap = false -- Disable text wrapping
 o.linebreak = true -- Wrap at words rather than characters
+o.showbreak = '>'
 o.termguicolors = true -- Enable 24-bit RBG colors
 o.scrolloff = 8 -- Scroll before reaching edge
 o.signcolumn = 'yes' -- Diagnostic icon column

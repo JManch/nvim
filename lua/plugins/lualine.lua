@@ -80,19 +80,20 @@ local update_length = {
   end,
   diff = function(str, info)
     if info.git_diff == nil then
+      component_lengths.left.diff = 0
       return str
     end
     local count = 0
     local length = 0
-    if info.git_diff.added ~= 0 then
+    if info.git_diff.added ~= nil and info.git_diff.added ~= 0 then
       length = length + #tostring(info.git_diff.added)
       count = count + 1
     end
-    if info.git_diff.modified ~= 0 then
+    if info.git_diff.modified ~= nil and info.git_diff.modified ~= 0 then
       length = length + #tostring(info.git_diff.modified)
       count = count + 1
     end
-    if info.git_diff.removed ~= 0 then
+    if info.git_diff.removed ~= nil and info.git_diff.removed ~= 0 then
       length = length + #tostring(info.git_diff.removed)
       count = count + 1
     end
@@ -105,6 +106,7 @@ local update_length = {
   end,
   diagnostics = function(str, info)
     if info.diagnostics_count == nil then
+      component_lengths.right.diagnostics = 0
       return str
     end
     local length = 0

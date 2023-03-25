@@ -5,6 +5,8 @@ return {
 
   { 'moll/vim-bbye', cmd = { 'Bdelete', 'Bwipeout' } },
 
+  { 'sickill/vim-pasta', lazy = false },
+
   {
     'folke/twilight.nvim',
     cmd = { 'Twilight' },

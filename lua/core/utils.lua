@@ -12,6 +12,7 @@ M.set_highlights = function()
   api.nvim_set_hl(0, 'Italic', { italic = true })
   api.nvim_set_hl(0, '@text.strong', { link = 'Bold' })
   api.nvim_set_hl(0, '@text.emphasis', { link = 'Italic' })
+  api.nvim_set_hl(0, '@text.literal.help', { link = 'help' })
 end
 
 local jump_chars = {

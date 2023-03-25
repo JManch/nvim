@@ -24,6 +24,7 @@ return {
         },
         highlight = {
           enable = true,
+          disable = { 'latex' },
         },
         context = {
           enable = false,
@@ -43,5 +44,12 @@ return {
   {
     'nvim-treesitter/playground',
     cmd = 'TSPlaygroundToggle',
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    ft = { 'html', 'markdown' },
+    opts = {
+      filetypes = { 'html', 'markdown' },
+    },
   },
 }

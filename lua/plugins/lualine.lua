@@ -1,10 +1,10 @@
 local M = {
-  'nvim-lualine/lualine.nvim',
+  'JManch/lualine.nvim',
   lazy = false,
   enabled = true,
 }
 
-local statusline_tab = function()
+local tabs = function()
   local tab_count = vim.fn.tabpagenr('$')
   if tab_count ~= 1 then
     return vim.fn.tabpagenr() .. '/' .. tab_count
@@ -12,15 +12,7 @@ local statusline_tab = function()
   return ''
 end
 
-local sun_status = function()
-  if vim.g.is_day then
-    return ' ' .. vim.g.sunset
-  else
-    return ' ' .. vim.g.sunrise
-  end
-end
-
-local show_macro_recording = function()
+local macro_recording = function()
   local recording_register = vim.fn.reg_recording()
   if recording_register == '' then
     return ''
@@ -29,20 +21,139 @@ local show_macro_recording = function()
   end
 end
 
--- Don't show utf-8 encoding
-local encoding = function()
-  local encoding, _ = (vim.bo.fenc or vim.go.enc):gsub('^utf%-8$', '')
-  return encoding
+-- Stores length of components on left and right side
+-- Used for centering the filename
+local component_lengths = { left = {}, right = {} }
+
+M.debug_centering = false
+
+local center_cushion = function(side)
+  local left = 0
+  local right = 0
+  local debug = ''
+  for k, v in pairs(component_lengths.left) do
+    if M.debug_centering then
+      debug = debug .. ' ' .. k .. ': ' .. v
+    end
+    left = left + v
+  end
+  for k, v in pairs(component_lengths.right) do
+    if M.debug_centering then
+      debug = debug .. ' ' .. k .. ': ' .. v
+    end
+    right = right + v
+  end
+  if M.debug_centering then
+    print(debug)
+  end
+  local diff = left - right
+  if side == 'left' and diff < 0 then
+    return string.rep(' ', math.abs(diff))
+  elseif side == 'right' and diff > 0 then
+    return string.rep(' ', diff)
+  else
+    return ''
+  end
 end
 
-local wpm = function()
-  return vim.g.wpm and require('wpm').wpm() .. ' wpm ' .. require('wpm').historic_graph() or ''
-end
+-- All of this stuff is just for centering the filename
+local update_length = {
+  mode = function(str, _)
+    component_lengths.left.mode = #str + 2
+    return str
+  end,
+  macro_recording = function(str, _)
+    component_lengths.left.macro_recording = #str + 1
+    return str
+  end,
+  hostname = function(str, _)
+    component_lengths.left.hostname = #str + 1
+    return str
+  end,
+  branch = function(str, _)
+    if str == '' then
+      component_lengths.left.branch = 0
+    else
+      component_lengths.left.branch = #str + 3
+    end
+    return str
+  end,
+  diff = function(str, info)
+    if info.git_diff == nil then
+      return str
+    end
+    local count = 0
+    local length = 0
+    if info.git_diff.added ~= 0 then
+      length = length + #tostring(info.git_diff.added)
+      count = count + 1
+    end
+    if info.git_diff.modified ~= 0 then
+      length = length + #tostring(info.git_diff.modified)
+      count = count + 1
+    end
+    if info.git_diff.removed ~= 0 then
+      length = length + #tostring(info.git_diff.removed)
+      count = count + 1
+    end
+    if count == 0 then
+      component_lengths.left.diff = 0
+    else
+      component_lengths.left.diff = length + 2 * count
+    end
+    return str
+  end,
+  diagnostics = function(str, info)
+    if info.diagnostics_count == nil then
+      return str
+    end
+    local length = 0
+    local count = 0
+    if info.diagnostics_count.error ~= 0 then
+      length = length + #tostring(info.diagnostics_count.error)
+      count = count + 1
+    end
+    if info.diagnostics_count.hint ~= 0 then
+      length = length + #tostring(info.diagnostics_count.hint)
+      count = count + 1
+    end
+    if info.diagnostics_count.info ~= 0 then
+      length = length + #tostring(info.diagnostics_count.info)
+      count = count + 1
+    end
+    if info.diagnostics_count.warn ~= 0 then
+      length = length + #tostring(info.diagnostics_count.warn)
+      count = count + 1
+    end
+    if count == 0 then
+      component_lengths.right.diagnostics = 0
+    else
+      component_lengths.right.diagnostics = length + 3 * count
+    end
+    return str
+  end,
+  searchcount = function(str, _)
+    component_lengths.right.searchcount = #str + 1
+    return str
+  end,
+  tabs = function(str, _)
+    component_lengths.right.tabs = #str + 1
+    return str
+  end,
+  progress = function(str, _)
+    if #str == 4 then
+      component_lengths.right.progress = #str + 1
+    else
+      component_lengths.right.progress = #str + 2
+    end
+    return str
+  end,
+}
 
 M.opts = {
   options = {
     theme = 'auto',
-    component_separators = '|',
+    component_separators = '',
     section_separators = '',
     disabled_filetypes = {
       'alpha',
@@ -53,29 +164,116 @@ M.opts = {
     globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { show_macro_recording, 'branch', 'diff', { 'diagnostics', sources = { 'nvim_diagnostic' } } },
-    lualine_c = { statusline_tab, { 'filename', path = 1 }, 'searchcount', wpm },
-    lualine_x = {
-      sun_status,
-      encoding,
-      'fileformat',
-      'filetype',
+    lualine_a = {
+      {
+        'mode',
+        fmt = update_length.mode,
+      },
     },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location' },
-  },
-  -- inactions sections are shown when focus is on another window
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { { 'filename', path = 1 } },
-    lualine_x = { 'location' },
-    lualine_y = {},
-    lualine_z = {},
-  },
-  extensions = {
-    'nvim-tree',
+    lualine_b = {
+      {
+        macro_recording,
+        fmt = update_length.macro_recording,
+        cond = function()
+          if vim.fn.reg_recording() == '' then
+            component_lengths.left.macro_recording = 0
+          end
+          return vim.fn.reg_recording() ~= ''
+        end,
+        padding = { left = 1 },
+      },
+      {
+        'hostname',
+        fmt = update_length.hostname,
+        cond = function()
+          local enabled = os.getenv('SSH_CLIENT') ~= nil
+          if not enabled then
+            component_lengths.left.hostname = 0
+          end
+          return enabled
+        end,
+        padding = { left = 1 },
+      },
+      {
+        'branch',
+        fmt = update_length.branch,
+        padding = { left = 1 },
+        icon = '',
+      },
+    },
+    lualine_c = {
+      {
+        'diff',
+        fmt = update_length.diff,
+        padding = { left = 1 },
+      },
+      '%=',
+      function()
+        return center_cushion('left')
+      end,
+      {
+        'filetype',
+        icon_only = true,
+        padding = 0,
+      },
+      {
+        'filename',
+        path = 1,
+      },
+      function()
+        return center_cushion('right')
+      end,
+    },
+    lualine_x = {
+      {
+        'diagnostics',
+        sources = { 'nvim_diagnostic' },
+        fmt = update_length.diagnostics,
+        symbols = {
+          error = ' ',
+          warn = ' ',
+          hint = ' ',
+          info = ' ',
+        },
+        padding = { right = 1 },
+      },
+    },
+    lualine_y = {
+      {
+        'searchcount',
+        fmt = update_length.searchcount,
+        cond = function()
+          if vim.v.hlsearch == 0 then
+            component_lengths.right.searchcount = 0
+          end
+          return vim.v.hlsearch ~= 0
+        end,
+        padding = { right = 1 },
+      },
+      {
+        tabs,
+        fmt = update_length.tabs,
+        cond = function()
+          local enabled = vim.fn.tabpagenr('$')
+          if not enabled then
+            component_lengths.right.tabs = 0
+          end
+          return enabled
+        end,
+        padding = { right = 1 },
+      },
+    },
+    lualine_z = {
+      {
+        'progress',
+        fmt = function(str, _)
+          if #str == 3 and str ~= 'Top' and str ~= 'Bot' then
+            str = ' ' .. str
+          end
+          return update_length.progress(str)
+        end,
+      },
+    },
   },
 }
 
@@ -96,7 +294,6 @@ M.config = function(_, opts)
       if not timer then
         return
       end
-      -- Wait 50ms for recording to fully stop
       timer:start(
         50,
         0,
@@ -108,6 +305,10 @@ M.config = function(_, opts)
       )
     end,
   })
+
+  vim.api.nvim_create_user_command('DebugLualineCentering', function()
+    M.debug_centering = not M.debug_centering
+  end, {})
 end
 
 return M

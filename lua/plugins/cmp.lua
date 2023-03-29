@@ -29,7 +29,6 @@ M.config = function()
       end,
     },
     mapping = {
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<C-y>'] = cmp.mapping.confirm({ select = true }),
 
       ['<Up>'] = cmp.mapping.select_prev_item(),

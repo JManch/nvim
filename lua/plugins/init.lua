@@ -123,4 +123,15 @@ return {
     'brenoprata10/nvim-highlight-colors',
     cmd = 'HighlightColorsToggle',
   },
+
+  {
+    'iamcco/markdown-preview.nvim',
+    command = 'MarkdownPreview',
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
+    enabled = function()
+      return vim.fn.has('win32') ~= 1
+    end,
+  },
 }

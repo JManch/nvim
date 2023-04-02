@@ -126,6 +126,7 @@ return {
 
   {
     'iamcco/markdown-preview.nvim',
+    lazy = false,
     cmd = 'MarkdownPreview',
     build = function()
       vim.fn['mkdp#util#install']()

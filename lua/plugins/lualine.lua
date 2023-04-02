@@ -221,9 +221,7 @@ M.opts = {
         end,
       },
       '%=',
-      function()
-        return center_cushion('left')
-      end,
+      function() return center_cushion('left') end,
       {
         'filetype',
         icon_only = true,
@@ -233,9 +231,7 @@ M.opts = {
         'filename',
         path = 1,
       },
-      function()
-        return center_cushion('right')
-      end,
+      function() return center_cushion('right') end,
     },
     lualine_x = {
       {
@@ -310,18 +306,22 @@ M.config = function(_, opts)
       timer:start(
         50,
         0,
-        vim.schedule_wrap(function()
-          require('lualine').refresh({
-            place = { 'statusline' },
-          })
-        end)
+        vim.schedule_wrap(
+          function()
+            require('lualine').refresh({
+              place = { 'statusline' },
+            })
+          end
+        )
       )
     end,
   })
 
-  vim.api.nvim_create_user_command('DebugLualineCentering', function()
-    M.debug_centering = not M.debug_centering
-  end, {})
+  vim.api.nvim_create_user_command(
+    'DebugLualineCentering',
+    function() M.debug_centering = not M.debug_centering end,
+    {}
+  )
 end
 
 return M

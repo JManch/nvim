@@ -134,9 +134,7 @@ return {
       },
     },
     config = function()
-      vim.api.nvim_create_user_command('TelescopeFileBrowser', function()
-        vim.cmd('Telescope file_browser')
-      end, {})
+      vim.api.nvim_create_user_command('TelescopeFileBrowser', function() vim.cmd('Telescope file_browser') end, {})
       require('telescope').load_extension('file_browser')
     end,
   },
@@ -145,8 +143,6 @@ return {
     keys = {
       { '<LEADER>fp', '<CMD>Telescope lazy<CR>', desc = 'Browse installed plugins' },
     },
-    config = function()
-      require('telescope').load_extension('lazy')
-    end,
+    config = function() require('telescope').load_extension('lazy') end,
   },
 }

@@ -16,17 +16,23 @@ local toggle_terminal = function(direction, count)
 end
 
 M.config = function()
-  vim.api.nvim_create_user_command('TerminalHorizontal', function(table)
-    toggle_terminal('horizontal', table.args)
-  end, { nargs = '?' })
+  vim.api.nvim_create_user_command(
+    'TerminalHorizontal',
+    function(table) toggle_terminal('horizontal', table.args) end,
+    { nargs = '?' }
+  )
 
-  vim.api.nvim_create_user_command('TerminalVertical', function(table)
-    toggle_terminal('vertical', table.args)
-  end, { nargs = '?' })
+  vim.api.nvim_create_user_command(
+    'TerminalVertical',
+    function(table) toggle_terminal('vertical', table.args) end,
+    { nargs = '?' }
+  )
 
-  vim.api.nvim_create_user_command('TerminalFloat', function(table)
-    toggle_terminal('float', table.args)
-  end, { nargs = '?' })
+  vim.api.nvim_create_user_command(
+    'TerminalFloat',
+    function(table) toggle_terminal('float', table.args) end,
+    { nargs = '?' }
+  )
 
   local options = {
     open_mapping = [[<C-t>]],

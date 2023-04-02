@@ -65,9 +65,7 @@ M.on_attach = function(client, bufnr)
 
         vim.lsp.buf.format({
           bufnr = bufnr,
-          filter = function(active_client)
-            return active_client.name == formatData.formatter
-          end,
+          filter = function(active_client) return active_client.name == formatData.formatter end,
         })
       end,
     })

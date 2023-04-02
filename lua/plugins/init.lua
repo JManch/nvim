@@ -63,14 +63,14 @@ return {
     'jcdickinson/wpm.nvim',
     cmd = 'ToggleWPM',
     config = function()
-      vim.api.nvim_create_user_command('ToggleWPM', function()
-        require('core.utils').toggle_g('wpm', true, false)
-      end, {})
+      vim.api.nvim_create_user_command(
+        'ToggleWPM',
+        function() require('core.utils').toggle_g('wpm', true, false) end,
+        {}
+      )
       require('wpm').setup({})
     end,
-    init = function()
-      vim.g.wpm = false
-    end,
+    init = function() vim.g.wpm = false end,
   },
 
   {
@@ -84,9 +84,7 @@ return {
         },
       },
     },
-    config = function()
-      require('leap').add_default_mappings()
-    end,
+    config = function() require('leap').add_default_mappings() end,
   },
 
   {
@@ -114,9 +112,7 @@ return {
       },
       n_lines = 20, -- lines searched for surround
     },
-    config = function(_, opts)
-      require('mini.surround').setup(opts)
-    end,
+    config = function(_, opts) require('mini.surround').setup(opts) end,
   },
 
   {
@@ -128,11 +124,7 @@ return {
     'iamcco/markdown-preview.nvim',
     lazy = false,
     cmd = 'MarkdownPreview',
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
-    enabled = function()
-      return vim.fn.has('win32') ~= 1
-    end,
+    build = function() vim.fn['mkdp#util#install']() end,
+    enabled = function() return vim.fn.has('win32') ~= 1 end,
   },
 }

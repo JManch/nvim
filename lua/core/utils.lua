@@ -76,17 +76,11 @@ local toggle_table_key = function(table, key, on, off)
   end
 end
 
-M.toggle_g = function(key, on, off)
-  toggle_table_key(vim.g, key, on, off)
-end
+M.toggle_g = function(key, on, off) toggle_table_key(vim.g, key, on, off) end
 
-M.toggle_o = function(key, on, off)
-  toggle_table_key(vim.o, key, on, off)
-end
+M.toggle_o = function(key, on, off) toggle_table_key(vim.o, key, on, off) end
 
-M.toggle_wo = function(key, on, off)
-  toggle_table_key(vim.wo, key, on, off)
-end
+M.toggle_wo = function(key, on, off) toggle_table_key(vim.wo, key, on, off) end
 
 M.toggle_local_opt = function(key, value)
   if vim.opt_local[key]:get()[value] == nil then

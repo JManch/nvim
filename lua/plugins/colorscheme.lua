@@ -9,9 +9,7 @@ return {
             local colors = require('ayu.colors')
             colors.generate(true)
             require('ayu').setup({
-              overrides = function()
-                return { Comment = { fg = colors.comment } }
-              end,
+              overrides = function() return { Comment = { fg = colors.comment } } end,
             })
           end
         end,

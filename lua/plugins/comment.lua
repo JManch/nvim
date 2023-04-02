@@ -39,23 +39,17 @@ return {
     },
     {
       'gco',
-      function()
-        require('Comment.api').insert.linewise.below()
-      end,
+      function() require('Comment.api').insert.linewise.below() end,
       desc = 'Comment insert below',
     },
     {
       'gcO',
-      function()
-        require('Comment.api').insert.linewise.above()
-      end,
+      function() require('Comment.api').insert.linewise.above() end,
       desc = 'Comment insert above',
     },
     {
       'gcA',
-      function()
-        require('Comment.api').insert.linewise.eol()
-      end,
+      function() require('Comment.api').insert.linewise.eol() end,
       desc = 'Comment insert end of line',
     },
 

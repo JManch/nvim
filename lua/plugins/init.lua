@@ -1,5 +1,20 @@
 return {
-  'nvim-lua/plenary.nvim',
+  {
+    'nvim-lua/plenary.nvim',
+    lazy = false,
+    config = function()
+      -- NOTE: This doesn't work in the portable neovim windows build or
+      -- appimage build because the luajit files are not included for some
+      -- reason. The luajit lua files need to be manually copied into
+      -- bin/lua/jit. https://github.com/neovim/neovim/issues/15543
+      vim.api.nvim_create_user_command(
+        'StartProfiling',
+        function() require('plenary.profile').start('profile.log', { flame = true }) end,
+        {}
+      )
+      vim.api.nvim_create_user_command('StopProfiling', function() require('plenary.profile').stop() end, {})
+    end,
+  },
 
   { 'godlygeek/tabular', cmd = 'Tabularize' },
 
@@ -57,20 +72,6 @@ return {
     keys = {
       { '<LEADER>rr', '<CMD>CellularAutomaton make_it_rain<CR>', desc = 'Make it rain' },
     },
-  },
-
-  {
-    'jcdickinson/wpm.nvim',
-    cmd = 'ToggleWPM',
-    config = function()
-      vim.api.nvim_create_user_command(
-        'ToggleWPM',
-        function() require('core.utils').toggle_g('wpm', true, false) end,
-        {}
-      )
-      require('wpm').setup({})
-    end,
-    init = function() vim.g.wpm = false end,
   },
 
   {

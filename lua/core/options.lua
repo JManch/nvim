@@ -61,7 +61,8 @@ o.hidden = true -- Enable background buffers
 o.updatetime = 250 -- Trigger event wait time (ms)
 o.timeoutlen = 600 -- Time to wait for mapped sequence (ms)
 
--- Disable providers
-g['loaded_python3_provider'] = 0
+-- Disable unused providers
 g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
+g['loaded_ruby_provider'] = 0
+g['loaded_gem_provider'] = 0

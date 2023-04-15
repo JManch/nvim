@@ -79,31 +79,32 @@ return {
   },
   {
     'uga-rosa/cmp-dictionary',
-    cmd = { 'SetDictionaryCompletion' },
+    cmd = { 'LoadDictionaryCompletion', 'ToggleDictionaryCompletion' },
     config = function()
-      local source = { name = 'dictionary', keyword_length = 4 }
-      vim.api.nvim_create_user_command('SetDictionaryCompletion', function(cmd_tbl)
-        local sources = require('cmp').get_config().sources
-        local enable = true
-        if cmd_tbl.args == 'false' then
-          enable = false
-        elseif cmd_tbl.args ~= 'true' then
-          vim.notify("Invalid argument. Must be 'true' or 'false'.", vim.log.levels.ERROR)
-          return
-        end
+      vim.api.nvim_create_user_command('LoadDictionaryCompletion', function() end, {})
+
+      local source = { name = 'dictionary', keyword_length = 4, max_item_count = 10 }
+      local sources = require('cmp').get_config().sources
+      table.insert(require('cmp').get_config().sources, source)
+      require('cmp').setup.buffer({ sources = sources })
+
+      vim.api.nvim_create_user_command('SetDictionaryCompletion', function()
+        sources = require('cmp').get_config().sources
+        local disabled = false
         for i = #sources, 1, -1 do
           if sources[i].name == 'dictionary' then
             table.remove(sources, i)
+            disabled = true
           end
         end
-        if enable then
+        if not disabled then
           table.insert(sources, source)
           vim.notify('Enabled dictionary completion', vim.log.levels.INFO)
         else
           vim.notify('Disabled dictionary completion', vim.log.levels.INFO)
         end
         require('cmp').setup.buffer({ sources = sources })
-      end, { nargs = 1 })
+      end, {})
     end,
   },
 }

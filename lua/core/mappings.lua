@@ -27,12 +27,12 @@ map('n', '<S-k>', '<C-i>', 'Go to newer cursor position')
 map('n', ']q', '<CMD>cn<CR>', 'Go to next item in quickfix list')
 map('n', '[q', '<CMD>cp<CR>', 'Go to previous item in quickfix list')
 
-map('n', 'vv', 'v$', 'Visual select to end of line')
+map('n', 'vv', 'vg_', 'Visual select to last character')
 
 map('n', '<S-e>', 'ge', 'Go to end of previous word')
 
-map({ 'n', 'v' }, '<S-h>', '^', 'Go to start of line')
-map({ 'n', 'v' }, '<S-l>', '$', 'Go to end of line')
+map({ 'n', 'v' }, '<S-h>', '^', 'Go first non-blank character')
+map({ 'n', 'v' }, '<S-l>', 'g_', 'Go to last non-blank character')
 
 map('n', '<C-d>', '<C-d>zz', 'Scroll down half a page and centre cursor')
 map('n', '<C-u>', '<C-u>zz', 'Scroll up half a page and centre cursor')

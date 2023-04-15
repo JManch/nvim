@@ -49,3 +49,5 @@ api.nvim_create_user_command(
 api.nvim_create_user_command('PutMessages', function() vim.cmd("put =execute('messages')") end, {})
 
 api.nvim_create_user_command('HighlightGroups', function() vim.cmd.so('$VIMRUNTIME/syntax/hitest.vim') end, {})
+
+api.nvim_create_user_command('SetCWDToFileDir', function() vim.cmd.cd('%:p:h') end, {})

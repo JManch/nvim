@@ -4,33 +4,33 @@ local M = {
   cmd = { 'AnkiSetDeck', 'AnkiSetTags', 'AnkiCreateCard' },
 }
 
-M.deck = ''
-M.card = 'Basic'
-M.tags = ''
+local deck = ''
+local card = 'Basic'
+local tags = ''
 
 M.config = function()
   local anki = require('anki')
   anki.setup()
 
   vim.api.nvim_create_user_command('AnkiSetDeck', function(cmd)
-    M.deck = cmd.args
-    vim.notify('Set deck to ' .. M.deck, vim.log.levels.INFO)
+    deck = cmd.args
+    vim.notify('Set deck to ' .. deck, vim.log.levels.INFO)
   end, { nargs = 1 })
 
   vim.api.nvim_create_user_command('AnkiSetTags', function(cmd)
-    M.tags = cmd.args
-    vim.notify('Set tags to ' .. M.tags, vim.log.levels.INFO)
+    tags = cmd.args
+    vim.notify('Set tags to ' .. tags, vim.log.levels.INFO)
   end, { nargs = 1 })
 
   vim.api.nvim_create_user_command('AnkiCreateCard', function()
-    if M.deck == '' then
+    if deck == '' then
       vim.notify('Deck has not been set', vim.log.levels.WARN)
       return
-    elseif M.tags == '' then
+    elseif tags == '' then
       vim.notify('Tags have not been set', vim.log.levels.WARN)
     end
-    vim.cmd.edit('~/card.anki')
-    anki.ankiWithDeck(M.deck, M.card, { tags = M.tags })
+    vim.cmd.edit(vim.fn.resolve(vim.fn.stdpath('data') .. '/card.anki'))
+    anki.ankiWithDeck(deck, card, { tags = tags })
   end, {})
 
   vim.api.nvim_create_autocmd('FileType', {

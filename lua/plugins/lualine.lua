@@ -25,25 +25,25 @@ end
 -- Used for centering the filename
 local component_lengths = { left = {}, right = {} }
 
-M.debug_centering = false
+local debug_centering = false
 
 local center_cushion = function(side)
   local left = 0
   local right = 0
   local debug = ''
   for k, v in pairs(component_lengths.left) do
-    if M.debug_centering then
+    if debug_centering then
       debug = debug .. ' ' .. k .. ': ' .. v
     end
     left = left + v
   end
   for k, v in pairs(component_lengths.right) do
-    if M.debug_centering then
+    if debug_centering then
       debug = debug .. ' ' .. k .. ': ' .. v
     end
     right = right + v
   end
-  if M.debug_centering then
+  if debug_centering then
     print(debug)
   end
   local diff = left - right
@@ -318,8 +318,8 @@ M.config = function(_, opts)
   })
 
   vim.api.nvim_create_user_command(
-    'DebugLualineCentering',
-    function() M.debug_centering = not M.debug_centering end,
+    'ToggleDebugLualineCentering',
+    function() debug_centering = not debug_centering end,
     {}
   )
 end

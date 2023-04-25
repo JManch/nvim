@@ -18,7 +18,7 @@ end
 g.mapleader = ' ' -- Custom leader
 g.maplocalleader = ',' -- Local leader used for neorg
 api.nvim_del_keymap('n', '<C-L>') -- Delete clashing keymap
-local dict_path = vim.fn.resolve(vim.fn.stdpath('data') .. '/en.dict')
+local dict_path = vim.fs.normalize(vim.fn.stdpath('data') .. '/en.dict')
 if vim.loop.fs_stat(dict_path) ~= nil then
   opt.dictionary:append(dict_path)
 end
@@ -53,7 +53,6 @@ o.shiftwidth = 4 -- Shift 4 spaces when tab
 o.tabstop = 4 -- 1 tab == 4 spaces
 o.smartindent = true -- Autoindent new lines
 o.foldenable = false -- Disable folding
-o.textwidth = 80 -- For comment autowrap
 o.breakindent = true -- Indent wrapped text
 
 -- Performance

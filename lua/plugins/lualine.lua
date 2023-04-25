@@ -263,7 +263,7 @@ M.opts = {
         tabs,
         fmt = update_length.tabs,
         cond = function()
-          local enabled = vim.fn.tabpagenr('$')
+          local enabled = vim.fn.tabpagenr('$') ~= 1
           if not enabled then
             component_lengths.right.tabs = 0
           end

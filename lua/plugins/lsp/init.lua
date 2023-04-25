@@ -72,14 +72,7 @@ M.dependencies = {
 }
 
 M.config = function()
-  -- Configure LspInfo window border
-  local win = require('lspconfig.ui.windows')
-  local default_opts = win.default_opts
-  win.default_opts = function(options)
-    local opts = default_opts(options)
-    opts.border = 'rounded'
-    return opts
-  end
+  require('lspconfig.ui.windows').default_options.border = 'rounded'
 
   require('plugins.lsp.formatting').setup()
   require('plugins.lsp.diagnostics').setup()

@@ -37,7 +37,6 @@ M.config = function()
     group = vim.api.nvim_create_augroup('AnkiFileType', {}),
     pattern = 'anki',
     callback = function()
-      print('Called anki ft callback')
       local map = require('core.mappings').map
       map(
         'n',

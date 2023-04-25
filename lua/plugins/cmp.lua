@@ -2,8 +2,6 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = { 'BufReadPost', 'BufNewFile', 'CmdlineEnter' },
-    -- BUG: Waiting for https://github.com/hrsh7th/nvim-cmp/issues/1382 to be fixed
-    commit = 'a9c701fa7e12e9257b3162000e5288a75d280c28',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'onsails/lspkind.nvim',
@@ -45,7 +43,6 @@ return {
           }),
         },
         sources = cmp.config.sources({
-          { name = 'neorg', keyword_length = 1 },
           { name = 'luasnip', keyword_length = 3 },
           { name = 'nvim_lsp', keyword_length = 1 },
           { name = 'path' },
@@ -83,12 +80,12 @@ return {
     config = function()
       vim.api.nvim_create_user_command('LoadDictionaryCompletion', function() end, {})
 
-      local source = { name = 'dictionary', keyword_length = 4, max_item_count = 10 }
+      local source = { name = 'dictionary', keyword_length = 5, max_item_count = 10 }
       local sources = require('cmp').get_config().sources
       table.insert(require('cmp').get_config().sources, source)
       require('cmp').setup.buffer({ sources = sources })
 
-      vim.api.nvim_create_user_command('SetDictionaryCompletion', function()
+      vim.api.nvim_create_user_command('ToggleDictionaryCompletion', function()
         sources = require('cmp').get_config().sources
         local disabled = false
         for i = #sources, 1, -1 do
@@ -98,7 +95,7 @@ return {
           end
         end
         if not disabled then
-          table.insert(sources, source)
+          table.insert(sources, #sources + 1, source)
           vim.notify('Enabled dictionary completion', vim.log.levels.INFO)
         else
           vim.notify('Disabled dictionary completion', vim.log.levels.INFO)

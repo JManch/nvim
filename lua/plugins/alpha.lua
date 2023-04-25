@@ -1,5 +1,5 @@
 local M = {
-  'JManch/alpha-nvim',
+  'goolord/alpha-nvim',
   lazy = false,
 }
 
@@ -60,7 +60,7 @@ M.opts = function()
 
   local version = {
     type = 'text',
-    val = string.match(vim.api.nvim_exec('version', true), 'NVIM (.-)\n'),
+    val = string.match(vim.api.nvim_exec2('version', { output = true }).output, 'NVIM (.-)\n'),
     opts = {
       position = 'center',
       hl = 'CmpItemMenu',
@@ -109,6 +109,9 @@ M.opts = function()
     },
     opts = {
       margin = 0,
+      keymap = {
+        queue_press = nil,
+      },
     },
   }
 

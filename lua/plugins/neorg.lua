@@ -5,12 +5,12 @@ return {
   opts = {
     load = {
       ['core.defaults'] = {},
-      ['core.norg.concealer'] = {
+      ['core.concealer'] = {
         config = {
           icon_preset = 'diamond',
         },
       },
-      ['core.norg.dirman'] = {
+      ['core.dirman'] = {
         config = {
           workspaces = {
             notes = '~/notes',
@@ -18,9 +18,26 @@ return {
           index = 'index.norg',
         },
       },
-      ['core.norg.completion'] = {
+      -- Disabled cause it's slow on windows and I never use it
+      ['core.completion'] = {
         config = {
-          engine = 'nvim-cmp',
+          engine = nil,
+        },
+      },
+      ['core.keybinds'] = {
+        config = {
+          hook = function(keybinds)
+            keybinds.unmap('norg', 'n', '<M-CR>')
+            keybinds.unmap('norg', 'i', '<M-CR>')
+            keybinds.remap_key('norg', 'n', 'gtd', '<LOCALLEADER>td')
+            keybinds.remap_key('norg', 'n', 'gtu', '<LOCALLEADER>tu')
+            keybinds.remap_key('norg', 'n', 'gth', '<LOCALLEADER>th')
+            keybinds.remap_key('norg', 'n', 'gtp', '<LOCALLEADER>tp')
+            keybinds.remap_key('norg', 'n', 'gtc', '<LOCALLEADER>tc')
+            keybinds.remap_key('norg', 'n', 'gti', '<LOCALLEADER>ti')
+            keybinds.remap_key('norg', 'n', 'gtr', '<LOCALLEADER>tr')
+            keybinds.remap_key('norg', 'n', '<C-Space>', '<LOCALLEADER>t')
+          end,
         },
       },
     },

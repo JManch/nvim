@@ -241,7 +241,7 @@ M.opts = {
         symbols = {
           error = ' ',
           warn = ' ',
-          hint = ' ',
+          hint = '󰌶 ',
           info = ' ',
         },
         padding = { right = 1 },

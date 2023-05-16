@@ -90,7 +90,7 @@ M.config = function()
       doc_lines = 100,
       floating_window = false,
       hint_enable = false,
-      hint_prefix = ' ',
+      hint_prefix = '󰅲 ',
       toggle_key = '<C-s>',
     }, bufnr)
   end

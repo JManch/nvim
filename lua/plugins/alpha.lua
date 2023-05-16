@@ -72,7 +72,10 @@ M.opts = function()
     callback = function()
       local stats = require('lazy').stats()
       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      plugin_count.val = '  ' .. stats.count .. ' plugins (' .. ms .. 'ms)'
+      plugin_count.val = '󰏖  ' .. stats.count .. ' plugins (' .. ms .. 'ms)'
+      if vim.bo.filetype == 'alpha' then
+        vim.cmd('AlphaRedraw')
+      end
     end,
   })
 
@@ -83,7 +86,7 @@ M.opts = function()
       button('f', '   Find file', '<CMD>Telescope find_files<CR>'),
       button('d', '   Browse files', '<CMD>TelescopeFileBrowser<CR>'),
       button('w', '   Load workspace', '<CMD>Telescope workspaces theme=dropdown previewer=false<CR>'),
-      button('l', '   Toggle theme', '<CMD>SunsetToggle<CR>'),
+      button('l', '   Toggle theme', '<CMD>SunsetToggle<CR>'),
       button('q', '   Quit', '<CMD>qa<CR>'),
     },
     opts = {

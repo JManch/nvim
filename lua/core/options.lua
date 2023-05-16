@@ -40,7 +40,7 @@ o.list = true -- Show tab, space and new line chars
 o.cmdheight = 1 -- Show statusline
 o.laststatus = 3 -- Global statusline
 o.emoji = false
-opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.completeopt = { 'menu', 'menuone', 'noselect', 'preview' }
 opt.fillchars = { eob = ' ' }
 opt.listchars:append({
   trail = '·',

@@ -1,6 +1,6 @@
 return {
   'folke/todo-comments.nvim',
-  cmd = 'TodoTelescope',
+  cmd = { 'TodoTelescope', 'TodoQuickFix', 'TodoLocList' },
   event = { 'BufReadPost', 'BufNewFile' },
   config = true,
   keys = {

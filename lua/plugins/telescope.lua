@@ -5,21 +5,21 @@ return {
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
-    cmd = 'Telescope',
+    lazy = false,
     keys = {
-      { '<LEADER>ff', '<CMD>Telescope find_files<CR>', desc = 'Find files' },
-      { '<LEADER>fa', '<CMD>Telescope find_files no_ignore=true hidden=true<CR>', desc = 'Find all files' },
-      { '<LEADER>b', '<CMD>Telescope buffers<CR>', desc = 'Buffers' },
-      { '<LEADER>fg', '<CMD>Telescope live_grep<CR>', desc = 'Live grep cwd' },
-      { '<LEADER>fG', '<CMD>Telescope grep_string<CR>', desc = 'Grep word under cursor in cwd' },
-      { '<LEADER>fb', '<CMD>Telescope current_buffer_fuzzy_find<CR>', desc = 'Find in current buffer' },
-      { '<LEADER>fR', '<CMD>Telescope registers initial_mode=normal<CR>', desc = 'Registers' },
-      { '<LEADER>fh', '<CMD>Telescope help_tags<CR>', desc = 'Help tags' },
-      { '<LEADER>fk', '<CMD>Telescope keymaps<CR>', desc = 'Keymaps' },
-      { '<LEADER>fs', '<CMD>Telescope spell_suggest<CR>', desc = 'Spell suggestions' },
-      { '<LEADER>fw', '<CMD>Telescope workspaces theme=dropdown previewer=false <CR>', desc = 'Workspaces' },
-      { '<LEADER>fc', '<CMD>Telescope colorscheme<CR>', desc = 'Switch colorscheme' },
-      { '<LEADER>f<SPACE>', '<CMD>Telescope resume<CR>', desc = 'Resume last telescope search' },
+      { '<LEADER>ff', '<CMD>Telescope find_files<CR>', desc = 'Telescope find files' },
+      { '<LEADER>fa', '<CMD>Telescope find_files no_ignore=true hidden=true<CR>', desc = 'Telescope find all files' },
+      { '<LEADER>b', '<CMD>Telescope buffers<CR>', desc = 'Telescope buffers' },
+      { '<LEADER>fg', '<CMD>Telescope live_grep<CR>', desc = 'Telescope live grep cwd' },
+      { '<LEADER>fG', '<CMD>Telescope grep_string<CR>', desc = 'Telescope grep word under cursor in cwd' },
+      { '<LEADER>fb', '<CMD>Telescope current_buffer_fuzzy_find<CR>', desc = 'Telescope find in current buffer' },
+      { '<LEADER>fR', '<CMD>Telescope registers initial_mode=normal<CR>', desc = 'Telescope registers' },
+      { '<LEADER>fh', '<CMD>Telescope help_tags<CR>', desc = 'Telescope help tags' },
+      { '<LEADER>fk', '<CMD>Telescope keymaps<CR>', desc = 'Telescope keymaps' },
+      { '<LEADER>fs', '<CMD>Telescope spell_suggest<CR>', desc = 'Telescope spell suggestions' },
+      { '<LEADER>fc', '<CMD>Telescope colorscheme<CR>', desc = 'Telescope switch colorscheme' },
+      { '<LEADER>fr', '<CMD>Telescope registers<CR>', desc = 'Telescope registers' },
+      { '<LEADER>f<SPACE>', '<CMD>Telescope resume<CR>', desc = 'Telescope resume last search' },
     },
     config = function()
       local telescope = require('telescope')
@@ -78,9 +78,6 @@ return {
           },
         },
         extensions = {
-          -- Not sure why but some extensions seem to ignore the settings here
-          -- whilst for others it works fine. For extensions like workspaces I
-          -- have configured the picker in the mapping below.
           ['ui-select'] = require('telescope.themes').get_dropdown(),
           file_browser = {
             initial_mode = 'normal',
@@ -88,45 +85,18 @@ return {
             grouped = true,
             git_status = false,
           },
-          lazy = {
-            show_icon = true,
-            mappings = {
-              open_in_file_browser = '<C-d>',
-            },
-          },
         },
       }
       telescope.setup(opts)
       telescope.load_extension('fzf')
       telescope.load_extension('ui-select')
-      telescope.load_extension('workspaces')
-    end,
-  },
-  {
-    'AckslD/nvim-neoclip.lua',
-    event = { 'TextYankPost' },
-    keys = {
-      { '<LEADER>fr', '<CMD>Telescope neoclip theme=dropdown initial_mode=normal<CR>', desc = 'Neoclip' },
-    },
-    opts = {
-      keys = {
-        telescope = {
-          i = {
-            paste_behind = '<C-P>',
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      require('neoclip').setup(opts)
-      require('telescope').load_extension('neoclip')
     end,
   },
   {
     'nvim-telescope/telescope-file-browser.nvim',
     cmd = 'TelescopeFileBrowser',
     keys = {
-      { '<LEADER>fd', '<CMD>Telescope file_browser<CR>', desc = 'File browser' },
+      { '<LEADER>fd', '<CMD>Telescope file_browser<CR>', desc = 'Telescope file browser' },
       {
         '<LEADER>fD',
         '<CMD>Telescope file_browser respect_gitignore=false<CR>',
@@ -137,12 +107,5 @@ return {
       vim.api.nvim_create_user_command('TelescopeFileBrowser', function() vim.cmd('Telescope file_browser') end, {})
       require('telescope').load_extension('file_browser')
     end,
-  },
-  {
-    'tsakirist/telescope-lazy.nvim',
-    keys = {
-      { '<LEADER>fp', '<CMD>Telescope lazy<CR>', desc = 'Browse installed plugins' },
-    },
-    config = function() require('telescope').load_extension('lazy') end,
   },
 }

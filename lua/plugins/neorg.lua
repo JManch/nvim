@@ -1,6 +1,5 @@
 return {
   'nvim-neorg/neorg',
-  ft = 'norg',
   cmd = { 'Neorg', 'Notes' },
   opts = {
     load = {
@@ -15,14 +14,19 @@ return {
           workspaces = {
             notes = '~/notes',
           },
-          index = 'index.norg',
         },
       },
       ['core.keybinds'] = {
         config = {
           hook = function(keybinds)
-            keybinds.unmap('norg', 'n', '<M-CR>')
-            keybinds.unmap('norg', 'i', '<M-CR>')
+            -- TODO: Remove these 7 once neorg version 5 releases
+            keybinds.unmap('norg', 'n', 'gtd')
+            keybinds.unmap('norg', 'n', 'gtu')
+            keybinds.unmap('norg', 'n', 'gth')
+            keybinds.unmap('norg', 'n', 'gtp')
+            keybinds.unmap('norg', 'n', 'gtc')
+            keybinds.unmap('norg', 'n', 'gti')
+            keybinds.unmap('norg', 'n', 'gtr')
             keybinds.remap_key('norg', 'n', '<C-Space>', '<LOCALLEADER>t')
           end,
         },

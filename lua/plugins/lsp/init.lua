@@ -26,47 +26,8 @@ M.dependencies = {
       override = function(root_dir, library)
         if string.find(root_dir, 'neovim-plugins') then
           library.enabled = true
-          library.plugins = { 'sqlite.lua' }
         end
       end,
-    },
-  },
-  {
-    'glepnir/lspsaga.nvim',
-    opts = {
-      preview = {
-        lines_above = 0,
-        lines_below = 30,
-      },
-      finder = {
-        max_height = 0.5,
-        keys = {
-          vsplit = 'v',
-          split = 'x',
-        },
-      },
-      definition = {
-        split = '<C-c>x',
-      },
-      lightbulb = {
-        enable = false,
-      },
-      diagnostic = {
-        on_insert = false,
-      },
-      outline = {
-        auto_preview = false,
-        keys = {
-          jump = '<CR>',
-          expand_collapse = 'l',
-        },
-      },
-      symbol_in_winbar = {
-        enable = false,
-      },
-      ui = {
-        border = 'rounded',
-      },
     },
   },
 }
@@ -83,7 +44,7 @@ M.config = function()
 
   local on_attach = function(client, bufnr)
     require('plugins.lsp.formatting').on_attach(client, bufnr)
-    require('plugins.lsp.mappings').load(bufnr)
+    require('plugins.lsp.mappings').load(client, bufnr)
     require('lsp_signature').on_attach({
       max_height = 100,
       max_width = 120,

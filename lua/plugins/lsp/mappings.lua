@@ -1,26 +1,28 @@
 local M = {}
 
-M.load = function(bufnr)
+M.load = function(client, bufnr)
   local map = require('core.mappings').map
-  local opts = { buffer = bufnr, silent = true }
+  local lsp_map = function(provider, mode, lhs, rhs, desc, opts)
+    local options = { buffer = bufnr, silent = true }
+    if opts then
+      options = vim.tbl_extend('force', options, opts)
+    end
+    if client.server_capabilities[provider] then
+      map(mode, lhs, rhs, desc, options)
+    end
+  end
 
-  local buf = vim.lsp.buf
-  map('n', 'gf', '<CMD>Lspsaga lsp_finder<CR>', 'Open LSP finder', opts)
-  map('n', 'gd', '<CMD>Lspsaga goto_definition<CR>', 'Go to LSP symbol definition', opts)
-  map('n', 'gdp', '<CMD>Lspsaga peek_definition<CR>', 'Preview LSP symbol definition', opts)
-  map('n', 'gD', buf.declaration, 'Go to LSP symbol declaration', opts)
-  map('n', 'go', buf.type_definition, 'Go to LSP symbol type definition', opts)
-  map('n', 'gr', '<CMD>Telescope lsp_references<CR>', 'View LSP symbol references', opts)
-  map('n', 'gh', '<CMD>Lspsaga hover_doc<CR>', 'View LSP symbol help doc', opts)
-  map('n', 'ga', '<CMD>Lspsaga code_action<CR>', 'Perform code action on LSP symbol', opts)
-  map('n', '<LEADER>rn', '<CMD>Lspsaga rename<CR>', 'Rename LSP symbol', opts)
-  map('n', '<LEADER>fl', '<CMD>Telescope lsp_workspace_symbols<CR>', 'LSP workspace symbols', opts)
-  map('n', '<LOCALLEADER>o', '<CMD>Lspsaga outline<CR>', 'LSP outline', opts)
+  lsp_map('definitionProvider', 'n', 'gd', vim.lsp.buf.definition, 'LSP symbol definition')
+  lsp_map('typeDefinitionProvider', 'n', 'go', vim.lsp.buf.type_definition, 'LSP symbol type definition')
+  lsp_map('referencesProvider', 'n', 'gr', vim.lsp.buf.references, 'LSP symbol references')
+  lsp_map('signatureHelpProvider', 'n', 'gh', vim.lsp.buf.signature_help, 'LSP signature help')
+  lsp_map('codeActionProvider', 'n', 'ga', vim.lsp.buf.code_action, 'LSP code action')
+  lsp_map('renameProvider', 'n', '<LEADER>rn', vim.lsp.buf.rename, 'LSP rename symbol')
 
-  -- Diagnostics
-  map('n', 'gl', '<CMD>Lspsaga show_line_diagnostics<CR>', 'Open LSP line diagnostics', opts)
-  map('n', ']d', '<CMD>Lspsaga diagnostic_jump_next<CR>', 'Go to next LSP diagnostic', opts)
-  map('n', '[d', '<CMD>Lspsaga diagnostic_jump_prev<CR>', 'Go to previous LSP diagnostic', opts)
+  map('n', 'gD', vim.diagnostic.setqflist, 'LSP open diagnostics quick fix list')
+  map('n', 'gl', vim.diagnostic.open_float, 'LSP show line diagnostics')
+  map('n', ']d', vim.diagnostic.goto_next, 'LSP goto next diagnostic')
+  map('n', '[d', vim.diagnostic.goto_prev, 'LSP goto previous diagnostic')
 end
 
 return M

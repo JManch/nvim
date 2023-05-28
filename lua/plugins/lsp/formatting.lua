@@ -2,14 +2,13 @@ local M = {}
 
 -- Stores the format_on_save option for each filetype. If a filetype is not
 -- listed here, format on save will be false although formatting can still be
--- manually invoked. Filetype is the value returned from vim.bo.filetype. If
--- the null_ls key is false, formatting will attempt to use the language server
--- rather than null-ls.
+-- manually invoked. Filetype is the value returned from vim.bo.filetype.
 M.format_on_save_filetypes = {
   ['lua'] = { enabled = true, formatter = 'null-ls' },
   ['cs'] = { enabled = false, formatter = 'null-ls' },
   ['javascript'] = { enabled = true, formatter = 'null-ls' },
   ['html'] = { enabled = true, formatter = 'null-ls' },
+  ['rust'] = { enabled = true, formatter = 'rust_analyzer' },
 }
 
 M.setup = function()

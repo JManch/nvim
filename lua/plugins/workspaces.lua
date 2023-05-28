@@ -1,8 +1,11 @@
 return {
-  'natecraddock/workspaces.nvim',
-  -- Commit before the plugin got unnecessarily bloated
-  commit = 'f55ad0a3688840ace255d327a5e5bb16b9ff5a17',
-  event = 'VeryLazy',
+  'JManch/workspaces.nvim',
+  cmd = { 'WorkspacesOpen', 'WorkspacesAdd', 'WorkspacesList' },
+  keys = {
+    { '<LEADER>w', '<CMD>WorkspacesOpen<CR>', desc = 'Workspaces open global' },
+    { '<LEADER>Ww', '<CMD>WorkspacesOpen local<CR>', desc = 'Workspaces open window' },
+    { '<LEADER>Wt', '<CMD>WorkspacesOpen tab<CR>', desc = 'Workspaces open tab' },
+  },
   opts = {
     hooks = {
       open = function()

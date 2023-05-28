@@ -4,10 +4,10 @@ return {
     event = { 'BufReadPost', 'BufNewFile', 'CmdlineEnter' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'onsails/lspkind.nvim',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
+      'onsails/lspkind.nvim',
     },
     config = function()
       local cmp = require('cmp')

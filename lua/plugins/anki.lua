@@ -1,6 +1,5 @@
 local M = {
   'rareitems/anki.nvim',
-  ft = 'anki',
   cmd = { 'AnkiSetDeck', 'AnkiSetTags', 'AnkiCreateCard' },
 }
 
@@ -59,7 +58,6 @@ M.config = function()
       vim.opt_local.conceallevel = 2
       vim.opt_local.concealcursor = 'nvi'
       vim.opt_local.wrap = true
-      vim.opt_local.textwidth = 0
     end,
   })
 end

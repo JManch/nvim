@@ -85,8 +85,8 @@ M.opts = function()
       button('e', '   New file', '<CMD>ene <BAR> startinsert<CR>'),
       button('f', '   Find file', '<CMD>Telescope find_files<CR>'),
       button('d', '   Browse files', '<CMD>TelescopeFileBrowser<CR>'),
-      button('w', '   Load workspace', '<CMD>Telescope workspaces theme=dropdown previewer=false<CR>'),
-      button('l', '   Toggle theme', '<CMD>SunsetToggle<CR>'),
+      button('w', '   Load workspace', '<CMD>WorkspacesOpen<CR>'),
+      button('n', '   Open notes', '<CMD>Notes<CR>'),
       button('q', '   Quit', '<CMD>qa<CR>'),
     },
     opts = {

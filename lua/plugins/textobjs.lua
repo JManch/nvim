@@ -1,10 +1,5 @@
 return {
-  'chrisgrieser/nvim-various-textobjs',
-  event = { 'BufReadPost', 'BufNewFile' },
-  opts = {
-    lookForwardLines = 10,
-    useDefaultKeymaps = false,
-  },
+  'JManch/nvim-various-textobjs',
   keys = {
     {
       'iS',

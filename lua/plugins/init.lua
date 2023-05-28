@@ -20,20 +20,11 @@ return {
 
   { 'moll/vim-bbye', cmd = { 'Bdelete', 'Bwipeout' } },
 
-  { 'sickill/vim-pasta', lazy = false },
-
-  {
-    'folke/twilight.nvim',
-    cmd = { 'Twilight' },
-    opts = {
-      context = 0,
-    },
-  },
-
   {
     'windwp/nvim-autopairs',
     event = { 'BufReadPost', 'BufNewFile' },
-    config = true,
+    enabled = true,
+    config = function() require('nvim-autopairs').setup({ map_cr = true }) end,
   },
 
   { 'nvim-tree/nvim-web-devicons', config = true },
@@ -51,26 +42,10 @@ return {
   },
 
   {
-    'kkharji/sqlite.lua',
-    config = function()
-      if vim.fn.has('win32') == 1 then
-        vim.g.sqlite_clib_path = vim.fn.stdpath('data') .. '/sqlite3.dll'
-      end
-    end,
-  },
-
-  {
     'danymat/neogen',
     cmd = 'Neogen',
     opts = {
       snippet_engine = 'luasnip',
-    },
-  },
-
-  {
-    'Eandrju/cellular-automaton.nvim',
-    keys = {
-      { '<LEADER>rr', '<CMD>CellularAutomaton make_it_rain<CR>', desc = 'Make it rain' },
     },
   },
 
@@ -109,11 +84,10 @@ return {
         delete = '<LEADER>ad',
         highlight = '<LEADER>ah',
         replace = '<LEADER>ar',
-        update_n_lines = '<LEADER>an', -- temporarily set n_lines value
+        update_n_lines = '<LEADER>an',
       },
-      n_lines = 20, -- lines searched for surround
+      n_lines = 20,
     },
-    config = function(_, opts) require('mini.surround').setup(opts) end,
   },
 
   {
@@ -125,7 +99,9 @@ return {
     'iamcco/markdown-preview.nvim',
     lazy = false,
     build = function() vim.fn['mkdp#util#install']() end,
-    enabled = function() return vim.fn.has('win32') ~= 1 end,
+    -- enabled = function() return vim.fn.has('win32') ~= 1 end,
+  },
+
   {
     'j-hui/fidget.nvim',
     event = { 'BufReadPost', 'BufNewFile' },

@@ -20,10 +20,25 @@ api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 40 }) end,
 })
 
+local terminal_group = api.nvim_create_augroup('Terminal', {})
 api.nvim_create_autocmd('TermOpen', {
-  group = api.nvim_create_augroup('TerminalMappings', {}),
+  group = terminal_group,
   pattern = 'term://*',
-  callback = function() require('core.mappings').terminal_maps() end,
+  callback = function()
+    require('core.mappings').terminal_maps()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.winhl = 'Normal:NormalFloat'
+  end,
+})
+
+api.nvim_create_autocmd({ 'WinEnter', 'BufWinEnter', 'TermOpen' }, {
+  group = terminal_group,
+  callback = function(args)
+    if vim.startswith(vim.api.nvim_buf_get_name(args.buf), 'term://') then
+      vim.cmd.startinsert()
+    end
+  end,
 })
 
 api.nvim_create_user_command('ToggleAutoWrap', function() utils.toggle_local_opt('formatoptions', 't') end, {})

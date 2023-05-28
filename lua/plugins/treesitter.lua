@@ -4,14 +4,7 @@ return {
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     cmd = { 'TSUninstall', 'TSInstall' },
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      {
-        -- BUG: Broken on nightly
-        'nvim-treesitter/nvim-treesitter-context',
-        enabled = false,
-      },
-    },
+    dependencies = { 'windwp/nvim-ts-autotag' },
     config = function()
       require('nvim-treesitter.configs').setup({
         auto_install = true,
@@ -19,37 +12,16 @@ return {
         indent = {
           enable = true,
           -- Treesitter indent does not work well in python yet
-          -- Indentation is c_sharp is broken
-          disable = { 'python', 'c_sharp' },
+          disable = { 'python' },
         },
         highlight = {
           enable = true,
           disable = { 'latex' },
         },
-        context = {
-          enable = false,
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ['in'] = { query = '@number.inner', desc = 'Select inner number text object' },
-            },
-          },
+        autotag = {
+          enable = true,
         },
       })
     end,
-  },
-  {
-    'nvim-treesitter/playground',
-    cmd = 'TSPlaygroundToggle',
-  },
-  {
-    'windwp/nvim-ts-autotag',
-    ft = { 'html', 'markdown' },
-    opts = {
-      filetypes = { 'html', 'markdown' },
-    },
   },
 }

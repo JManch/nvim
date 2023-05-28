@@ -70,7 +70,6 @@ M.terminal_maps = function()
   local opts = { buffer = true }
   local excluded_terminals = {
     'lazygit',
-    'typioca',
   }
 
   local buffer_name = vim.api.nvim_buf_get_name(0)
@@ -83,12 +82,13 @@ M.terminal_maps = function()
     end
   end
 
-  map('t', 'jk', [[<C-\><C-n>]], 'Exit insert mode', opts)
-  map('t', '<C-h>', '<CMD>wincmd h<CR>', 'Go to the left window', opts)
-  map('t', '<C-l>', '<CMD>wincmd l<CR>', 'Go to the right window', opts)
-  map('t', '<C-j>', '<CMD>wincmd j<CR>', 'Go to the down window', opts)
-  map('t', '<C-k>', '<CMD>wincmd k<CR>', 'Go to the up window', opts)
-  map('t', '<C-v>', [[<C-\><C-n>"+pA]], 'Put from system register', opts)
+  map('t', 'jk', [[<C-\><C-n>]], 'Terminal exit insert mode', opts)
+  map('t', '<ESC>', [[<C-\><C-n>]], 'Terminal exit insert mode', opts)
+  map('t', '<C-h>', '<CMD>wincmd h<CR>', 'Terminal go to the left window', opts)
+  map('t', '<C-l>', '<CMD>wincmd l<CR>', 'Terminal go to the right window', opts)
+  map('t', '<C-j>', '<CMD>wincmd j<CR>', 'Terminal go to the down window', opts)
+  map('t', '<C-k>', '<CMD>wincmd k<CR>', 'Terminal go to the up window', opts)
+  map('t', '<C-v>', [[<C-\><C-n>"+pA]], 'Terminal put from system register', opts)
 end
 
 return M

@@ -126,5 +126,18 @@ return {
     lazy = false,
     build = function() vim.fn['mkdp#util#install']() end,
     enabled = function() return vim.fn.has('win32') ~= 1 end,
+  {
+    'j-hui/fidget.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      text = {
+        done = '󰄬',
+      },
+      sources = {
+        ltex = {
+          ignore = true,
+        },
+      },
+    },
   },
 }

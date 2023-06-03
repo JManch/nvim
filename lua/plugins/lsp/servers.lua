@@ -52,10 +52,8 @@ M.servers = function(on_attach, capabilities)
           on_attach(client, bufnr)
           require('ltex_extra').setup({
             load_langs = { 'en-GB' },
-            -- BUG: I do not want to force this directory but there's a bug with
-            -- the plugin meaning I am forced to as the default behaviour of
-            -- using the current directory does not work. Waiting for a fix.
-            path = vim.fs.normalize('C:\\NVME Files\\University\\Modules\\CS310\\Report\\dict'),
+            path = '.ltex',
+            file_watcher = true,
             log_level = 'none',
           })
         end,

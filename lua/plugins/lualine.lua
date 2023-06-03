@@ -1,7 +1,6 @@
 local M = {
   'JManch/lualine.nvim',
   lazy = false,
-  enabled = true,
 }
 
 local tabs = function()

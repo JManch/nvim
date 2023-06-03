@@ -19,6 +19,7 @@ return {
       { '<LEADER>fs', '<CMD>Telescope spell_suggest<CR>', desc = 'Telescope spell suggestions' },
       { '<LEADER>fc', '<CMD>Telescope colorscheme<CR>', desc = 'Telescope switch colorscheme' },
       { '<LEADER>fr', '<CMD>Telescope registers<CR>', desc = 'Telescope registers' },
+      { '<LEADER>fm', '<CMD>Telescope marks<CR>', desc = 'Telescope marks' },
       { '<LEADER>f<SPACE>', '<CMD>Telescope resume<CR>', desc = 'Telescope resume last search' },
     },
     config = function()

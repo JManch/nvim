@@ -1,0 +1,116 @@
+snippet heading1 "Level 1 heading"
+    * $0
+snippet heading2 "Level 2 heading"
+    ** $0
+snippet heading3 "Level 3 heading"
+    *** $0
+snippet heading4 "Level 4 heading"
+    **** $0
+snippet heading5 "Level 5 heading"
+    ***** $0
+snippet heading6 "Level 6 heading"
+    ****** $0
+snippet rule "Horizontal rule"
+    ___
+    $0
+snippet bold "Bold text"
+	*$0*
+snippet italic "Italic text"
+	/$0/
+snippet underline "Underline text"
+	_$0_
+snippet spoiler "Spoiler"
+	!$0!
+snippet strikethrough "Strike through"
+	-$0-
+snippet inlinecomment "Inline comment"
+	%$0%
+snippet code "Code block"
+	@code $(1:lang)
+	$0
+	@end
+snippet data "Data tags"
+	@data
+	$0
+	@end
+snippet link "Links"
+	{${1:object}}[${2:description}]
+snippet anchor "Anchors"
+	[${1:description}]{${2:object}}
+snippet subscript "Subscript"
+	,$0,
+snippet superscript "Superscript"
+	^$0^
+snippet inlinemath "Inline math"
+	$$0$
+snippet rigidmath "Inline math (rigid syntax version)"
+	$|$0|$
+snippet math "Math block"
+	@math
+	$0
+	@end
+snippet table "Table"
+	@table
+	$0
+	@end
+snippet ulist1 "Level 1 unordered list"
+	- ${1:item}
+snippet ulist2 "Level 2 unordered list"
+	-- ${1:item}
+snippet ulist3 "Level 3 unordered list"
+	--- ${1:item}
+snippet ulist4 "Level 4 unordered list"
+	---- ${1:item}
+snippet ulist5 "Level 5 unordered list"
+	----- ${1:item}
+snippet ulist6 "Level 6 unordered list"
+	------ ${1:item}
+snippet olist1 "Level 1 ordered list"
+	~ ${1:item}
+snippet olist2 "Level 2 ordered list"
+	~~ ${1:item}
+snippet olist3 "Level 3 ordered list"
+	~~~ ${1:item}
+snippet olist4 "Level 4 ordered list"
+	~~~~ ${1:item}
+snippet olist5 "Level 5 ordered list"
+	~~~~~ ${1:item}
+snippet olist6 "Level 6 ordered list"
+	~~~~~~ ${1:item}
+snippet quote1 "Level 1 quote"
+	> $0
+snippet quote2 "Level 2 quote"
+	>> $0
+snippet quote3 "Level 3 quote"
+	>>> $0
+snippet quote4 "Level 4 quote"
+	>>>> $0
+snippet quote5 "Level 5 quote"
+	>>>>> $0
+snippet quote6 "Level 6 quote"
+	>>>>>> $0
+snippet task "Task"
+	- ( ) ${1:task}
+snippet dtask "Task (done)"
+	- (x) ${1:task}
+snippet itask "Task (needs further input)"
+	- (?) ${1:task}
+snippet utask "Task (high priority)"
+	- (!) ${1:task}
+snippet rtask "Task (recurring, with children)"
+	- (+) ${1:task}
+snippet ptask "Task (in progress)"
+	- (-) ${1:task}
+snippet htask "Task (on hold)"
+	- (=) ${1:task}
+snippet ctask "Task (cancelled)"
+	- (_) ${1:task}
+snippet footnote "Footnote (short version)"
+	^ ${1:title}
+	${2:content}
+snippet footnoter "Footnote (ranged version)"
+	^^ ${1:title}
+	${2:content}
+	^^
+snippet var "Variable"
+	&${1:variable}&

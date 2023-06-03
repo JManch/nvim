@@ -95,9 +95,9 @@ M.opts = function()
     },
   }
 
-  local marginTopPercent = 0.20
+  local margin_percentage = 0.22
   local winheight = vim.fn.winheight(0)
-  local headerPadding = vim.fn.max({ 2, vim.fn.floor(winheight * marginTopPercent) })
+  local headerPadding = vim.fn.max({ 2, vim.fn.floor(winheight * margin_percentage) })
 
   local opts = {
     layout = {

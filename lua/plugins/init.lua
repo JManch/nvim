@@ -23,7 +23,6 @@ return {
   {
     'windwp/nvim-autopairs',
     event = { 'BufReadPost', 'BufNewFile' },
-    enabled = true,
     config = function() require('nvim-autopairs').setup({ map_cr = true }) end,
   },
 
@@ -99,7 +98,6 @@ return {
     'iamcco/markdown-preview.nvim',
     lazy = false,
     build = function() vim.fn['mkdp#util#install']() end,
-    -- enabled = function() return vim.fn.has('win32') ~= 1 end,
   },
 
   {
@@ -112,6 +110,19 @@ return {
       sources = {
         ltex = {
           ignore = true,
+        },
+      },
+    },
+  },
+
+  {
+    'dcampos/nvim-snippy',
+    name = 'snippy',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+      mappings = {
+        is = {
+          ['<C-f>'] = 'expand_or_advance',
         },
       },
     },

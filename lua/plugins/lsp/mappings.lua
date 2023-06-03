@@ -9,11 +9,20 @@ M.load = function(client, bufnr)
     end
     if client.server_capabilities[provider] then
       map(mode, lhs, rhs, desc, options)
+    else
+      map(
+        mode,
+        lhs,
+        function() vim.notify('Server does not support ' .. provider, vim.log.levels.WARN, { title = client.name }) end,
+        desc,
+        options
+      )
     end
   end
 
   lsp_map('definitionProvider', 'n', 'gd', vim.lsp.buf.definition, 'LSP symbol definition')
   lsp_map('typeDefinitionProvider', 'n', 'go', vim.lsp.buf.type_definition, 'LSP symbol type definition')
+  lsp_map('implementationProvider', 'n', 'gm', vim.lsp.buf.implementation, 'LSP symbol implementation')
   lsp_map('referencesProvider', 'n', 'gr', vim.lsp.buf.references, 'LSP symbol references')
   lsp_map('signatureHelpProvider', 'n', 'gh', vim.lsp.buf.signature_help, 'LSP signature help')
   lsp_map('codeActionProvider', 'n', 'ga', vim.lsp.buf.code_action, 'LSP code action')

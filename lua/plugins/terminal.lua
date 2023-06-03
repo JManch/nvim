@@ -153,7 +153,7 @@ M.config = function()
   require('terminal').setup(opts)
 
   local lazygit = require('terminal').terminal:new({
-    layout = { open_cmd = 'float', height = 0.8, width = 0.8, border = 'single' },
+    layout = { open_cmd = 'float', height = 0.9, width = 0.9, border = 'single' },
     cmd = { 'lazygit' },
     autoclose = true,
   })

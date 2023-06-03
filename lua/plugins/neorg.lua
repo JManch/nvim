@@ -31,10 +31,18 @@ return {
           end,
         },
       },
+      ['core.completion'] = {
+        config = {
+          engine = 'nvim-cmp',
+        },
+      },
     },
   },
   config = function(_, opts)
-    vim.api.nvim_create_user_command('Notes', 'Neorg workspace notes', {})
+    vim.api.nvim_create_user_command('Notes', function()
+      vim.cmd('$tabnew')
+      vim.cmd('Neorg workspace notes')
+    end, {})
     vim.api.nvim_create_user_command('CloseNotes', 'Neorg return', {})
     require('neorg').setup(opts)
   end,

@@ -31,8 +31,8 @@ map('n', 'vv', 'vg_', 'Visual select to last character')
 
 map('n', '<S-e>', 'ge', 'Go to end of previous word')
 
-map({ 'n', 'v' }, '<S-h>', '^', 'Go first non-blank character')
-map({ 'n', 'v' }, '<S-l>', 'g_', 'Go to last non-blank character')
+map({ 'n', 'v', 'o' }, '<S-h>', '^', 'Go first non-blank character')
+map({ 'n', 'v', 'o' }, '<S-l>', 'g_', 'Go to last non-blank character')
 
 map('n', '<C-d>', '<C-d>zz', 'Scroll down half a page and centre cursor')
 map('n', '<C-u>', '<C-u>zz', 'Scroll up half a page and centre cursor')
@@ -65,6 +65,9 @@ map('v', 'gy', 'ygv<ESC>', 'Yank and maintain cursor position')
 
 map('v', '>', '>gv', 'Indent right and maintain highlight')
 map('v', '<', '<gv', 'Indent left and maintain highlight')
+
+map('v', 'J', ":m '>+1<CR>gv==kgvo<ESC>=kgvo", 'Move highlighted text lines down')
+map('v', 'K', ":m '<-2<CR>gv==jgvo<ESC>=jgvo", 'Move highlighted text lines up')
 
 M.terminal_maps = function()
   local opts = { buffer = true }

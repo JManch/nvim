@@ -9,9 +9,11 @@ return {
   opts = {
     hooks = {
       open = function()
-        vim.notify('Loaded workspace ' .. require('workspaces').name(), vim.log.levels.INFO, {
-          { title = 'Workspaces', timeout = '1000' },
-        })
+        vim.notify(
+          'Loaded workspace ' .. require('workspaces').name(),
+          vim.log.levels.INFO,
+          { title = 'Workspaces', timeout = '1000' }
+        )
       end,
     },
   },

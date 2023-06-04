@@ -27,6 +27,8 @@ return {
             keybinds.unmap('norg', 'n', 'gtc')
             keybinds.unmap('norg', 'n', 'gti')
             keybinds.unmap('norg', 'n', 'gtr')
+            keybinds.remap_key('norg', 'n', '<M-CR>', '<RIGHT>')
+            keybinds.remap_key('norg', 'i', '<M-CR>', '<C-j>')
             keybinds.remap_key('norg', 'n', '<C-Space>', '<LOCALLEADER>t')
           end,
         },

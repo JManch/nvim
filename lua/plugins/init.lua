@@ -102,6 +102,7 @@ return {
 
   {
     'j-hui/fidget.nvim',
+    tag = 'legacy',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       text = {

@@ -71,6 +71,13 @@ M.servers = function(on_attach, capabilities)
         capabilities = capabilities,
       })
     end,
+    ['matlab_ls'] = function()
+      require('lspconfig').matlab_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        single_file_support = true,
+      })
+    end,
   }
 end
 

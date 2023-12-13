@@ -35,6 +35,7 @@ return {
       local notify = require('notify')
       notify.setup({
         top_down = true,
+        -- background_colour = '#000000',
       })
       vim.notify = notify
     end,
@@ -105,6 +106,9 @@ return {
     tag = 'legacy',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
+      -- window = {
+      --   blend = 0,
+      -- },
       text = {
         done = '󰄬',
       },

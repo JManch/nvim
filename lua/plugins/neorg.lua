@@ -13,6 +13,7 @@ return {
         config = {
           workspaces = {
             notes = '~/Notes',
+            journal = '~/Journal',
           },
         },
       },
@@ -28,6 +29,12 @@ return {
       ['core.completion'] = {
         config = {
           engine = 'nvim-cmp',
+        },
+      },
+      ['core.journal'] = {
+        config = {
+          strategy = 'flat',
+          workspace = 'journal',
         },
       },
     },

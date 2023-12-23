@@ -9,6 +9,7 @@ M.format_on_save_filetypes = {
   ['javascript'] = { enabled = true, formatter = 'null-ls' },
   ['html'] = { enabled = true, formatter = 'null-ls' },
   ['rust'] = { enabled = true, formatter = 'rust_analyzer' },
+  ['nix'] = { enabled = true, formatter = 'null-ls' },
 }
 
 M.setup = function()

@@ -1,9 +1,10 @@
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   dependencies = 'nvim-lua/plenary.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local sources = {
+      require('null-ls').builtins.formatting.alejandra,
       require('null-ls').builtins.formatting.stylua,
       require('null-ls').builtins.formatting.rustfmt,
       require('null-ls').builtins.formatting.csharpier,

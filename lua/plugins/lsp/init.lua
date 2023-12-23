@@ -37,13 +37,8 @@ M.dependencies = {
 
 M.config = function()
   require('lspconfig.ui.windows').default_options.border = 'rounded'
-
-  require('plugins.lsp.formatting').setup()
   require('plugins.lsp.diagnostics').setup()
-
-  local mason_config = require('mason-lspconfig')
-
-  mason_config.setup()
+  require('plugins.lsp.formatting').setup()
 
   local on_attach = function(client, bufnr)
     require('plugins.lsp.formatting').on_attach(client, bufnr)
@@ -61,16 +56,26 @@ M.config = function()
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  local servers = vim.tbl_deep_extend('error', {
-    function(server_name)
-      require('lspconfig')[server_name].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-    end,
-  }, require('plugins.lsp.servers').servers(on_attach, capabilities))
+  if os.getenv("NIX_NEOVIM") == "1" then
+    local servers = require('plugins.lsp.servers').servers(on_attach, capabilities)
+    for k, v in pairs(servers) do
+      v()
+    end
+  else
+    local mason_config = require('mason-lspconfig')
+    mason_config.setup()
 
-  mason_config.setup_handlers(servers)
+    local servers = vim.tbl_deep_extend('error', {
+      function(server_name)
+        require('lspconfig')[server_name].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+        })
+      end,
+    }, require('plugins.lsp.servers').servers(on_attach, capabilities))
+
+    mason_config.setup_handlers(servers)
+  end
 end
 
 -- Mason Install List

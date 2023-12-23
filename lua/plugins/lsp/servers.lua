@@ -78,6 +78,12 @@ M.servers = function(on_attach, capabilities)
         single_file_support = true,
       })
     end,
+    ['nil_ls'] = function()
+      require('lspconfig').nil_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
   }
 end
 

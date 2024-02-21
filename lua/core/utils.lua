@@ -90,7 +90,7 @@ M.toggle_local_opt = function(key, value)
   end
 end
 
-M.set_alacritty_theme = function(is_day)
+M.windows_set_alacritty_theme = function(is_day)
   if vim.fn.has('win32') ~= 1 or os.getenv('ALACRITTY') ~= 'true' then
     return
   end
@@ -103,6 +103,33 @@ M.set_alacritty_theme = function(is_day)
       [[sed -i "s/colors: \*light/colors: *dark/" ]] .. os.getenv('APPDATA') .. '\\alacritty\\alacritty.yml'
     )
   end
+end
+
+M.linux_set_alacritty_theme = function()
+  if os.getenv('NIX_NEOVIM') ~= '1' then
+    return
+  end
+
+  if M.tty == nil then
+    local handle = io.popen('tty')
+    if handle == nil then
+      return
+    end
+    M.tty = handle:read('*a')
+    handle:close()
+  end
+
+  local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+
+  local bg_hex = string.format('#%06x', normal.bg)
+  local fg_hex = string.format('#%06x', normal.fg)
+
+  if not bg_hex or not fg_hex then
+    return
+  end
+
+  os.execute('printf "\\033]11;' .. bg_hex .. '\\007" > ' .. M.tty)
+  os.execute('printf "\\033]12;' .. fg_hex .. '\\007" > ' .. M.tty)
 end
 
 P = function(v)

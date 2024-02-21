@@ -41,6 +41,12 @@ api.nvim_create_autocmd({ 'WinEnter', 'BufWinEnter', 'TermOpen' }, {
   end,
 })
 
+api.nvim_create_autocmd('VimLeave', {
+  group = api.nvim_create_augroup('ResetTerminalCursor', {}),
+  command = 'set guicursor=a:ver80-blinkon500',
+  desc = 'Set cursor back to beam for Alacrity when exiting Neovim',
+})
+
 api.nvim_create_user_command('ToggleAutoWrap', function() utils.toggle_local_opt('formatoptions', 't') end, {})
 
 api.nvim_create_user_command('ToggleCommentAutoWrap', function() utils.toggle_local_opt('formatoptions', 'c') end, {})

@@ -57,6 +57,8 @@ map('n', '<LEADER>c', '<CMD>nohl<CR>', 'Clear search highlighting')
 map('n', '<LEADER>l', '<CMD>SunsetToggle<CR>', 'Toggle sunset theme')
 map('n', '<LEADER>n', '<CMD>ToggleCMDHeight<CR>', 'Toggle cmdheight')
 
+map('n', 'die', 'diwx', 'Extended deleted inner word')
+
 map('v', '<LEADER>y', '"+y', 'Yank to system register')
 map('v', '<LEADER>p', '"+p', 'Put from system register')
 map('v', '<LEADER>P', '"+P', 'Put before from system register')
@@ -66,8 +68,9 @@ map('v', 'gy', 'ygv<ESC>', 'Yank and maintain cursor position')
 map('v', '>', '>gv', 'Indent right and maintain highlight')
 map('v', '<', '<gv', 'Indent left and maintain highlight')
 
-map('v', 'J', ":m '>+1<CR>gv==kgvo<ESC>=kgvo", 'Move highlighted text lines down')
-map('v', 'K', ":m '<-2<CR>gv==jgvo<ESC>=jgvo", 'Move highlighted text lines up')
+map('v', '<S-j>', ":m '>+1<CR>gv==kgvo<ESC>=kgvo", 'Move selected text down')
+map('v', '<S-k>', ":m '<-2<CR>gv==jgvo<ESC>=jgvo", 'Move selected text up')
+map('v', '<S-m>', '<S-j>', 'Merge selected lines into one line')
 
 M.terminal_maps = function()
   local opts = { buffer = true }

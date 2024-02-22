@@ -84,6 +84,24 @@ M.servers = function(on_attach, capabilities)
         capabilities = capabilities,
       })
     end,
+    ['nixd'] = function()
+      require('lspconfig').nixd.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
+    ['rust_analyzer'] = function()
+      require('lspconfig').rust_analyzer.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
+    ['ocamlls'] = function()
+      require('lspconfig').ocamlls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
   }
 end
 

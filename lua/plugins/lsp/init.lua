@@ -56,9 +56,9 @@ M.config = function()
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  if os.getenv("NIX_NEOVIM") == "1" then
+  if os.getenv('NIX_NEOVIM') == '1' then
     local servers = require('plugins.lsp.servers').servers(on_attach, capabilities)
-    for k, v in pairs(servers) do
+    for _, v in pairs(servers) do
       v()
     end
   else

@@ -3,25 +3,14 @@ return {
     'JManch/sunset.nvim',
     dependencies = {
       {
-        'Shatur/neovim-ayu',
+        'JManch/neovim-ayu',
         config = function()
           if os.getenv('ALACRITTY') ~= 'true' then
             local colors = require('ayu.colors')
             colors.generate(true)
             require('ayu').setup({
-              -- overrides = function() return { Comment = { fg = colors.comment } } end,
               overrides = {
                 Comment = { fg = colors.comment },
-                -- Normal = { bg = 'None' },
-                -- NormalFloat = { bg = 'None' },
-                -- ColorColumn = { bg = 'None' },
-                -- SignColumn = { bg = 'None' },
-                -- Folded = { bg = 'None' },
-                -- FoldColumn = { bg = 'None' },
-                -- CursorLine = { bg = 'None' },
-                -- CursorColumn = { bg = 'None' },
-                -- WhichKeyFloat = { bg = 'None' },
-                -- VertSplit = { bg = 'None' },
               },
             })
           end
@@ -33,11 +22,12 @@ return {
     opts = {
       day_callback = function()
         vim.cmd.colorscheme('ayu-light')
-        require('core.utils').set_alacritty_theme(true)
+        require('core.utils').linux_set_alacritty_theme()
       end,
       night_callback = function()
         vim.cmd.colorscheme('ayu-mirage')
-        require('core.utils').set_alacritty_theme(false)
+        require('core.utils').windows_set_alacritty_theme(false)
+        require('core.utils').linux_set_alacritty_theme()
       end,
       update_interval = 10000,
       latitude = 50.8229,

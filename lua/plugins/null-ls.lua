@@ -4,7 +4,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local sources = {
-      require('null-ls').builtins.formatting.alejandra,
+      require('null-ls').builtins.formatting.nixpkgs_fmt,
       require('null-ls').builtins.formatting.stylua,
       require('null-ls').builtins.formatting.rustfmt,
       require('null-ls').builtins.formatting.csharpier,
@@ -12,7 +12,7 @@ return {
         extra_args = { '-style={IndentWidth: 4}' },
       }),
       require('null-ls').builtins.formatting.black,
-      require('null-ls').builtins.formatting.prettier.with({
+      require('null-ls').builtins.formatting.prettierd.with({
         filetypes = { 'html', 'javascript' },
         extra_args = { '--tab-width', 4 },
       }),

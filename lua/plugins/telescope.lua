@@ -9,7 +9,7 @@ return {
     keys = {
       { '<LEADER>ff', '<CMD>Telescope find_files<CR>', desc = 'Telescope find files' },
       { '<LEADER>fa', '<CMD>Telescope find_files no_ignore=true hidden=true<CR>', desc = 'Telescope find all files' },
-      { '<LEADER>b', '<CMD>Telescope buffers<CR>', desc = 'Telescope buffers' },
+      { '<LEADER><LEADER>', '<CMD>Telescope buffers<CR>', desc = 'Telescope buffers' },
       { '<LEADER>fg', '<CMD>Telescope live_grep<CR>', desc = 'Telescope live grep cwd' },
       { '<LEADER>fG', '<CMD>Telescope grep_string<CR>', desc = 'Telescope grep word under cursor in cwd' },
       { '<LEADER>fb', '<CMD>Telescope current_buffer_fuzzy_find<CR>', desc = 'Telescope find in current buffer' },
@@ -58,7 +58,10 @@ return {
           },
           buffers = {
             previewer = false,
-            path_display = { 'tail' },
+            initial_mode = 'normal',
+            path_display = { 'smart' },
+            sort_mru = true,
+            ignore_current_buffer = true,
             theme = 'dropdown',
             mappings = {
               n = {

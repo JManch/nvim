@@ -61,6 +61,8 @@ api.nvim_create_user_command('ToggleColorcolumn', function() utils.toggle_wo('co
 
 api.nvim_create_user_command('ToggleCMDHeight', function() utils.toggle_o('cmdheight', 1, 0) end, {})
 
+api.nvim_create_user_command('ToggleHighlightColors', function() require('nvim-highlight-colors').toggle() end, {})
+
 api.nvim_create_user_command(
   'ToggleVirtualText',
   function() vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text }) end,

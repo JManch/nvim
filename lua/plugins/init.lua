@@ -16,6 +16,10 @@ return {
     end,
   },
 
+  {
+    'brenoprata10/nvim-highlight-colors',
+  },
+
   { 'godlygeek/tabular', cmd = 'Tabularize' },
 
   { 'moll/vim-bbye', cmd = { 'Bdelete', 'Bwipeout' } },
@@ -88,11 +92,6 @@ return {
       },
       n_lines = 20,
     },
-  },
-
-  {
-    'brenoprata10/nvim-highlight-colors',
-    cmd = 'HighlightColorsToggle',
   },
 
   {

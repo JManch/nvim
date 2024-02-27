@@ -117,6 +117,9 @@ M.linux_set_alacritty_theme = function()
     end
     M.tty = handle:read('*a')
     handle:close()
+    vim.api.nvim_create_autocmd({ 'VimLeave' }, {
+      callback = function() os.execute('printf "\\033]111\\007" > ' .. M.tty) end,
+    })
   end
 
   local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })

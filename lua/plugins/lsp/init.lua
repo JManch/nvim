@@ -36,6 +36,7 @@ M.dependencies = {
 }
 
 M.config = function()
+  vim.lsp.set_log_level('OFF')
   require('lspconfig.ui.windows').default_options.border = 'rounded'
   require('plugins.lsp.diagnostics').setup()
   require('plugins.lsp.formatting').setup()

@@ -17,7 +17,7 @@ return {
       { '<LEADER>fh', '<CMD>Telescope help_tags<CR>', desc = 'Telescope help tags' },
       { '<LEADER>fk', '<CMD>Telescope keymaps<CR>', desc = 'Telescope keymaps' },
       { '<LEADER>fs', '<CMD>Telescope spell_suggest<CR>', desc = 'Telescope spell suggestions' },
-      { '<LEADER>fc', '<CMD>Telescope colorscheme<CR>', desc = 'Telescope switch colorscheme' },
+      { '<LEADER>fc', '<CMD>Telescope lsp_document_symbols<CR>', desc = 'Telescope LSP symbols' },
       { '<LEADER>fr', '<CMD>Telescope registers<CR>', desc = 'Telescope registers' },
       { '<LEADER>fm', '<CMD>Telescope marks<CR>', desc = 'Telescope marks' },
       { '<LEADER>f<SPACE>', '<CMD>Telescope resume<CR>', desc = 'Telescope resume last search' },

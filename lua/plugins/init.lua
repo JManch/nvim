@@ -16,9 +16,7 @@ return {
     end,
   },
 
-  {
-    'brenoprata10/nvim-highlight-colors',
-  },
+  { 'brenoprata10/nvim-highlight-colors' },
 
   { 'godlygeek/tabular', cmd = 'Tabularize' },
 
@@ -31,6 +29,12 @@ return {
   },
 
   { 'nvim-tree/nvim-web-devicons', config = true },
+
+  {
+    'vhyrro/luarocks.nvim',
+    priority = 1000,
+    config = true,
+  },
 
   {
     'rcarriga/nvim-notify',

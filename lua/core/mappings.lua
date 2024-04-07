@@ -34,8 +34,9 @@ map('n', '<S-e>', 'ge', 'Go to end of previous word')
 map({ 'n', 'v', 'o' }, '<S-h>', '^', 'Go first non-blank character')
 map({ 'n', 'v', 'o' }, '<S-l>', 'g_', 'Go to last non-blank character')
 
-map('n', '<C-d>', '<C-d>zz', 'Scroll down half a page and centre cursor')
-map('n', '<C-u>', '<C-u>zz', 'Scroll up half a page and centre cursor')
+-- Temporarily disabled until https://github.com/neovim/neovim/pull/28160
+-- map('n', '<C-d>', '<C-d>M', 'Scroll down half a page and centre cursor')
+-- map('n', '<C-u>', '<C-u>M', 'Scroll up half a page and centre cursor')
 map('n', '<C-o>', '<C-o>zz', 'Go to prev marker and centre cursor')
 map('n', '<C-i>', '<C-i>zz', 'Go to next marker and centre cursor')
 

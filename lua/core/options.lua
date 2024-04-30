@@ -9,7 +9,6 @@ o.exrc = true -- Load vim config in current dir
 o.ignorecase = true -- Case-insensitive search
 o.smartcase = true -- Smart case-sensitive search
 o.swapfile = true -- Enable swap files
-o.undofile = true -- Store undo history
 o.spelllang = 'en_gb'
 opt.jumpoptions = { 'stack' }
 if vim.version().minor > 8 then

@@ -1,6 +1,7 @@
 return {
   {
     'JManch/sunset.nvim',
+    branch = 'dev',
     dependencies = {
       {
         'JManch/neovim-ayu',
@@ -19,21 +20,39 @@ return {
     },
     lazy = false,
     priority = 1000,
-    opts = {
-      day_callback = function()
-        vim.cmd.colorscheme('ayu-light')
-        require('core.utils').linux_set_alacritty_theme()
-      end,
-      night_callback = function()
-        vim.cmd.colorscheme('ayu-mirage')
-        require('core.utils').windows_set_alacritty_theme(false)
-        require('core.utils').linux_set_alacritty_theme()
-      end,
-      update_interval = 10000,
-      latitude = 50.8229,
-      longitude = -0.1363,
-      sunrise_offset = 1800,
-      sunset_offset = -1800,
-    },
+    config = function()
+      local opts = {
+        day_callback = function()
+          vim.cmd.colorscheme('ayu-light')
+          require('core.utils').linux_set_alacritty_theme()
+        end,
+        night_callback = function()
+          vim.cmd.colorscheme('ayu-mirage')
+          require('core.utils').windows_set_alacritty_theme(false)
+          require('core.utils').linux_set_alacritty_theme()
+        end,
+        update_interval = 10000,
+        latitude = 50.8229,
+        longitude = -0.1363,
+        sunrise_offset = 1800,
+        sunset_offset = -1800,
+      }
+
+      if os.getenv('NIX_NEOVIM_DARKMAN') == '1' then
+        opts.custom_switch = function(tbl)
+          if not tbl.init then
+            return
+          end
+          local result = vim.system({ 'darkman', 'get' }, { text = true }):wait()
+          if vim.trim(result.stdout) == 'light' then
+            tbl.trigger_day()
+          else
+            tbl.trigger_night()
+          end
+        end
+      end
+
+      require('sunset').setup(opts)
+    end,
   },
 }

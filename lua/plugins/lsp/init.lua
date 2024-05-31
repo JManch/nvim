@@ -53,6 +53,7 @@ M.config = function()
       hint_prefix = '󰅲 ',
       toggle_key = '<C-s>',
     }, bufnr)
+    vim.lsp.inlay_hint.enable(true)
   end
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()

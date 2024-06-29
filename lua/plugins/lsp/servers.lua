@@ -102,6 +102,12 @@ M.servers = function(on_attach, capabilities)
         capabilities = capabilities,
       })
     end,
+    ['pyright'] = function()
+      require('lspconfig').pyright.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
   }
 end
 

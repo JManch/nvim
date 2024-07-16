@@ -31,12 +31,6 @@ return {
   { 'nvim-tree/nvim-web-devicons', config = true },
 
   {
-    'vhyrro/luarocks.nvim',
-    priority = 1000,
-    config = true,
-  },
-
-  {
     'rcarriga/nvim-notify',
     event = 'VeryLazy',
     config = function()

@@ -1,6 +1,6 @@
 return {
   'nvim-neorg/neorg',
-  dependencies = { 'luarocks.nvim' },
+  version = '*',
   cmd = { 'Neorg', 'Notes' },
   opts = {
     load = {

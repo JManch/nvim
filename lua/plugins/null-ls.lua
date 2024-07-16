@@ -4,7 +4,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local sources = {
-      require('null-ls').builtins.formatting.nixpkgs_fmt,
+      require('null-ls').builtins.formatting.nixfmt,
       require('null-ls').builtins.formatting.stylua,
       require('null-ls').builtins.formatting.csharpier,
       require('null-ls').builtins.formatting.clang_format,

@@ -4,14 +4,23 @@ return {
     dependencies = {
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      { 'nvim-telescope/telescope-live-grep-args.nvim' },
     },
     lazy = false,
     keys = {
       { '<LEADER>ff', '<CMD>Telescope find_files<CR>', desc = 'Telescope find files' },
       { '<LEADER>fa', '<CMD>Telescope find_files no_ignore=true hidden=true<CR>', desc = 'Telescope find all files' },
       { '<LEADER><LEADER>', '<CMD>Telescope buffers<CR>', desc = 'Telescope buffers' },
-      { '<LEADER>fg', '<CMD>Telescope live_grep<CR>', desc = 'Telescope live grep cwd' },
-      { '<LEADER>fG', '<CMD>Telescope grep_string<CR>', desc = 'Telescope grep word under cursor in cwd' },
+      {
+        '<LEADER>fg',
+        function() require('telescope').extensions.live_grep_args.live_grep_args() end,
+        desc = 'Telescope live grep cwd',
+      },
+      {
+        '<LEADER>fG',
+        function() require('telescope-live-grep-args.shortcuts').grep_word_under_cursor() end,
+        desc = 'Telescope grep word under cursor in cwd',
+      },
       { '<LEADER>fb', '<CMD>Telescope current_buffer_fuzzy_find<CR>', desc = 'Telescope find in current buffer' },
       { '<LEADER>fR', '<CMD>Telescope registers initial_mode=normal<CR>', desc = 'Telescope registers' },
       { '<LEADER>fh', '<CMD>Telescope help_tags<CR>', desc = 'Telescope help tags' },
@@ -94,6 +103,7 @@ return {
       telescope.setup(opts)
       telescope.load_extension('fzf')
       telescope.load_extension('ui-select')
+      telescope.load_extension('live_grep_args')
     end,
   },
   {

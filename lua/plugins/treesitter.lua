@@ -12,7 +12,9 @@ return {
         indent = {
           enable = true,
           -- Treesitter indent does not work well in python yet
-          disable = { 'python' },
+          -- Nix indent randomly broke for some reason. Eventually try enabling
+          -- it again.
+          disable = { 'python', 'nix' },
         },
         highlight = {
           enable = true,

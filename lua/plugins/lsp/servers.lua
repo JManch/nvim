@@ -63,6 +63,23 @@ M.servers = function(on_attach, capabilities)
             language = 'en-GB',
           },
         },
+        filetypes = {
+          'bib',
+          'gitcommit',
+          'markdown',
+          'org',
+          'plaintex',
+          'rst',
+          'rnoweb',
+          'tex',
+          'pandoc',
+          'quarto',
+          'rmd',
+          'context',
+          'html',
+          'xhtml',
+          'mail',
+        },
       })
     end,
     ['omnisharp'] = function()

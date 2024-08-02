@@ -47,6 +47,23 @@ api.nvim_create_autocmd('VimLeave', {
   desc = 'Set cursor back to beam for Alacrity when exiting Neovim',
 })
 
+-- The following two auto commands set terminal bg to fix border when terminal
+-- bg does not match neovim bg
+-- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
+api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  callback = function()
+    local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+    if not normal.bg then
+      return
+    end
+    io.write(string.format('\027]11;#%06x\027\\', normal.bg))
+  end,
+})
+
+api.nvim_create_autocmd('UILeave', {
+  callback = function() io.write('\027]111\027\\') end,
+})
+
 api.nvim_create_user_command('ToggleAutoWrap', function() utils.toggle_local_opt('formatoptions', 't') end, {})
 
 api.nvim_create_user_command('ToggleCommentAutoWrap', function() utils.toggle_local_opt('formatoptions', 'c') end, {})

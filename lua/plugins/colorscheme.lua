@@ -24,12 +24,11 @@ return {
       local opts = {
         day_callback = function()
           vim.cmd.colorscheme('ayu-light')
-          require('core.utils').linux_set_alacritty_theme()
+          require('core.utils').windows_set_alacritty_theme(true)
         end,
         night_callback = function()
           vim.cmd.colorscheme('ayu-mirage')
           require('core.utils').windows_set_alacritty_theme(false)
-          require('core.utils').linux_set_alacritty_theme()
         end,
         update_interval = 10000,
         latitude = 50.8229,

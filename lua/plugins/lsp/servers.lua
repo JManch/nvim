@@ -49,6 +49,12 @@ M.servers = function(on_attach, capabilities)
     ['ltex'] = function()
       require('lspconfig').ltex.setup({
         on_attach = function(client, bufnr)
+          local buf_name = vim.api.nvim_buf_get_name(bufnr)
+          if buf_name:match('gen%.nvim$') then
+            client.stop()
+            return
+          end
+
           on_attach(client, bufnr)
           require('ltex_extra').setup({
             load_langs = { 'en-GB' },

@@ -129,4 +129,17 @@ return {
       },
     },
   },
+
+  {
+    'David-Kunz/gen.nvim',
+    cmd = 'Gen',
+    keys = {
+      { '<LEADER>m', '<CMD>Gen Chat<CR>', mode = { 'n' }, desc = 'Gen chat' },
+    },
+    opts = {
+      model = 'qwen2.5-coder:32b-instruct-q3_K_M',
+      show_model = true,
+      display_mode = 'split',
+    },
+  },
 }

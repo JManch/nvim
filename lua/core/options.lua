@@ -48,8 +48,8 @@ opt.listchars:append({
 
 -- Tabs, indent and folding
 o.expandtab = true -- Use spaces instead of tabs
-o.shiftwidth = 4 -- Shift 4 spaces when tab
-o.tabstop = 4 -- 1 tab == 4 spaces
+o.shiftwidth = 2 -- Shift 2 spaces when tab
+o.tabstop = 2 -- 1 tab == 2 spaces
 o.autoindent = true -- Autoindent new lines
 o.foldenable = false -- Disable folding
 o.breakindent = true -- Indent wrapped text

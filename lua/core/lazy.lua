@@ -36,7 +36,6 @@ local options = {
       disabled_plugins = {
         '2html_plugin',
         'getscript',
-        'man',
         'matchit',
         'shada_plugin',
         'getscriptPlugin',

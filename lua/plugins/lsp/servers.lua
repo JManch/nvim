@@ -115,7 +115,10 @@ M.servers = function(on_attach, capabilities)
     end,
     ['rust_analyzer'] = function()
       require('lspconfig').rust_analyzer.setup({
-        on_attach = on_attach,
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
+          vim.lsp.inlay_hint.enable(true)
+        end,
         capabilities = capabilities,
       })
     end,

@@ -33,7 +33,13 @@ o.splitbelow = true
 o.showtabline = 0
 o.list = true
 o.laststatus = 3
-opt.completeopt = { 'menu', 'menuone', 'noselect', 'preview', 'fuzzy' }
+opt.completeopt = {
+  'menu',
+  'menuone',
+  'noselect',
+  'preview',
+  --[[ , 'fuzzy' ]]
+}
 opt.listchars:append({
   trail = '·',
   tab = '  ',

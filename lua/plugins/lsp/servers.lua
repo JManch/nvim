@@ -134,6 +134,12 @@ M.servers = function(on_attach, capabilities)
         capabilities = capabilities,
       })
     end,
+    ['gopls'] = function()
+      require('lspconfig').gopls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
   }
 end
 

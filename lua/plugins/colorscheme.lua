@@ -37,7 +37,9 @@ return {
         sunset_offset = -1800,
       }
 
-      if os.getenv('NIX_NEOVIM_DARKMAN') == '1' then
+      if
+        os.getenv('NIX_NEOVIM_DARKMAN') == '1' and (os.getenv('DISPLAY') ~= nil or os.getenv('WAYLAND_DISPLAY') ~= nil)
+      then
         opts.custom_switch = function(tbl)
           if not tbl.init then
             return
